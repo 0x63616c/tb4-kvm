@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
+  "methodRevision": "CHANNEL_BUDGET_METHOD_V3",
   "status": "PROPOSED_UNBOOKED",
   "orderReady": false,
   "usb4OrThunderboltComplianceClaimAuthorized": false,
@@ -58,6 +59,13 @@
       "TIME_DOMAIN_IMPEDANCE_CONTINUITY"
     ]
   },
+  "sourceContext": {
+    "usb4ElectricalCts": "https://www.usb.org/document-library/usb4r-specification",
+    "usb4ElectricalCtsContext": "Use the applicable released CTS (1.04 where applicable) only at its defined compliance planes; never copy its mask to PCB-1A package-land allocation.",
+    "hiZStates": "CONDITIONAL_ON_AUTHORITATIVE_DEVICE_SUPPORT",
+    "plainThruRole": "COMPARATOR_NOT_AUTOMATIC_NETWORK_EXTRACTION",
+    "channelBudgetContract": "design/channel-budget/schema.json (Draft 2020-12); Prototype A record remains BLOCKED and the only closed fixture is SYNTHETIC_TEST_ONLY."
+  },
   "rawEvidence": [
     "RAW_SINGLE_ENDED_TOUCHSTONE",
     "RAW_2X_THRU_TOUCHSTONE",
@@ -107,7 +115,7 @@
       },
       "repeatability": {
         "minimumIndependentRemates": 3,
-        "acceptance": "PAIRWISE_DELTA_LE_COMBINED_EXPANDED_UNCERTAINTY_K2",
+        "acceptance": "PAIRWISE_RECONNECT_DIFFERENCE_LE_COMBINED_U_WITH_COVARIANCE_OR_CONSERVATIVE_SUM",
         "absoluteMagnitudeCapDb": null,
         "absolutePhaseCapDeg": null
       },

@@ -45,7 +45,7 @@ On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the 
 
 ## Current execution checkpoint
 
-The prototype-first execution map and repository operating rules are complete and independently reviewed. Optional PCB-1A RF measurement no longer blocks the first integrated prototype; the preserved safety, reference, model, review and owner gates are recorded in the live graph.
+The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is positively closable; the later numeric allocation remains blocked.
 
 Why: the owner prioritizes a working prototype soon and accepts iterative PCB revisions. We still require reference-backed design, modeling, power/PD safety, independent release review and protected bring-up, but paid high-speed measurement moves later unless a failure makes it necessary.
 
@@ -57,21 +57,23 @@ Latest evidence:
 - Cost-aware agent routing: [`docs/agents/AGENT-SELECTION.md`](docs/agents/AGENT-SELECTION.md).
 - Accepted route: [`docs/decisions/2026-09-01-prototype-first-validation.md`](docs/decisions/2026-09-01-prototype-first-validation.md).
 - Revised-map audit: [`docs/reviews/2026-09-01-prototype-first-map-audit.md`](docs/reviews/2026-09-01-prototype-first-map-audit.md).
+- Vendor/model evidence review: [`docs/reviews/2026-09-01-vendor-evidence-review.md`](docs/reviews/2026-09-01-vendor-evidence-review.md).
+- Channel-budget contract review: [`docs/reviews/2026-09-01-channel-budget-contract-review.md`](docs/reviews/2026-09-01-channel-budget-contract-review.md).
+- Collateral-policy review: [`docs/reviews/2026-09-01-collateral-policy-review.md`](docs/reviews/2026-09-01-collateral-policy-review.md).
 
 ## Current frontier
 
 Agent-ready, safely parallel research:
 
-- #4 PCB-1A channel-budget method and schema;
-- #5 accepted PCB-1A models and sourcing evidence;
 - #6 optional later measurement-route qualification;
-- #19 router and Type-C/PD reference evidence;
-- #22 early open-source collateral policy.
 
 Owner participation or acceptance:
 
 - #3 v1 product behavior and success envelope;
+- #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
+- #19 Intel/Infineon developer access and exact topology/controller questions;
+- #22 adoption of the independently reviewed early collateral policy;
 - #52 pre-KVM desk baseline capture.
 
 ## Agent-routing decision
@@ -80,9 +82,10 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Delegate unblocked research and controller work to bounded, cost-appropriate agents without duplicate broad work.
-2. Persist primary-source evidence and independent review before freezing the first integrated schematic/layout.
-3. Ask the owner only for actions that genuinely require them: product-envelope acceptance, external contact/terms, purchasing, equipment connection and physical measurements.
+1. Publish the reviewed research checkpoint and update issues #4/#5/#19 with exact evidence and blockers.
+2. Ask the owner to adopt or amend the independently reviewed early collateral policy.
+3. Continue agent-owned control work while presenting the owner only the prepared external-access, product-envelope and baseline actions.
+4. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits
 

@@ -23,6 +23,10 @@ function includesEvery(values, required, field) {
 }
 
 check(plan.schemaVersion === 1, 'unsupported PCB-1A plan schema');
+check(
+  plan.methodRevision === 'CHANNEL_BUDGET_METHOD_V3',
+  'measurement plan must name the current channel-budget method revision',
+);
 check(plan.status === 'PROPOSED_UNBOOKED', 'lab status must remain explicit');
 check(plan.orderReady === false, 'unbooked PCB-1A must not be order-ready');
 check(
@@ -58,6 +62,12 @@ check(
   plan.referencePlanes.deembedded === 'PCB_PACKAGE_LANDS' &&
     plan.referencePlanes.siliconDieClaimed === false,
   'de-embedding must stop at package lands and not claim die planes',
+);
+check(
+  plan.sourceContext?.channelBudgetContract?.includes('Draft 2020-12') &&
+    plan.sourceContext?.channelBudgetContract?.includes('BLOCKED') &&
+    plan.sourceContext?.channelBudgetContract?.includes('SYNTHETIC_TEST_ONLY'),
+  'plan must preserve the blocked Prototype A and synthetic-fixture channel-budget boundary',
 );
 includesEvery(plan.lanes, ['D0', 'D1', 'D2', 'D3'], 'lanes');
 includesEvery(
@@ -190,7 +200,7 @@ includesEvery(
 check(
   metrology?.repeatability?.minimumIndependentRemates >= 3 &&
     metrology?.repeatability?.acceptance ===
-      'PAIRWISE_DELTA_LE_COMBINED_EXPANDED_UNCERTAINTY_K2' &&
+      'PAIRWISE_RECONNECT_DIFFERENCE_LE_COMBINED_U_WITH_COVARIANCE_OR_CONSERVATIVE_SUM' &&
     metrology?.repeatability?.absoluteMagnitudeCapDb === null &&
     metrology?.repeatability?.absolutePhaseCapDeg === null,
   'repeatability needs three remates and lab-defined absolute caps',

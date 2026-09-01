@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "issue": 22,
+  "policyStatus": "PROPOSED",
+  "ownerAdoption": { "status": "PENDING", "owner": null, "date": null, "evidence": null },
+  "records": [
+    {
+      "id": "public-usb4-overview",
+      "title": "USB4 public overview",
+      "artifactKind": "web-page",
+      "classification": "PUBLIC_LINK_ONLY",
+      "sourceUrl": "https://www.usb.org/usb4",
+      "accessedDate": "2026-09-01",
+      "revision": "current page at capture",
+      "custodian": "project",
+      "terms": { "status": "UNKNOWN", "url": null, "evidence": "Public access is recorded; redistribution terms for page content are not asserted." },
+      "redistribution": { "status": "UNKNOWN", "evidence": "Link-only record; no copy is included." },
+      "repository": { "artifactPath": null, "metadataPath": "design/collateral-policy/inventory.example.json", "notes": "Link and safe metadata only." },
+      "hash": { "value": null, "algorithm": null, "permission": "unknown", "permissionEvidence": "none", "permissionEvidenceUrl": null, "basis": "No artifact is stored." },
+      "review": { "status": "UNREVIEWED", "author": "issue-22-policy-author", "independentReviewer": null, "attestation": null, "evidence": "Independent review pending.", "date": "2026-09-01" }
+    },
+    {
+      "id": "project-authored-schema",
+      "title": "Collateral inventory schema",
+      "artifactKind": "schema",
+      "classification": "OPEN_REDISTRIBUTABLE",
+      "sourceUrl": "https://github.com/0x63616c/tb4-kvm",
+      "accessedDate": "2026-09-01",
+      "revision": "working tree issue-22 policy",
+      "custodian": "project",
+      "terms": { "status": "PROJECT_LICENSE", "url": "https://github.com/0x63616c/tb4-kvm/blob/main/LICENSE.md", "evidence": "Project-authored metadata template; repository license applies." },
+      "redistribution": { "status": "PERMITTED", "evidence": "Project-authored file under the repository license." },
+      "repository": { "artifactPath": "design/collateral-policy/schema.json", "metadataPath": "design/collateral-policy/inventory.example.json", "notes": "Example only; does not contain vendor collateral." },
+      "hash": { "value": null, "algorithm": null, "permission": "not_applicable", "permissionEvidence": "not-applicable", "permissionEvidenceUrl": null, "basis": "No release hash in the example." },
+      "review": { "status": "UNREVIEWED", "author": "issue-22-policy-author", "independentReviewer": null, "attestation": null, "evidence": "Independent review pending.", "date": "2026-09-01" }
+    },
+    {
+      "id": "intel-reference-package",
+      "title": "Intel Thunderbolt reference package",
+      "artifactKind": "reference-design",
+      "classification": "REGISTRATION_GATED",
+      "sourceUrl": "https://www.thunderbolttechnology.net/developer-application",
+      "accessedDate": "2026-09-01",
+      "revision": "not received",
+      "custodian": "owner",
+      "terms": { "status": "GATED", "url": "https://www.thunderbolttechnology.net/developer-application", "evidence": "Access route precedes any package; no terms accepted by this work." },
+      "redistribution": { "status": "FORBIDDEN_UNTIL_CONFIRMED", "evidence": "No written redistribution permission recorded." },
+      "repository": { "artifactPath": null, "metadataPath": "design/collateral-policy/inventory.example.json", "notes": "Metadata only; no package, screenshot, or correspondence." },
+      "hash": { "value": null, "algorithm": null, "permission": "unknown", "permissionEvidence": "none", "permissionEvidenceUrl": null, "basis": "No artifact is stored." },
+      "review": { "status": "UNREVIEWED", "author": "issue-22-policy-author", "independentReviewer": null, "attestation": null, "evidence": "Independent review pending.", "date": "2026-09-01" }
+    },
+    {
+      "id": "unclassified-vendor-model",
+      "title": "Vendor broadband model (placeholder)",
+      "artifactKind": "simulation-model",
+      "classification": "UNKNOWN",
+      "sourceUrl": null,
+      "accessedDate": "2026-09-01",
+      "revision": "unresolved",
+      "custodian": "owner",
+      "terms": { "status": "UNKNOWN", "url": null, "evidence": "Placeholder demonstrates the fail-closed state; this URL is not a source." },
+      "redistribution": { "status": "UNKNOWN", "evidence": "No artifact or permission is recorded." },
+      "repository": { "artifactPath": null, "metadataPath": "design/collateral-policy/inventory.example.json", "notes": "Do not add the model until terms and provenance are reviewed." },
+      "hash": { "value": null, "algorithm": null, "permission": "unknown", "permissionEvidence": "none", "permissionEvidenceUrl": null, "basis": "Hashing is not permitted by default." },
+      "review": { "status": "UNREVIEWED", "author": "issue-22-policy-author", "independentReviewer": null, "attestation": null, "evidence": "Independent review pending.", "date": "2026-09-01" }
+    }
+  ]
+}

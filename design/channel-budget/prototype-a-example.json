@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 3,
+  "status": "BLOCKED",
+  "claimBoundary": {"couponPurpose": "RF_ONLY_MUX_COUPON", "usb4OrThunderboltComplianceClaimAuthorized": false, "prototypeAMeasurementRequiredBeforeOrder": false, "testOnly": false},
+  "board": {"revision": "PCB-1A-TBD", "serial": "UNFABRICATED"},
+  "planes": [{"id":"CABLE_END","kind":"CABLE_END","description":"Proposed calibration plane; no measured reference-plane claim."}],
+  "frequency": {"sweepStartHz": 10000000, "sweepStopHz": 26500000000, "sampleHz": [10000000, 26500000000], "validatedBandHz": [10000000, 26500000000]},
+  "ports": [{"id":"D0_A_P","singleEndedNumber":1,"pairId":"D0_A","polarity":"P","branch":"HOST_A","planeId":"CABLE_END","referenceImpedanceOhm":50},{"id":"D0_A_N","singleEndedNumber":2,"pairId":"D0_A","polarity":"N","branch":"HOST_A","planeId":"CABLE_END","referenceImpedanceOhm":50},{"id":"D0_C_P","singleEndedNumber":3,"pairId":"D0_C","polarity":"P","branch":"COMMON","planeId":"CABLE_END","referenceImpedanceOhm":50},{"id":"D0_C_N","singleEndedNumber":4,"pairId":"D0_C","polarity":"N","branch":"COMMON","planeId":"CABLE_END","referenceImpedanceOhm":50},{"id":"D0_B_P","singleEndedNumber":5,"pairId":"D0_B","polarity":"P","branch":"HOST_B","planeId":"CABLE_END","referenceImpedanceOhm":50},{"id":"D0_B_N","singleEndedNumber":6,"pairId":"D0_B","polarity":"N","branch":"HOST_B","planeId":"CABLE_END","referenceImpedanceOhm":50}],
+  "mixedMode": {"order":["D0_A_P","D0_A_N","D0_C_P","D0_C_N","D0_B_P","D0_B_N"],"singleEndedReferenceOhm":50,"differentialReferenceOhm":100,"commonModeReferenceOhm":25,"conversionOrder":"CALIBRATED_SINGLE_ENDED_THEN_DEEMBEDDED_THEN_RENORMALIZED_THEN_MIXED_MODE"},
+  "structures": [{"id":"DUT","kind":"DUT_FIXTURE"},{"id":"THRU2","kind":"2X_THRU"}],
+  "terminationNetworks": [{"id":"TBD_TERMINATION_NETWORK","planeId":"CABLE_END","perPort":[{"portId":"D0_A_P","termination":"measurement_port"},{"portId":"D0_A_N","termination":"measurement_port"},{"portId":"D0_C_P","termination":"measurement_port"},{"portId":"D0_C_N","termination":"measurement_port"},{"portId":"D0_B_P","termination":"matched_50ohm"},{"portId":"D0_B_N","termination":"matched_50ohm"}]}],
+  "authoritativeEvidence": [],
+  "scenarios": [{"id":"D0_TBD","lane":"D0","direction":"forward","dutState":"A_SELECTED_B_MATCHED","fixtureStructureId":"DUT","terminationNetworkId":"TBD_TERMINATION_NETWORK","inactiveTermination":"matched_50ohm","powerState":"powered","temperatureC":25,"applicability":"APPLIES","exclusionReason":"","hiZAuthorityEvidenceId":null}],
+  "coupledLaneSets": [{"id":"ALL_LANES_TBD","lanes":["D0","D1","D2","D3"],"scenarioIds":["D0_TBD","D0_TBD","D0_TBD","D0_TBD"]}],
+  "observables": [{"id":"insertion_loss_db","domain":"INSERTION_LOSS_DB","scope":"PER_SCENARIO","reducer":"MAXIMUM"},{"id":"return_loss_db","domain":"RETURN_LOSS_DB","scope":"PER_SCENARIO","reducer":"MINIMUM"},{"id":"crosstalk_db","domain":"COUPLING_DB","scope":"PER_SCENARIO","reducer":"MAXIMUM"},{"id":"group_delay_ps","domain":"GROUP_DELAY_PS","scope":"PER_SCENARIO","reducer":"MAXIMUM","targetPs":0},{"id":"lane_skew_ps","domain":"LANE_SKEW_PS","scope":"COUPLED_LANE_SET","reducer":"MAXIMUM"}],
+  "terms": [],
+  "closure": {"requiredObservableIds":["insertion_loss_db","return_loss_db","crosstalk_db","group_delay_ps","lane_skew_ps"],"limits":[],"acceptedEvidenceIds":[],"tbdFields":["INTEGRATED_CHANNEL_REQUIREMENT","ACCEPTED_MUX_MODEL","FABRICATOR_STACKUP","BOARD_REVISION_AND_SERIAL","TERMINATION_NETWORK","FOUR_LANE_COUPLED_SCENARIOS","ALL_OBSERVABLE_SAMPLES"],"allocationPassAuthorized":false}
+}

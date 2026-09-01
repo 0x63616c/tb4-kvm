@@ -2,7 +2,7 @@
 
 Status: `PROPOSED_UNBOOKED`. This is an engineering-characterization plan, not USB4 or Thunderbolt compliance.
 
-The machine-readable contract is [`design/pcb1a-measurement-matrix.json`](../design/pcb1a-measurement-matrix.json). `npm run verify:pcb1a` checks that its minimum equipment, structures, states, evidence and no-claim gates remain intact. That structural check cannot replace a VNA measurement or lab review.
+The machine-readable measurement plan is [`design/pcb1a-measurement-matrix.json`](../design/pcb1a-measurement-matrix.json). The separate Draft 2020-12 channel-budget contract keeps the real Prototype A allocation record `BLOCKED`; its only closed record is an explicitly `SYNTHETIC_TEST_ONLY` evaluator fixture, not a product limit. `npm run verify:pcb1a` checks the measurement plan, and `npm run verify:channel-budget` checks that contract. Neither structural check can replace a VNA measurement or lab review.
 
 ## What PCB-1A is measuring
 
@@ -26,9 +26,9 @@ Minimum: a calibrated four-port VNA reaching 20 GHz. Preferred: 26.5 GHz and eig
 2. Do not move calibrated cables. Record the VNA, firmware, options, calibration module/kit, cable and adapter identities, connector torque, source power and sweep settings.
 3. Retain the calibrated raw fixture+DUT single-ended Touchstone file before any correction.
 4. Fabricate a symmetric 2x-thru for every materially different launch/escape geometry. It must use the same stack-up, copper, soldermask, vias, connectors and trace geometry as the DUT fixture.
-5. Extract left and right fixtures using IEEE 370 2x-thru or a lab-accepted equivalent.
+5. Extract left and right fixtures using IEEE 370 2x-thru or a lab-accepted equivalent. The plain no-mux thru is a comparator for process/launch loss, not an extraction standard.
 6. De-embed only to the PCB package lands. Do not claim a silicon-die reference plane without a vendor package model that supports it.
-7. Include a plain no-mux thru to separate launch/PCB process loss from mux loss.
+7. Include a plain no-mux thru as a comparator for launch/PCB process loss; do not treat it as an extracted network unless the lab documents that method.
 8. Validate de-embedding with the residual thru, raw-versus-corrected comparison, reciprocity, passivity, causality and time-domain impedance continuity.
 
 Primary methods: [IEEE 370-2020](https://standards.ieee.org/ieee/370/6165/), [Rohde & Schwarz fixture characterization](https://www.rohde-schwarz.com/us/applications/accurate-test-fixture-characterization-and-de-embedding_56280-1271617.html), [Keysight de-embedding](https://www.keysight.com/zz/en/assets/7018-06806/application-notes/5980-2784.pdf), and [scikit-rf IEEE 370 examples](https://scikit-rf.readthedocs.io/en/latest/examples/networktheory/IEEEP370%20Deembedding.html).
@@ -40,7 +40,7 @@ Every unmeasured single-ended conductor needs a documented, repeatable RF termin
 Required nominal states:
 
 - unpowered;
-- powered with all paths Hi-Z;
+- powered with all paths Hi-Z only if the selected device's authoritative datasheet/model explicitly supports that state;
 - A selected with B matched;
 - B selected with A matched;
 - A selected with B open;
@@ -59,7 +59,7 @@ For each D0–D3 pair and selected state, collect insertion loss (`Sdd21/Sdd12`)
 - narrower IF bandwidth and averaging for isolation/crosstalk near the noise floor;
 - source power limited to vendor-supported small-signal conditions.
 
-The [USB4 Electrical CTS](https://www.usb.org/sites/default/files/USB4%20Electrical%20Compliance%20Test%20Specification%20Ver%201.02.pdf) is useful context, but its masks apply at defined USB4 reference planes. They cannot be copied onto this coupon's mux-land reference planes.
+The [USB-IF USB4 specification library](https://www.usb.org/document-library/usb4r-specification) is the canonical current source context (use the applicable released CTS, including 1.04 where applicable). Its masks apply at defined USB4 reference planes. They cannot be copied onto this coupon's mux-land reference planes.
 
 ## Raw evidence contract
 
@@ -82,7 +82,7 @@ Product/channel performance limits remain empty until that budget exists. A sepa
 - the lab must declare the frequency band over which its method is valid and accept the fixture electrical requirements and time/frequency-domain quality criteria;
 - residual self-de-embedding must remain within ±0.1 dB insertion loss and ±1° phase over that accepted band, using the IEEE 370 residual check;
 - the uncertainty model must report expanded uncertainty with coverage factor `k=2`;
-- at least three independent disconnect/reconnect measurements must satisfy `|xᵢ − xⱼ| ≤ √(Uᵢ² + Uⱼ²)`, where each `U` is the reported `k=2` expanded uncertainty;
+- at least three independent disconnect/reconnect measurements must use the covariance-aware combined uncertainty of the two observations; use `U_combined = sqrt(U_i² + U_j² + 2ρU_iU_j)` when correlation `ρ` is known, or a documented conservative sum when it is not. Accept only when `|xᵢ − xⱼ| ≤ U_combined`;
 - the provisional measurement-to-system-noise-floor margin is at least 10 dB; the lab must accept or replace this criterion before use; and
 - resonance/state-asymmetry detection criteria, absolute repeatability caps and the validated band must be filled in rather than guessed.
 

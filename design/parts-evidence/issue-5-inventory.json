@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "issue": 5,
+  "captureDate": "2026-09-01",
+  "status": "BLOCKED",
+  "positiveExitCriteriaMet": false,
+  "orderReady": false,
+  "complianceClaimAuthorized": false,
+  "sourcePolicy": "Manufacturer sources are authoritative for identity/electrical/package; authorized distributors are dated availability snapshots only.",
+  "requiredFields": ["exact_opn", "identity_pins_land_pattern", "lifecycle_pcn_route", "broadband_model_reference_planes_states_corners", "authorized_prototype_source", "fitted_or_dnp_disposition"],
+  "replacementSearch": [
+    {
+      "function": "mux_replacement",
+      "exact_opn": "TMUXHS4412IRUAT",
+      "manufacturer": "Texas Instruments",
+      "package": "42-pin RUA WQFN, 9 mm x 3.5 mm, 250-piece SMALL T&R",
+      "identity_and_lifecycle": "PASS: official TI page lists ACTIVE; exact page lists -40 to 105 C",
+      "broadband_model": "PARTIAL/BLOCKED: public SLAM352.ZIP average ON-channel Touchstone; readme lacks PCB/package reference plane, fixture removal, state matrix, bias/supply, temperature/lot corners",
+      "prototype_source": "BLOCKED: exact IRUAT TI page captured out of stock; no authorized prototype source positively captured",
+      "replacement_blocker": "42-pin RUA is not a drop-in replacement for 40-pin RET; new pin/land/escape review required",
+      "disposition": "BLOCKED_REPLACEMENT_SELECTION",
+      "sources": ["https://www.ti.com/product/TMUXHS4412", "https://www.ti.com/product/TMUXHS4412/part-details/TMUXHS4412IRUAT", "https://www.ti.com/lit/zip/slam352"]
+    },
+    {
+      "function": "mux_replacement",
+      "exact_opn": "PI2DBS32412EQ",
+      "manufacturer": "Diodes Incorporated",
+      "package": "38-pin ZTFA UQFN (official product page)",
+      "identity_and_lifecycle": "PARTIAL: official page identifies active automotive-grade part",
+      "broadband_model": "BLOCKED: official datasheet is request-gated; no public S-parameter/IBIS-AMI/package model with reference planes, states and corners",
+      "prototype_source": "BLOCKED: no authorized prototype stock/source captured",
+      "replacement_blocker": "Marketing data rate and protocol claims cannot substitute for a legally usable broadband model",
+      "disposition": "BLOCKED_REPLACEMENT_SELECTION",
+      "sources": ["https://www.diodes.com/part/view/PI2DBS32412EQ", "https://www.diodes.com/assets/product-showcases/1.8V-32-Gbps-Four-Differential-Channel-21-Mux-/Demux-Switch.pdf"]
+    }
+  ],
+  "parts": [
+    {
+      "function": "mux",
+      "exact_opn": "TMUXHS4512IRETT",
+      "manufacturer": "Texas Instruments",
+      "aliases": ["TMUXHS4512IRETT.A"],
+      "package": "40-pin RET WQFN, 3 mm x 6 mm, 0.4 mm pitch, -40 to 125 C industrial",
+      "manufacturer_identity": "PASS",
+      "pins_land_pattern": "PASS: 40 pins and RET package; public datasheet example land pattern; datasheet pin table applies to the TMUXHS4512I industrial grade",
+      "lifecycle_pcn_route": "PARTIAL: ACTIVE page; current PCN/longevity route still requires TI confirmation",
+      "broadband_model": "BLOCKED: no public TI S-parameter/package model entry; no reference planes, mux states, bias or corners",
+      "prototype_source": "BLOCKED: TI exact IRETT order page captured out of stock; the earlier 220-piece Digi-Key snapshot was for non-I TMUXHS4512RETT and must not be attached to this industrial OPN. Digi-Key/Mouser exact IRETT prototype stock was not positively captured.",
+      "disposition": "PROPOSED_ONLY",
+      "sources": ["https://www.ti.com/product/TMUXHS4512", "https://www.ti.com/product/TMUXHS4512/part-details/TMUXHS4512IRETT", "https://www.ti.com/lit/gpn/TMUXHS4512", "https://www.digikey.com/en/products/detail/texas-instruments/TMUXHS4512IRETR/25821308"]
+    },
+    {
+      "function": "optional_esd",
+      "exact_opn": "RClamp01012ZC.F",
+      "manufacturer": "Semtech",
+      "package": "3-pin DFN, 0.62 mm x 0.32 mm x 0.25 mm (manufacturer page)",
+      "manufacturer_identity": "PASS: Semtech's exact product page names RClamp01012ZC.F as the sole order code and identifies the 3-lead DFN package",
+      "pins_land_pattern": "BLOCKED: manufacturer page gives package size/count but no public pin/land artifact captured",
+      "lifecycle_pcn_route": "BLOCKED: no public current lifecycle/PCN/longevity record captured",
+      "broadband_model": "BLOCKED: no public broadband model, reference planes, states or corners",
+      "prototype_source": "PARTIAL: Semtech page routes fulfillment to Digi-Key; an authorized Mouser line was located qualitatively, but no volatile quantity is retained; verify exact authorized line and lot",
+      "disposition": "DNP_COMPARISON_CANDIDATE",
+      "distributor_conflict": "Mouser search labels a DFN-2; do not use it for pin/package truth because Semtech says 3-lead DFN",
+      "sources": ["https://www.semtech.com/products/circuit-protection/usb/rclamp01012zc", "https://www.semtech.com/uploads/design-support/CP-Circuit_Protection-Product-Guide-April2026-2.pdf", "https://www.mouser.com/ProductDetail/Semtech/RClamp01012ZC.F"]
+    },
+    {
+      "function": "rf_launch",
+      "exact_opn": "SMA-J-P-H-ST-EM1",
+      "manufacturer": "Samtec",
+      "package": "50 ohm SMA jack, board-edge/end-launch, configured EM1",
+      "manufacturer_identity": "PASS",
+      "pins_land_pattern": "PARTIAL: manufacturer provides configured print/CAD path; board stack-up-specific land tuning remains open",
+      "lifecycle_pcn_route": "PARTIAL: manufacturer page identifies the product; formal PCN/longevity route not captured",
+      "broadband_model": "BLOCKED: manufacturer directs EM-solver models to Signal Integrity Group by request; no public legal Touchstone/EM model with planes/corners",
+      "prototype_source": "BLOCKED: Samtec manufacturer page currently limits this configuration to existing customers and directs new customers to alternatives; no authorized new-customer prototype source is established",
+      "disposition": "PROPOSED_LAUNCH_CANDIDATE",
+      "sources": ["https://www.samtec.com/products/sma-j-p-h-st-em1", "https://www.digikey.com/en/products/detail/samtec-inc/SMA-J-P-H-ST-EM1/17278900"]
+    },
+    {
+      "function": "rf_launch_alternative",
+      "exact_opn": "901-10511-1",
+      "manufacturer": "Amphenol RF",
+      "package": "SMA end-launch PCB jack; manufacturer family table lists 26.5 GHz",
+      "manufacturer_identity": "PASS: exact Amphenol RF product page identifies 901-10511-1 as active SMA PCB end-launch straight jack",
+      "pins_land_pattern": "PARTIAL: exact Customer Drawing is publicly downloadable; STP and HFSS 3D component are account-gated, so no public revision-controlled 3D/land package is complete",
+      "lifecycle_pcn_route": "BLOCKED: no current public lifecycle/PCN record captured",
+      "broadband_model": "BLOCKED: exact HFSS 3D component and other model collateral are account-gated; no public/legal broadband reference-plane/corner/terms set captured",
+      "prototype_source": "BLOCKED: no authorized prototype stock snapshot captured",
+      "disposition": "DNP_ALTERNATIVE",
+      "sources": ["https://www.amphenolrf.com/en-us/part/901-10511-1/4021/"]
+    }
+  ]
+}
