@@ -74,6 +74,7 @@ Start with the [beginner build and contribution guide](docs/BUILD-GUIDE.md). The
 
 Useful starting documents:
 
+- [Live execution map and parallel work lanes](docs/EXECUTION-MAP.md)
 - [End-to-end project plan](docs/PROJECT-PLAN.md)
 - [Product requirements](docs/PRODUCT-REQUIREMENTS.md)
 - [USB-C/TB4 architecture decision](docs/ARCHITECTURE-DECISION.md)

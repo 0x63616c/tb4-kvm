@@ -43,6 +43,7 @@ Record review inputs, findings, severity, disposition, author and evidence in `d
 ## Repository discipline
 
 - Work toward `main` directly for now; do not open project pull requests unless the owner changes this policy. Before pushing, run the full repository gate and persist independent review of the exact staged tree. After pushing, verify GitHub Actions against the exact new `main` commit. Never force-push or delete `main`.
+- Keep `PROJECT-STATUS.md` current at meaningful handoffs. Record what is being done, why it is the next safe step, the active/blocked/owner-only frontier, evidence produced, unresolved risks and the exact pickup action. Do not use chat history as the only continuity record.
 - Existing project-wide canonical documents remain at `docs/*.md`; use `docs/decisions/`, `docs/research/` and `docs/validation/` for new multi-file domain records when those collections are created. Keep fabrication releases in immutable revision folders under `hardware/releases/`.
 - Store source models, scripts and tool versions—not only exports.
 - Never commit vendor-confidential collateral, credentials, tokens or personally identifying machine data. Record the document title/revision/access restriction instead.
@@ -60,3 +61,30 @@ Record review inputs, findings, severity, disposition, author and evidence in `d
 ## Progress notifications
 
 The primary agent sends concise, non-sensitive milestones to `https://ntfy.sh/0x63616c`. Notifications must not include secrets, private document contents, machine identifiers or unverified success claims.
+
+## Agent skills
+
+### Issue tracker
+
+Work breakdown, wayfinding maps and tickets live in this repository's GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the canonical five-state triage vocabulary plus `wayfinder:*` map/type labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context project. Read `CONTEXT.md` and relevant records under `docs/` before changing domain terms or architecture. See `docs/agents/domain.md`.
+
+### Agent selection and cost
+
+Match agent capability to risk instead of defaulting every subtask to the most expensive model. The owner explicitly prefers token-conscious execution:
+
+- use fast, lower-cost agents for bounded research, issue hygiene, documentation and repetitive checked work;
+- use balanced agents for substantive PCB, firmware, CAD and website implementation;
+- reserve frontier agents for independent reviews where an error could waste a board revision, damage equipment or support a false safety/compliance claim;
+- normally use one worker plus one independent reviewer, not several agents repeating the same broad task;
+- use small or empty context forks and make agents work from persisted repository evidence;
+- do not trade away validation to save tokens: the final electrical-safety, signal-integrity, manufacturing-release and validated-v1 checkpoints require strong independent review.
+
+See `docs/agents/AGENT-SELECTION.md` for the full routing policy.

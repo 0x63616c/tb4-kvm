@@ -1,5 +1,7 @@
 # End-to-end project plan
 
+Live ticket state, blocking edges and agent ownership are tracked in the [execution map](EXECUTION-MAP.md) and its canonical [GitHub wayfinding map](https://github.com/0x63616c/tb4-kvm/issues/2). This document remains the stage-level design plan.
+
 ## Outcome
 
 Create a reproducible, open-source Thunderbolt 4 KVM that switches one existing TB4 dock between two computers with one physical action, preserves a real 40 Gb/s link, charges the selected host under an explicitly approved policy, and requires no host software.
