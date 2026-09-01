@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0x63616c/tb4-kvm/design/controller-bench/evidence-schema.json",
+  "title": "Issue 18 PD-free controller bench evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "issue",
+    "status",
+    "boundary",
+    "identity",
+    "toolVersions",
+    "power",
+    "cases",
+    "review"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "issue": { "const": 18 },
+    "status": { "enum": ["DRAFT", "COMPLETED"] },
+    "boundary": { "$ref": "#/$defs/boundary" },
+    "identity": { "$ref": "#/$defs/identity" },
+    "toolVersions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "power": { "$ref": "#/$defs/power" },
+    "cases": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "items": { "$ref": "#/$defs/case" }
+    },
+    "review": { "$ref": "#/$defs/review" }
+  },
+  "$defs": {
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "usbC",
+        "pd",
+        "vbus",
+        "thunderbolt",
+        "highSpeed",
+        "productValidation"
+      ],
+      "properties": {
+        "usbC": { "const": false },
+        "pd": { "const": false },
+        "vbus": { "const": false },
+        "thunderbolt": { "const": false },
+        "highSpeed": { "const": false },
+        "productValidation": { "const": false }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boardOrderCode",
+        "serialOrLocalId",
+        "firmwareCommit",
+        "firmwareHash",
+        "firmwareArtifact",
+        "wiringRevision",
+        "wiringPhotoPaths"
+      ],
+      "properties": {
+        "boardOrderCode": { "type": "string", "minLength": 1 },
+        "serialOrLocalId": { "type": "string", "minLength": 1 },
+        "firmwareCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "firmwareHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "firmwareArtifact": { "$ref": "#/$defs/artifact" },
+        "wiringRevision": { "type": "string", "minLength": 1 },
+        "wiringPhotoPaths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/artifact" }
+        }
+      }
+    },
+    "power": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supplyDescription",
+        "currentLimitMilliamp",
+        "usbDisconnectedBeforeVsys",
+        "usbVbusAbsentEvidence",
+        "isolationEvidence"
+      ],
+      "properties": {
+        "supplyDescription": { "type": "string", "minLength": 1 },
+        "currentLimitMilliamp": { "type": "number", "exclusiveMinimum": 0 },
+        "usbDisconnectedBeforeVsys": { "const": true },
+        "usbVbusAbsentEvidence": { "$ref": "#/$defs/artifact" },
+        "isolationEvidence": { "$ref": "#/$defs/artifact" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "sha256"],
+      "properties": {
+        "kind": {
+          "enum": ["serial-log", "waveform", "photo", "supply-record", "other"]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "caseId": { "type": "string", "pattern": "^B([1-9]|1[0-3])$" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "result", "notes", "artifacts"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^B([1-9]|1[0-3])$" },
+        "result": { "enum": ["PASS", "FAIL", "BLOCKED"] },
+        "notes": { "type": "string", "minLength": 1 },
+        "artifacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/caseArtifact" }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "independentReviewer",
+        "attestation",
+        "evidencePath"
+      ],
+      "properties": {
+        "status": { "enum": ["UNREVIEWED", "REVIEWED"] },
+        "independentReviewer": { "type": ["string", "null"] },
+        "attestation": { "type": ["string", "null"] },
+        "evidencePath": {
+          "anyOf": [{ "$ref": "#/$defs/artifact" }, { "type": "null" }]
+        }
+      }
+    },
+    "caseArtifact": {
+      "allOf": [
+        { "$ref": "#/$defs/artifact" },
+        {
+          "type": "object",
+          "required": ["caseId"],
+          "properties": {
+            "caseId": { "type": "string", "pattern": "^B([1-9]|1[0-3])$" }
+          }
+        }
+      ]
+    }
+  }
+}

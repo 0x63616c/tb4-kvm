@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "issue": 18,
+  "status": "PROPOSED",
+  "recommended": "raspberry-pi-pico-2-sc1631",
+  "boundary": {
+    "usbC": false,
+    "pd": false,
+    "vbus": false,
+    "thunderbolt": false,
+    "highSpeed": false,
+    "valuableEquipment": false,
+    "simultaneousUsbAndVsys": false,
+    "documentedOringRequiredForSimultaneous": true
+  },
+  "powerWorkflow": [
+    "program-over-USB",
+    "disconnect-USB",
+    "verify-USB-VBUS-absent",
+    "connect-current-limited-3.3V-to-VSYS",
+    "test"
+  ],
+  "adcMonitor": {
+    "externalPin": "GP26",
+    "internalVsysMonitor": "ADC3/GP29",
+    "topResistorOhms": 100000,
+    "bottomResistorOhms": 100000,
+    "resistorTolerancePercent": 1,
+    "capacitorFarads": 1e-7,
+    "maxVsysVolts": 5.5,
+    "adcLimitVolts": 3.3,
+    "maxAdcVoltsWorstCase": 2.78
+  },
+  "candidates": [
+    {
+      "id": "raspberry-pi-pico-2-sc1631",
+      "manufacturer": "Raspberry Pi",
+      "partNumber": "SC1631",
+      "name": "Pico 2",
+      "sourceUrl": "https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf",
+      "accessedDate": "2026-09-01",
+      "logicVoltage": "3.3V",
+      "watchdog": "documented-sdk-api",
+      "brownout": "measure-on-bench",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "arduino-nano-every-abx00028",
+      "manufacturer": "Arduino",
+      "partNumber": "ABX00028",
+      "name": "Nano Every",
+      "sourceUrl": "https://store.arduino.cc/products/nano-every",
+      "accessedDate": "2026-09-01",
+      "logicVoltage": "5V",
+      "watchdog": "documented",
+      "brownout": "measure-on-bench",
+      "status": "PROPOSED"
+    },
+    {
+      "id": "st-nucleo-g071rb",
+      "manufacturer": "STMicroelectronics",
+      "partNumber": "NUCLEO-G071RB",
+      "name": "Nucleo-G071RB",
+      "sourceUrl": "https://www.st.com/en/evaluation-tools/nucleo-g071rb.html",
+      "accessedDate": "2026-09-01",
+      "logicVoltage": "3.3V",
+      "watchdog": "two-mcu-watchdogs",
+      "brownout": "programmable-bor",
+      "status": "PROPOSED"
+    }
+  ]
+}

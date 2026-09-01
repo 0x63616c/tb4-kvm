@@ -2174,6 +2174,185 @@ footer > p {
 }
 
 /* Issue #17 control-experience prototype */
+.controller-prototype-lab {
+  max-width: 1180px;
+}
+.controller-lab-summary {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 24px 0 18px;
+  padding: 18px;
+  border: 1px solid #35564e;
+  background: linear-gradient(
+    135deg,
+    rgba(18, 33, 30, 0.94),
+    rgba(7, 16, 15, 0.94)
+  );
+}
+.controller-lab-summary > div {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.controller-lab-summary .eyebrow {
+  margin-bottom: 6px;
+}
+.controller-lab-summary strong {
+  font: 650 15px/1.35 var(--font-mono);
+  color: var(--lime);
+}
+.controller-status-dot {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #29443d;
+  box-shadow: inset 0 0 0 3px #0b1815;
+}
+.controller-status-a,
+.controller-status-b {
+  background: var(--lime);
+  box-shadow: 0 0 16px rgba(185, 255, 102, 0.6);
+}
+.controller-status-amber {
+  background: var(--amber);
+  box-shadow: 0 0 16px rgba(255, 200, 97, 0.45);
+}
+.controller-status-fault {
+  background: #ff8177;
+  box-shadow: 0 0 16px rgba(255, 129, 119, 0.45);
+}
+.controller-lab-summary dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(105px, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+.controller-lab-summary dl div {
+  padding: 8px 10px;
+  border: 1px solid rgba(71, 230, 193, 0.17);
+}
+.controller-lab-summary dt {
+  color: #78938a;
+  font: 9px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.controller-lab-summary dd {
+  margin: 6px 0 0;
+  color: #d4e6df;
+  font-size: 11px;
+}
+.controller-lab-grid {
+  display: grid;
+  grid-template-columns: 1.13fr 0.87fr;
+  gap: 18px;
+}
+.controller-lab-controls {
+  display: grid;
+  gap: 12px;
+}
+.controller-lab-controls fieldset {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--line);
+  background: rgba(7, 16, 15, 0.45);
+}
+.controller-lab-controls legend {
+  padding: 0 5px;
+  color: var(--teal);
+  font: 9px var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.controller-lab-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 9px 0;
+  color: #c8d8d3;
+  font-size: 13px;
+}
+.controller-lab-controls input {
+  accent-color: var(--lime);
+}
+.controller-lab-controls fieldset > p,
+.controller-lab-controls small {
+  margin: 0 0 11px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.controller-lab-controls fieldset > button {
+  margin: 7px 7px 0 0;
+}
+.controller-lab-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.controller-lab-actions button {
+  margin: 0;
+}
+.controller-lab-observations {
+  display: grid;
+  gap: 12px;
+}
+.controller-lab-observations > div {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--line);
+  background: rgba(7, 16, 15, 0.7);
+}
+.controller-lab-observations ol {
+  display: grid;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.controller-lab-observations li {
+  display: grid;
+  grid-template-columns: minmax(104px, 0.82fr) 1.18fr;
+  gap: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(36, 60, 54, 0.74);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.controller-lab-observations li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.controller-lab-observations code {
+  overflow-wrap: anywhere;
+  color: var(--teal);
+  font: 9px/1.35 var(--font-mono);
+}
+.controller-lab-boundary {
+  display: flex;
+  gap: 9px;
+  margin: 18px 0 0;
+  padding: 13px 14px;
+  border-left: 2px solid var(--amber);
+  background: rgba(255, 200, 97, 0.06);
+  color: #c8d8d3;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.controller-lab-boundary svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--amber);
+}
+.controller-lab-controls button:focus-visible,
+.controller-lab-controls input:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
 .control-experience {
   max-width: 1180px;
 }
@@ -2471,6 +2650,7 @@ footer > p {
   background: rgba(71, 230, 193, 0.04);
 }
 @media (max-width: 800px) {
+  .controller-lab-grid,
   .control-prototype-layout,
   .control-prototype-controls,
   .port-row,
@@ -2484,9 +2664,14 @@ footer > p {
     grid-column: 1 / -1;
   }
   .main-unit-controls,
-  .remote-pod {
+  .remote-pod,
+  .controller-lab-summary {
     align-items: flex-start;
     flex-direction: column;
+  }
+  .controller-lab-summary dl {
+    width: 100%;
+    grid-template-columns: 1fr;
   }
 }
 

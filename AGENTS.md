@@ -2,6 +2,9 @@
 
 This repository is the source of truth for the open-source TB4 KVM project. Chat history, generated prose and agent confidence are not evidence unless the result is persisted and independently checkable here.
 
+The durable destination and definition of done are in [`GOAL.md`](GOAL.md).
+The live checkpoint and next action are in [`PROJECT-STATUS.md`](PROJECT-STATUS.md).
+
 ## Product boundary
 
 The target is a minimal, externally powered, two-host/one-dock Thunderbolt 4 KVM with three TB4 receptacles, an onboard switch/status indicator and a protected low-speed expansion interface for a later remote control pod. It must work without host software. Do not add a general-purpose dock, extra display outputs, networking, USB-A ports or Thunderbolt 5 unless a recorded decision changes the scope.

@@ -73,6 +73,9 @@ For each host:
 
 ## 5. Affordable tools
 
+The beginner-facing [validation-tool matrix](validation/tool-matrix.md) maps
+each free, local, rented and lab tool to what it can and cannot prove.
+
 - two known TB4 hosts;
 - certified TB4 cables;
 - existing OWC dock;

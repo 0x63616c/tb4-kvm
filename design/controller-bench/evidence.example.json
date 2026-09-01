@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "issue": 18,
+  "status": "DRAFT",
+  "boundary": {
+    "usbC": false,
+    "pd": false,
+    "vbus": false,
+    "thunderbolt": false,
+    "highSpeed": false,
+    "productValidation": false
+  },
+  "identity": {
+    "boardOrderCode": "PLACEHOLDER",
+    "serialOrLocalId": "PLACEHOLDER",
+    "firmwareCommit": "0000000000000000000000000000000000000000",
+    "firmwareHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "firmwareArtifact": {
+      "kind": "other",
+      "path": "PLACEHOLDER",
+      "sha256": null
+    },
+    "wiringRevision": "PLACEHOLDER",
+    "wiringPhotoPaths": [
+      { "kind": "photo", "path": "PLACEHOLDER", "sha256": null }
+    ]
+  },
+  "toolVersions": {
+    "firmwareTool": "PLACEHOLDER",
+    "serialLogger": "PLACEHOLDER"
+  },
+  "power": {
+    "supplyDescription": "PLACEHOLDER current-limited 3.3 V VSYS",
+    "currentLimitMilliamp": 100,
+    "usbDisconnectedBeforeVsys": true,
+    "usbVbusAbsentEvidence": {
+      "kind": "supply-record",
+      "path": "PLACEHOLDER",
+      "sha256": null
+    },
+    "isolationEvidence": {
+      "kind": "supply-record",
+      "path": "PLACEHOLDER",
+      "sha256": null
+    }
+  },
+  "cases": [
+    {
+      "id": "B1",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B1",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B2",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B3",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B4",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B4",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B5",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B5",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B6",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B6",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B7",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B7",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        },
+        {
+          "kind": "supply-record",
+          "caseId": "B7",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B8",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B8",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B9",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B9",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        },
+        {
+          "kind": "waveform",
+          "caseId": "B9",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B10",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        },
+        {
+          "kind": "waveform",
+          "caseId": "B10",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B11",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "other",
+          "caseId": "B12",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    },
+    {
+      "id": "B13",
+      "result": "BLOCKED",
+      "notes": "PLACEHOLDER — DRAFT only",
+      "artifacts": [
+        {
+          "kind": "serial-log",
+          "caseId": "B13",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        },
+        {
+          "kind": "photo",
+          "caseId": "B13",
+          "path": "PLACEHOLDER",
+          "sha256": null
+        }
+      ]
+    }
+  ],
+  "review": {
+    "status": "UNREVIEWED",
+    "independentReviewer": null,
+    "attestation": null,
+    "evidencePath": null
+  }
+}

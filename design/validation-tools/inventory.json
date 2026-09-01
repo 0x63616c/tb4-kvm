@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-09-01",
+  "status": "PROPOSED",
+  "productBoundary": "Two-host/one-dock Thunderbolt 4 KVM with three USB-C receptacles; externally powered; no host software required.",
+  "globalNonClaims": [
+    "No free or local software establishes USB4 or Thunderbolt 4 compliance.",
+    "No software-only result establishes electrical safety, isolation, or absence of cross-host VBUS/CC conduction.",
+    "OS enumeration and a passing application test establish interoperability evidence only, not compliance certification."
+  ],
+  "tools": [
+    {
+      "id": "kicad-erc-drc-cli",
+      "class": "free-local",
+      "phase": "schematic-and-pcb",
+      "proves": [
+        "electrical-rule and connectivity violations selected by the KiCad rule set",
+        "PCB clearance, unconnected, footprint and geometry-rule violations selected by the KiCad rule set",
+        "repeatable report and non-zero exit status in CI"
+      ],
+      "cannotProve": [
+        "USB4/TB4 protocol, link training or interoperability",
+        "controlled impedance, insertion loss, crosstalk, eye, jitter or receiver tolerance",
+        "PD timing, protection behavior, thermal performance or product safety"
+      ],
+      "enterWhen": "Immediately when the schematic and PCB exist; rerun on every reviewable revision.",
+      "sourceUrls": ["https://docs.kicad.org/9.0/en/cli/cli.html"],
+      "versionNote": "KiCad CLI documentation 9.0.9; pin the installed KiCad major/minor in the evidence record."
+    },
+    {
+      "id": "ngspice",
+      "class": "free-local",
+      "phase": "power-and-control-model",
+      "proves": [
+        "behavior of the modeled circuit over stated component models, sources, loads and corners",
+        "transient DC/AC results such as VBUS ramp, discharge or regulator response when the model includes them",
+        "repeatable simulation output"
+      ],
+      "cannotProve": [
+        "unmodeled parasitics, layout coupling, connector behavior or real PD-controller firmware",
+        "USB4/TB4 compliance or actual fault-current limiting",
+        "safety certification or hardware behavior outside model assumptions"
+      ],
+      "enterWhen": "After power/PD topology and parameterized limits are written; before PCB review, then correlate against bench measurements.",
+      "sourceUrls": [
+        "https://ngspice.sourceforge.io/docs.html",
+        "https://ngspice.sourceforge.io/docs/ngspice-manual.pdf"
+      ],
+      "versionNote": "ngspice manual version 47 is current in the official documentation snapshot; record exact executable version."
+    },
+    {
+      "id": "firmware-host-unit-fuzz",
+      "class": "free-local",
+      "phase": "firmware-and-control",
+      "proves": [
+        "deterministic state-machine transitions, watchdog/error handling and protocol-parser behavior under the tested inputs",
+        "host/unit tests and fuzz corpus outcomes for the controller code",
+        "regression against recorded requirements"
+      ],
+      "cannotProve": [
+        "electrical pin levels, VBUS/CC isolation, timing under analog load or PD conformance",
+        "USB4 router firmware/NVM behavior or Intel/Thunderbolt certification",
+        "absence of defects outside the test model and corpus"
+      ],
+      "enterWhen": "Before connecting valuable equipment; run host tests on every change, then hardware-in-loop only with current limiting and an approved fixture.",
+      "sourceUrls": [
+        "https://llvm.org/docs/LibFuzzer.html",
+        "https://clang.llvm.org/docs/AddressSanitizer.html"
+      ],
+      "versionNote": "Record compiler, sanitizer/fuzzer and corpus versions."
+    },
+    {
+      "id": "openems",
+      "class": "free-local",
+      "phase": "pre-layout-rf-model",
+      "proves": [
+        "a stated 3-D FDTD model's fields and derived port behavior for the modeled geometry, materials, mesh and boundaries",
+        "sensitivity or comparative results for launches, traces and discontinuities when the model is sufficiently complete",
+        "repeatable simulation inputs and outputs"
+      ],
+      "cannotProve": [
+        "fabricated-board behavior without validated material, stack-up, connector and package models",
+        "USB4/TB4 compliance, receiver tolerance or interoperability",
+        "PD, firmware, thermal, mechanical fit or safety behavior"
+      ],
+      "enterWhen": "Only after the stack-up, connector models and channel limits are available; use for risk reduction/model correlation, not as a compliance gate.",
+      "sourceUrls": ["https://docs.openems.de/", "https://www.openems.de/"],
+      "versionNote": "Official documentation identifies openEMS 0.0.35; record solver, Python/Octave and mesh settings."
+    },
+    {
+      "id": "scikit-rf-touchstone",
+      "class": "free-local",
+      "phase": "rf-data-analysis",
+      "proves": [
+        "parsing, plotting, conversion and comparison of measured or simulated N-port S-parameter/Touchstone data",
+        "calculated insertion/return loss, crosstalk or mixed-mode quantities when ports, reference planes and conventions are correct",
+        "traceable analysis scripts and derived plots/tables"
+      ],
+      "cannotProve": [
+        "that a Touchstone file is accurate, calibrated, de-embedded or representative of the finished product",
+        "USB4/TB4 compliance or live link training",
+        "electrical safety or PD behavior"
+      ],
+      "enterWhen": "When a VNA, solver or lab supplies Touchstone files; use alongside calibration metadata and written channel limits.",
+      "sourceUrls": [
+        "https://scikit-rf.readthedocs.io/en/latest/tutorials/Networks.html",
+        "https://scikit-rf.readthedocs.io/en/latest/api/io/index.html"
+      ],
+      "versionNote": "Record exact scikit-rf and Python versions plus Touchstone format, frequency span, z0 and calibration/de-embedding metadata."
+    },
+    {
+      "id": "mechanical-cad-mesh-slicer",
+      "class": "free-local",
+      "phase": "mechanical-release",
+      "proves": [
+        "parametric CAD regeneration, dimensions, clearances and mesh validity according to the chosen tool's checks",
+        "export/import and slicer warnings for the selected STEP/STL/3MF artifact",
+        "documented orientation, supports and print profile when the slicer actually loads geometry"
+      ],
+      "cannotProve": [
+        "printed-part fit, connector insertion force, strength, thermal behavior or enclosure safety",
+        "electrical or USB4/TB4 behavior",
+        "that a screenshot or geometry-only 3MF is a printable, acceptable part"
+      ],
+      "enterWhen": "After PCB/connector datums are released; rerun on each geometry export, then inspect a printed fit-check before release.",
+      "sourceUrls": [
+        "https://www.freecad.org/",
+        "https://github.com/FreeCAD/FreeCAD-documentation",
+        "https://github.com/prusa3d/PrusaSlicer"
+      ],
+      "versionNote": "Record CAD and slicer versions, source hash, export hash, profile, orientation/supports and visual/physical inspection."
+    },
+    {
+      "id": "usb-c-pd-analyzer",
+      "class": "paid-or-rental",
+      "phase": "integrated-pd-bench",
+      "proves": [
+        "captured CC, VBUS, VCONN and PD message/contract behavior within the analyzer's supported coverage",
+        "attach/detach, orientation, role and switching traces for named fixtures and conditions",
+        "time-correlated protocol evidence when capture is configured correctly"
+      ],
+      "cannotProve": [
+        "USB4/TB4 high-speed electrical compliance or receiver tolerance",
+        "all analog safety faults, isolation withstand, thermal or worst-case current behavior",
+        "coverage beyond the analyzer's protocol, voltage/current and sampling limits"
+      ],
+      "enterWhen": "At first powered PD prototype, before host/dock exposure; rent/borrow a current Type-C/PD analyzer with documented voltage/current limits.",
+      "sourceUrls": [
+        "https://www.usb.org/compliancetools",
+        "https://www.totalphase.com/protocol-analyzer/usb-power-delivery/"
+      ],
+      "versionNote": "Record analyzer model, firmware/software version, probe/fixture, voltage/current range and capture settings."
+    },
+    {
+      "id": "oscilloscope-load",
+      "class": "paid-or-rental",
+      "phase": "power-and-control-bench",
+      "proves": [
+        "measured CC/VBUS/VCONN voltage/current waveforms, timing, ripple and transients at stated probe bandwidth and load",
+        "behavior under controlled source/load and fault experiments",
+        "raw waveform evidence tied to probe, bandwidth, sample rate and calibration"
+      ],
+      "cannotProve": [
+        "USB4/TB4 compliance without the required fixtures, bandwidth, methodology and approved test software",
+        "isolation/safety certification, connector current rating or every fault condition",
+        "protocol-layer behavior"
+      ],
+      "enterWhen": "Before first live host/dock test; begin with current-limited supplies and benign loads, then use a lab for USB4 electrical work.",
+      "sourceUrls": [
+        "https://www.usb.org/usb4compliance",
+        "https://www.tek.com/en/documents/application-note/usb4-compliance-test-solution"
+      ],
+      "versionNote": "Record scope model, probes, bandwidth limit, sample rate, load profile and calibration date."
+    },
+    {
+      "id": "vna-tdr",
+      "class": "paid-or-rental",
+      "phase": "pcb1a-and-channel",
+      "proves": [
+        "calibrated S-parameters and/or impedance/discontinuity location for the measured coupon or assembled channel",
+        "insertion loss, return loss, crosstalk and mode conversion only for the measured ports, fixtures, reference plane and frequency span",
+        "comparison with pre-layout models when de-embedding and limits are documented"
+      ],
+      "cannotProve": [
+        "live USB4/TB4 protocol interoperability or receiver tolerance",
+        "unmeasured states, cables, connectors or the full product",
+        "safety, PD behavior or certification from TDR alone"
+      ],
+      "enterWhen": "After PCB-1A coupon or integrated board exists and model correlation or channel diagnosis justifies the cost; rent a suitable multi-port calibrated setup.",
+      "sourceUrls": [
+        "https://www.usb.org/usb4compliance",
+        "https://scikit-rf.readthedocs.io/en/latest/tutorials/Networks.html"
+      ],
+      "versionNote": "Record VNA/TDR model, ports, calibration kit/date, reference plane, fixtures, de-embedding, terminations and raw Touchstone."
+    },
+    {
+      "id": "usb4cv-protocol-analyzer",
+      "class": "paid-or-rental",
+      "phase": "interoperability-and-compliance",
+      "proves": [
+        "USB4 compliance/interoperability procedures only when the exact USB-IF test specification, approved platform, fixtures, software and DUT setup are followed",
+        "protocol discovery, tunneling and selected logical/host-interface behavior within the platform's coverage",
+        "captured protocol traces and test reports"
+      ],
+      "cannotProve": [
+        "product safety, PD isolation or analog electrical limits by itself",
+        "claims outside the tested USB4 generation, CTS revision, topology, cable and software",
+        "Thunderbolt branding/certification unless the separate Intel/Thunderbolt route is satisfied"
+      ],
+      "enterWhen": "Late, after stable integrated prototypes pass functional and PD gates; normally use a compliance lab or rent approved equipment.",
+      "sourceUrls": [
+        "https://www.usb.org/usb4compliance",
+        "https://www.usb.org/compliancetools"
+      ],
+      "versionNote": "USB-IF's 2026-09-01 page lists a USB4CV CTS dated 2026-07-30 and 40 Gb/s approved-platform support on Voyager M4x/M480x. Capture the actual downloaded tool/CTS version and recheck approved equipment before use."
+    },
+    {
+      "id": "bert-compliance-lab",
+      "class": "paid-or-rental",
+      "phase": "electrical-compliance",
+      "proves": [
+        "electrical transmitter/receiver measurements only under the applicable USB4 Electrical CTS, approved scope/BERT, fixtures, automation and calibration",
+        "eye/jitter, stressed receiver or other named measurements included by the selected CTS",
+        "formal lab report when performed by the lab under its stated accreditation/scope"
+      ],
+      "cannotProve": [
+        "anything outside the selected CTS and DUT configuration",
+        "firmware correctness, functional reliability, mechanical fit, PD safety or long-term field reliability",
+        "compliance from a generic oscilloscope/BERT without approved method, fixtures and limits"
+      ],
+      "enterWhen": "Only after design freeze candidate, functional matrix and channel/PD evidence are complete; book a USB-IF-capable lab rather than buying equipment for this project.",
+      "sourceUrls": [
+        "https://www.usb.org/usb4compliance",
+        "https://www.usb.org/document-library/usb4-electrical-compliance-test-specification"
+      ],
+      "versionNote": "USB-IF's approved equipment and test specifications change; capture specification revision, lab scope, equipment models, calibration and report identity."
+    }
+  ]
+}

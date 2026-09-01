@@ -20,6 +20,15 @@
       "id": "ART-CONTROL-UX-001", "kind": "artifact", "title": "Interactive button, display and remote-pod control-experience prototype", "status": "REVIEWED", "owner": "product/control", "evidence": ["components/control-experience-prototype.tsx", "docs/prototypes/control-experience.md", "docs/reviews/2026-09-01-control-experience-review.md"], "blockers": []
     },
     {
+      "id": "ART-CONTROLLER-SIM-001", "kind": "artifact", "title": "PD-free executable controller model and interactive lab", "status": "REVIEWED", "owner": "firmware/control", "evidence": ["firmware/controller-prototype/model.mjs", "firmware/controller-prototype/test.mjs", "design/controller-prototype/scenarios.json", "components/controller-prototype-lab.tsx", "docs/prototypes/pd-free-controller.md", "docs/reviews/2026-09-01-controller-prototype-review.md"], "blockers": []
+    },
+    {
+      "id": "ART-CONTROLLER-BENCH-PLAN-001", "kind": "artifact", "title": "Reviewed proposed isolated Pico 2 controller bench and evidence contract", "status": "REVIEWED", "owner": "firmware/validation", "evidence": ["docs/research/issue-18-controller-bench/README.md", "design/controller-bench/inventory.json", "design/controller-bench/evidence-schema.json", "design/controller-bench/test-evidence.mjs", "docs/reviews/2026-09-01-controller-prototype-review.md"], "blockers": ["GATE-CONTROLLER-BENCH-EVIDENCE-001"]
+    },
+    {
+      "id": "GATE-CONTROLLER-BENCH-EVIDENCE-001", "kind": "gate", "title": "Physical PD-free controller bench B1-B13 evidence is complete and independently reviewed", "status": "BLOCKED", "owner": "firmware/validation", "evidence": ["docs/research/issue-18-controller-bench/README.md", "design/controller-bench/evidence-schema.json", "design/controller-bench/evidence.example.json"], "blockers": []
+    },
+    {
       "id": "ART-CHMETHOD-001", "kind": "artifact", "title": "Reference-plane-specific channel-budget method and deterministic closure contract", "status": "REVIEWED", "owner": "signal integrity", "evidence": ["docs/research/pcb1a-channel-budget-method.md", "design/channel-budget/schema.json", "design/channel-budget/prototype-a-example.json", "design/channel-budget/test-only-closed-fixture.json", "design/channel-budget/validate.mjs", "docs/reviews/2026-09-01-channel-budget-contract-review.md"], "blockers": []
     },
     {

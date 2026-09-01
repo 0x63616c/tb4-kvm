@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "status": "PROTOTYPE",
+  "scenarios": [
+    {
+      "id": "startup-a",
+      "events": [{ "type": "STARTUP" }],
+      "expectMode": "SELECTED_A"
+    },
+    {
+      "id": "b-only",
+      "initial": { "hostA": false, "hostB": true },
+      "events": [{ "type": "STARTUP" }],
+      "expectMode": "SELECTED_B"
+    },
+    {
+      "id": "neither",
+      "initial": { "hostA": false, "hostB": false },
+      "events": [{ "type": "STARTUP" }],
+      "expectMode": "NO_HOSTS"
+    },
+    {
+      "id": "switch-with-hold",
+      "events": [
+        { "type": "BUTTON_DOWN" },
+        { "type": "TICK", "ms": 40 },
+        { "type": "BUTTON_UP" },
+        { "type": "BUTTON_DOWN" },
+        { "type": "TICK", "ms": 1000 },
+        { "type": "BUTTON_UP" }
+      ],
+      "expectMode": "SELECTED_B"
+    }
+  ]
+}

@@ -62,8 +62,12 @@ method/schema has completed multi-round adversarial SI review and is closed;
 the later numeric allocation remains blocked. Issue #17 delivered an independently
 reviewed interactive control-experience prototype covering the onboard switch,
 truthful status, optional remote pod and fail-closed edge cases. It is the
-provisional v1 control default and now unblocks the PD-free controller prototype;
-later owner feedback may refine it without stopping reversible work. Optional measurement-route
+provisional v1 control default. Issue #18 now has a reviewed PD-free executable
+controller model with 57 checks, a live interactive model lab, a portable C11
+controller core with 113 host checks, an isolated Pico 2 bench plan and a
+content-verified B1-B13 physical-evidence contract. No Pico has been flashed and
+no physical bench has run yet. Later owner feedback may refine the UX without stopping
+reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
 proven complete contract.
 
@@ -88,12 +92,13 @@ Latest evidence:
 - Product-decision contract review: [`docs/reviews/2026-09-01-product-decision-contract-review.md`](docs/reviews/2026-09-01-product-decision-contract-review.md).
 - Owner-acceptance transcription review: [`docs/reviews/2026-09-01-owner-acceptance-review.md`](docs/reviews/2026-09-01-owner-acceptance-review.md).
 - Interactive control-experience prototype and review: [`components/control-experience-prototype.tsx`](components/control-experience-prototype.tsx), [`docs/prototypes/control-experience.md`](docs/prototypes/control-experience.md) and [`docs/reviews/2026-09-01-control-experience-review.md`](docs/reviews/2026-09-01-control-experience-review.md).
+- PD-free controller model, bench plan and review: [`firmware/controller-prototype/model.mjs`](firmware/controller-prototype/model.mjs), [`docs/research/issue-18-controller-bench/README.md`](docs/research/issue-18-controller-bench/README.md) and [`docs/reviews/2026-09-01-controller-prototype-review.md`](docs/reviews/2026-09-01-controller-prototype-review.md).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- #18 build and validate the PD-free controller prototype against the reviewed provisional control experience;
+- #18 bind the portable C core to a named Pico SDK/toolchain and prepare the exact low-value physical bench acquisition/build pack;
 
 Owner participation or acceptance:
 
@@ -110,11 +115,12 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Build and independently review issue #18's PD-free controller/firmware simulator using the reviewed control experience as the provisional default.
-2. Continue collecting owner feedback without pausing reversible downstream work.
-3. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
-4. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
-5. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
+1. Independently review the portable C core, then bind it to a named Pico SDK/toolchain while preserving abstract I/O boundaries.
+2. Prepare the exact isolated-bench BOM/acquisition and wiring package; request owner purchase authority only when the package is reviewed.
+3. Continue collecting owner feedback without pausing reversible downstream work.
+4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
+5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
+6. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits
 
