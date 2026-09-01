@@ -26,6 +26,8 @@ Required measurement access:
 - TDR/TDT only for the impedance/discontinuity evidence it can actually produce;
 - raw single-ended and mixed-mode Touchstone outputs plus the comparison script.
 
+The proposed instrument, calibration, port, termination, state and raw-evidence contract is in [PCB-1A mixed-mode measurement method](PCB-1A-MEASUREMENT-METHOD.md) and its machine-readable [measurement matrix](../design/pcb1a-measurement-matrix.json). It remains `PROPOSED_UNBOOKED`.
+
 It must not be described as a compliant USB-C extender or complete KVM.
 
 ## Parallel PCB-1B candidate — low-speed controller/UI board
@@ -67,3 +69,5 @@ If no adequately ported calibrated VNA/lab-equivalent and agreed fixture/de-embe
 PCB 1 becomes order-ready only when its owner-approved questions, schematic/layout, BOM, stack-up, measurement procedure, pass/fail limits, independent reviews, DFM confirmation, manufacturing outputs and release manifest are all present and have no unresolved release blocker.
 
 For PCBWay specifically, the release package also requires written job-specific stack-up and tolerances; accepted impedance/de-embedding coupon geometry; per-panel impedance/TDR report requirement; as-built stack-up/microsection or equivalent construction evidence; named material and lot traceability/CoC expectation; and the measurement lab's acceptance of the fabricated coupon geometry. Generic capability-page claims do not close this gate.
+
+Use the [PCBWay pre-quote engineering inquiry](PCBWAY-PREQUOTE-INQUIRY.md) to obtain those written answers. The document is a draft only and authorizes neither submission nor fabrication.

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TB4 KVM Project Files</title>
+    <style>
+      :root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #111713; color: #e7f3e9; }
+      body { max-width: 76rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+      a { color: #72f0c1; }
+      h1, h2 { color: #c9ff74; }
+      .meta, .status { color: #98aaa0; }
+      .grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+      .card { border: 1px solid #355044; border-radius: .5rem; padding: 1rem; background: #172019; overflow-wrap: anywhere; }
+      .tag { display: inline-block; border: 1px solid #466657; border-radius: 999px; padding: .15rem .45rem; margin-right: .35rem; font-size: .75rem; }
+      ul { padding-left: 1.25rem; }
+      li { margin: .6rem 0; }
+      code { color: #7de6e4; }
+    </style>
+  </head>
+  <body>
+    <p><a href="../">← Interactive field guide</a></p>
+    <h1>Project files and evidence</h1>
+    <p>
+      This index exposes repository documents and evidence at the deployed revision. Hardware
+      viewers appear only after a revisioned artifact is published and its viewer is implemented.
+    </p>
+    <p id="revision" class="meta">Loading revision…</p>
+    <h2>Viewer readiness</h2>
+    <div id="capabilities" class="grid"></div>
+    <h2>Documents</h2>
+    <ul id="documents"></ul>
+    <h2>Evidence</h2>
+    <ul id="evidence"></ul>
+    <h2>Hardware artifacts</h2>
+    <div id="artifacts" class="card">Loading…</div>
+    <script type="module">
+      const manifest = await fetch('./index.json').then((response) => {
+        if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+        return response.json();
+      });
+
+      document.querySelector('#revision').textContent = `Deployed source revision: ${manifest.revision}`;
+
+      const capabilities = document.querySelector('#capabilities');
+      for (const [name, capability] of Object.entries(manifest.viewerCapabilities)) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const title = document.createElement('strong');
+        title.textContent = name;
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = capability.status;
+        const mode = document.createElement('span');
+        mode.className = 'status';
+        mode.textContent = capability.mode;
+        card.append(title, document.createElement('br'), tag, mode);
+        capabilities.append(card);
+      }
+
+      function renderEntries(selector, entries) {
+        const list = document.querySelector(selector);
+        for (const entry of entries) {
+          const item = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = entry.path;
+          link.textContent = entry.title;
+          item.append(link, document.createElement('br'));
+          const labels = document.createElement('small');
+          labels.className = 'meta';
+          labels.textContent = `revision ${entry.revisionLabel} · ${entry.evidenceLabel} · sha256 ${entry.sha256}`;
+          item.append(labels);
+          list.append(item);
+        }
+      }
+
+      renderEntries('#documents', manifest.documents);
+      renderEntries('#evidence', manifest.evidence);
+
+      document.querySelector('#artifacts').textContent = manifest.artifacts.length
+        ? `${manifest.artifacts.length} revisioned artifact(s) published.`
+        : 'No PCB, Gerber, STEP, STL or 3MF artifact is published in this revision.';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "status": "PROPOSED_UNBOOKED",
+  "orderReady": false,
+  "usb4OrThunderboltComplianceClaimAuthorized": false,
+  "purpose": "Characterize a measurement-only four-pair high-speed mux coupon without USB-C, VBUS, CC, PD or a protocol link.",
+  "lanes": ["D0", "D1", "D2", "D3"],
+  "instrument": {
+    "minimumSingleEndedPorts": 4,
+    "preferredSingleEndedPorts": 8,
+    "minimumStopFrequencyHz": 20000000000,
+    "preferredStopFrequencyHz": 26500000000,
+    "startFrequencyHzRange": [10000000, 50000000],
+    "minimumPoints": 1601,
+    "nominalIfBandwidthHz": 1000,
+    "calibration": "FULL_4_PORT_SOLT_OR_ECAL_AT_CABLE_ENDS",
+    "labStatus": "UNBOOKED"
+  },
+  "referencePlanes": {
+    "raw": "CALIBRATED_COAX_CABLE_ENDS",
+    "deembedded": "PCB_PACKAGE_LANDS",
+    "siliconDieClaimed": false
+  },
+  "requiredStructures": [
+    "FIXTURE_DUT_FIX",
+    "SYMMETRIC_2X_THRU_PER_DISTINCT_LAUNCH",
+    "PLAIN_NO_MUX_THRU",
+    "INACTIVE_PORT_TERMINATION_FIXTURE"
+  ],
+  "requiredStates": [
+    "UNPOWERED",
+    "POWERED_ALL_PATHS_HIZ",
+    "A_SELECTED_B_MATCHED",
+    "B_SELECTED_A_MATCHED",
+    "A_SELECTED_B_OPEN",
+    "B_SELECTED_A_OPEN"
+  ],
+  "requiredMeasurements": [
+    "SDD21_SDD12_INSERTION_LOSS",
+    "SDD11_SDD22_RETURN_LOSS",
+    "GROUP_DELAY",
+    "SDC_SCD_MODE_CONVERSION",
+    "COMMON_MODE_TERMS",
+    "INACTIVE_PATH_ISOLATION",
+    "PAIRWISE_NEXT_FEXT",
+    "PHASE_DELAY_AND_LANE_SKEW",
+    "RECONNECTION_REPEATABILITY",
+    "SYSTEM_NOISE_FLOOR"
+  ],
+  "deembedding": {
+    "method": "IEEE_370_2X_THRU_OR_LAB_ACCEPTED_EQUIVALENT",
+    "validation": [
+      "RESIDUAL_THRU",
+      "RAW_VS_DEEMBEDDED_COMPARISON",
+      "RECIPROCITY",
+      "PASSIVITY",
+      "CAUSALITY",
+      "TIME_DOMAIN_IMPEDANCE_CONTINUITY"
+    ]
+  },
+  "rawEvidence": [
+    "RAW_SINGLE_ENDED_TOUCHSTONE",
+    "RAW_2X_THRU_TOUCHSTONE",
+    "RAW_PLAIN_THRU_TOUCHSTONE",
+    "EXTRACTED_FIXTURE_TOUCHSTONE",
+    "DEEMBEDDED_TOUCHSTONE",
+    "MIXED_MODE_TOUCHSTONE",
+    "CALIBRATION_AND_INSTRUMENT_MANIFEST",
+    "PORT_POLARITY_AND_TERMINATION_MAP",
+    "MUX_STATE_SUPPLY_AND_TEMPERATURE_LOG",
+    "NOISE_FLOOR_AND_REPEATABILITY_CAPTURE",
+    "BOARD_SERIAL_AND_FILE_HASH_MANIFEST"
+  ],
+  "limits": {
+    "status": "BLOCKED_ON_END_TO_END_CHANNEL_BUDGET",
+    "numericLimits": {},
+    "measurementValidityPassAuthorized": false,
+    "metrologyValidity": {
+      "status": "BLOCKED_ON_LAB_ACCEPTANCE_CRITERIA",
+      "separateFromProductAcceptance": true,
+      "validatedFrequencyBandHz": null,
+      "fixtureElectricalRequirements": {
+        "standard": "IEEE_370_2020_WITH_ERRATA",
+        "requiredResult": "PASS",
+        "result": null
+      },
+      "residualSelfDeembedding": {
+        "maximumAbsoluteInsertionLossResidualDb": 0.1,
+        "maximumAbsolutePhaseResidualDeg": 1,
+        "terms": ["S21", "S12"],
+        "requireEveryPointInValidatedBand": true
+      },
+      "uncertainty": {
+        "coverageFactorK": 2,
+        "requiredPerObservableAndFrequency": true,
+        "requiredContributors": [
+          "CALIBRATION",
+          "INSTRUMENT_DRIFT",
+          "CABLE_STABILITY",
+          "CONNECTOR_REMATE",
+          "TERMINATION",
+          "DEEMBEDDING",
+          "NOISE_FLOOR"
+        ],
+        "absoluteMagnitudeCapDb": null,
+        "absolutePhaseCapDeg": null
+      },
+      "repeatability": {
+        "minimumIndependentRemates": 3,
+        "acceptance": "PAIRWISE_DELTA_LE_COMBINED_EXPANDED_UNCERTAINTY_K2",
+        "absoluteMagnitudeCapDb": null,
+        "absolutePhaseCapDeg": null
+      },
+      "noiseFloor": {
+        "minimumObservableMarginDb": 10,
+        "appliesTo": ["INACTIVE_PATH_ISOLATION", "PAIRWISE_NEXT_FEXT"],
+        "status": "PROVISIONAL_REQUIRES_LAB_ACCEPTANCE"
+      },
+      "qualityMetrics": {
+        "frequencyDomainMethodAndVersion": null,
+        "frequencyDomainAcceptance": null,
+        "timeDomainDataRateHz": null,
+        "timeDomainRiseTimeDefinition": null,
+        "timeDomainAcceptance": null
+      },
+      "resonanceDetection": {
+        "algorithmAndVersion": null,
+        "minimumMagnitudeThresholdDb": null,
+        "minimumQualityFactor": null
+      },
+      "openTbd": [
+        "VALIDATED_FREQUENCY_BAND",
+        "ABSOLUTE_REPEATABILITY_CAPS",
+        "FD_QUALITY_METRIC_ACCEPTANCE",
+        "TD_QUALITY_METRIC_INPUTS_AND_ACCEPTANCE",
+        "RESONANCE_DETECTION_RULE"
+      ]
+    },
+    "measurementValidityOnly": [
+      "LAB_ACCEPTS_METROLOGY_CRITERIA_AND_VALIDATED_BAND",
+      "CALIBRATION_AND_DEEMBEDDING_PASS_ACCEPTED_CRITERIA",
+      "REPEATABILITY_WITHIN_K2_EXPANDED_UNCERTAINTY",
+      "NOISE_FLOOR_MARGIN_PASSES_ACCEPTED_CRITERIA",
+      "NO_UNEXPLAINED_RESONANCE_OR_STATE_ASYMMETRY",
+      "RAW_EVIDENCE_COMPLETE"
+    ]
+  }
+}

@@ -8,8 +8,11 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:pages": "PAGES_STATIC_EXPORT=true PAGES_BASE_PATH=/tb4-kvm vinext build && PAGES_BASE_PATH=/tb4-kvm node scripts/assemble-pages-hub.mjs",
+    "preview:pages": "node scripts/preview-pages.mjs",
     "start": "wrangler dev --config dist/server/wrangler.json",
     "verify:control": "node scripts/verify-control-model.mjs",
+    "verify:pcb1a": "node scripts/verify-pcb1a-plan.mjs",
     "verify:evidence": "node scripts/verify-evidence-ledger.mjs",
     "verify:links": "node scripts/verify-links.mjs",
     "verify:sbom": "node scripts/verify-sbom.mjs",
@@ -18,7 +21,7 @@
     "format": "oxfmt app components lib scripts package.json tsconfig.json vite.config.ts next.config.ts",
     "format:check": "oxfmt --check app components lib scripts package.json tsconfig.json vite.config.ts next.config.ts",
     "audit": "npm audit --audit-level=high",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:control && npm run verify:evidence && npm run verify:links && npm run audit && npm run verify:sbom && npm run build"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:control && npm run verify:pcb1a && npm run verify:evidence && npm run verify:links && npm run audit && npm run verify:sbom && npm run build"
   },
   "dependencies": {
     "react": "19.2.8",

@@ -1,55 +1,105 @@
-# TB4 KVM Field Guide
+# TB4 KVM
 
-This repository is the pre-PCB research and learning package for a two-host, one-dock Thunderbolt 4 KVM.
+[![Project checks](https://github.com/0x63616c/tb4-kvm/actions/workflows/check.yml/badge.svg)](https://github.com/0x63616c/tb4-kvm/actions/workflows/check.yml)
+[![Status: design review](https://img.shields.io/badge/status-design_review-c8ff57)](PROJECT-STATUS.md)
+[![Hardware: CERN-OHL-S-2.0](https://img.shields.io/badge/hardware-CERN--OHL--S--2.0-31c6aa)](LICENSE.md)
+[![Software: MIT](https://img.shields.io/badge/software-MIT-31c6aa)](LICENSE.md)
 
-The full living execution roadmap is in [End-to-end project plan](docs/PROJECT-PLAN.md). Product behavior is controlled by [Product requirements](docs/PRODUCT-REQUIREMENTS.md), and no artifact can be released outside the [Review and release policy](docs/REVIEW-AND-RELEASE-POLICY.md).
+An evidence-gated, open-source Thunderbolt 4 KVM: two computers, one real TB4 dock, one physical switch, no host software.
 
-The integrated product is intentionally held at the design-review gate. Independent review selected a measurement-only mux coupon as PCB-1A, but even that coupon is not order-ready until an adequately ported calibrated VNA/equivalent mixed-mode S-parameter method, supplemental TDR/TDT plan, and frozen fabricator stack-up are agreed. No production schematic, integrated PCB layout, enclosure dimensions, or Thunderbolt product claims are approved yet.
+**[Open the interactive field guide](https://0x63616c.github.io/tb4-kvm/)** · **[Browse project files and evidence](https://0x63616c.github.io/tb4-kvm/project/)**
 
-## Current conclusion
+![TB4 KVM interactive field guide](docs/assets/field-guide-overview.png)
 
-Build a small, self-powered Thunderbolt 4 KVM dock with two selectable upstream host ports, one real Thunderbolt router, and at least one downstream Thunderbolt port. Do not treat a passive three-receptacle mux as the product architecture.
+> [!IMPORTANT]
+> This is real hardware engineering in public, currently at design review—not a finished 40 Gb/s product. No PCB is order-ready yet. Every status and blocker is tracked in [`evidence/ledger.json`](evidence/ledger.json).
+
+## What we are building
 
 ```text
 Host A USB-C ── PD/CC A ──┐
-                          ├── 4-pair high-speed mux ── TB4 router ── downstream TB4 ── dock
+                          ├── 4-pair high-speed mux ── real TB4 router ── downstream TB4 ── dock
 Host B USB-C ── PD/CC B ──┘                │
-                                           ├── USB2/SBU routing
-                                           └── MCU + display + protected power
+                                           ├── orientation-aware USB2/SBU routing
+                                           └── protected power + MCU + button/display header
 ```
 
-The nearest shipping precedent is the Sabrent SB-TB4K / SSI SI-452TB4 architecture: a selectable front end feeding one Intel JHL8440 router. This validates the broad design pattern but not our final component set or layout.
+The key design decision is what this project **is not**: a passive three-receptacle USB-C coupler. A credible TB4 KVM selects one upstream front end before a real Thunderbolt router while keeping Host A and Host B CC/PD/VBUS domains isolated.
 
-## Review order
+![Interactive architecture comparison](docs/assets/architecture-overview.png)
 
-1. Work through the interactive field guide.
-2. Read [Architecture decision](docs/ARCHITECTURE-DECISION.md).
-3. Review [Signal and power ownership](docs/SIGNAL-POWER-OWNERSHIP.md).
-4. Step through the [Controller and display state model](docs/CONTROL-STATE-MACHINE.md).
-5. Review [Candidate parts](docs/CANDIDATE-PARTS.md).
-6. Review [Validation plan](docs/VALIDATION-PLAN.md).
-7. Review [Mechanical interface guidance](docs/MECHANICAL-INTERFACE.md).
-8. Use the [Design-readiness checklist](docs/DESIGN-READINESS-CHECKLIST.md) to approve or change the v1 scope before schematic capture.
+## Current state
 
-The machine-readable [evidence ledger](evidence/ledger.json) is authoritative for project status; the [Objective and evidence matrix](docs/OBJECTIVE-EVIDENCE-MATRIX.md) explains the distinction between completed research, intentionally gated work and missing physical validation.
+| Artifact | State | Evidence |
+| --- | --- | --- |
+| Beginner field guide and terminology | `MODELED` | [`app/field-guide.tsx`](app/field-guide.tsx) |
+| Product architecture | `REVIEWED` | [`docs/ARCHITECTURE-DECISION.md`](docs/ARCHITECTURE-DECISION.md) |
+| Safety/control ordering | `MODELED` | [`design/control-state-machine.json`](design/control-state-machine.json) |
+| PCB-1A RF mux coupon | `BLOCKED` | [`docs/PCB-1-DEFINITION.md`](docs/PCB-1-DEFINITION.md) |
+| Integrated TB4 KVM PCB | `BLOCKED` | [`docs/DESIGN-READINESS-CHECKLIST.md`](docs/DESIGN-READINESS-CHECKLIST.md) |
+| Parametric enclosure/mount | `BLOCKED` | [`docs/CAD-RELEASE-CONTRACT.md`](docs/CAD-RELEASE-CONTRACT.md) |
 
-The first fabrication scope is deliberately tracked in [PCB 1 definition](docs/PCB-1-DEFINITION.md) until vendor access, measurement capability and independent review determine which experiment most efficiently retires risk.
+PCB-1A is deliberately an RF measurement coupon with no USB-C receptacle, VBUS, CC, PD or protocol link. Its proposed minimum measurement setup is a calibrated four-port VNA to 20 GHz; it remains no-go until vendor models, lab access, channel limits and a frozen PCBWay construction exist.
 
-## Hard gates before PCB layout
+## Explore and run the field guide
 
-- Obtain Intel Thunderbolt developer/reference-design access for the current JHL9440-family solution or Intel-recommended successor.
-- Confirm a reproducible NVM/firmware and prototype-quantity sourcing path.
-- Confirm Infineon CYPD5235/CCG5 upstream-dock firmware and programming workflow.
-- Simulate the proposed connector–ESD–mux–router channel using vendor S-parameter models and the real PCB stack-up.
-- Choose the product power policy: selected host only at 60 W is the recommended v1.
-- Confirm that connecting the existing dock downstream meets the desired display/peripheral behavior even though its laptop-charging power will not transparently pass through the KVM router.
+Requirements: Node.js 22+ and npm.
 
-## What the display can show
+```bash
+git clone https://github.com/0x63616c/tb4-kvm.git
+cd tb4-kvm
+npm ci
+npm run dev
+```
 
-The local MCU can truthfully show selected host, attachment/orientation, PD contract, measured voltage/current/power, faults, switching stage, reconnect time, temperature, and firmware version. It cannot passively count Thunderbolt bytes. True link speed requires supported router status or host-side confirmation; live throughput requires router counters, an analyzer, or a host helper.
+Open `http://localhost:3000`. Run the complete repository gate with:
 
-## Status
+```bash
+npm run check
+```
 
-The interactive site, documentation, v3 architectural control model and initial independent audits exist. `npm run check` verifies formatting, lint, TypeScript, the control-model invariants, evidence-ledger references and a production build. The ledger remains deliberately blocker-heavy, including Intel collateral, downstream PD ownership, host-availability policy, lab access and PCBWay's job-specific stack-up/DFM.
+The check suite covers formatting, lint, TypeScript, control-state invariants, the PCB-1A measurement-plan contract, evidence/link integrity, dependency audit, CycloneDX SBOM and a production build. Passing these checks proves repository consistency—not electrical safety or 40 Gb/s operation.
 
-Read the append-only [independent review records](docs/reviews/README.md), [PCB-1 decision](docs/PCB-1-DEFINITION.md) and [parametric CAD release contract](docs/CAD-RELEASE-CONTRACT.md) before changing scope.
+## Build path
+
+Start with the [beginner build and contribution guide](docs/BUILD-GUIDE.md). The project proceeds in evidence-gated stages:
+
+1. Learn the connector, protocol and safety boundaries in the field guide.
+2. Close exact-parts, lab and fabricator questions for PCB-1A.
+3. Build and measure the RF-only mux coupon; retain raw Touchstone evidence.
+4. In parallel, prototype the PD-free controller/button/display board.
+5. Prove reference-backed Type-C/PD/power behavior on protected lab equipment—never first on laptops.
+6. Design and bring up the integrated KVM, expecting a measured correction revision.
+7. Freeze the board geometry, then release parametric enclosure, mount and remote-pod CAD.
+
+Useful starting documents:
+
+- [End-to-end project plan](docs/PROJECT-PLAN.md)
+- [Product requirements](docs/PRODUCT-REQUIREMENTS.md)
+- [USB-C/TB4 architecture decision](docs/ARCHITECTURE-DECISION.md)
+- [Signal and power ownership](docs/SIGNAL-POWER-OWNERSHIP.md)
+- [PCB-1A measurement method](docs/PCB-1A-MEASUREMENT-METHOD.md)
+- [Exact PCB-1A candidate-parts evidence](docs/PCB-1A-PARTS-EVIDENCE.md)
+- [PCBWay pre-quote inquiry](docs/PCBWAY-PREQUOTE-INQUIRY.md)
+- [Validation plan](docs/VALIDATION-PLAN.md)
+- [Review and release policy](docs/REVIEW-AND-RELEASE-POLICY.md)
+
+## Repository map
+
+```text
+app/          interactive learning and project-status site
+design/       machine-readable control and measurement models
+docs/         requirements, decisions, research, guides and reviews
+evidence/     authoritative project evidence ledger
+hardware/     KiCad sources and immutable releases as they become real
+mechanical/   parametric CAD sources and verified exports as they become real
+scripts/      reproducible repository and evidence checks
+```
+
+PCB and 3D previews will be added to the site and README only from real, revisioned source files. Placeholder renders are never presented as manufactured, measured or printable hardware.
+
+## Contributing
+
+Read [`AGENTS.md`](AGENTS.md) before changing the project. Preserve evidence labels, use primary sources, record independent reviews, and do not weaken a safety or manufacturing gate to make the project appear further along.
+
+Hardware is licensed under CERN-OHL-S-2.0, software under MIT, and documentation under CC BY-SA 4.0; see [`LICENSE.md`](LICENSE.md).

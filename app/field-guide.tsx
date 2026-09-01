@@ -60,6 +60,7 @@ const faultState = controlStates.find(
 )!;
 const evidenceRecords = evidenceLedger.records as EvidenceRecord[];
 const sourceRevision = import.meta.env.VITE_GIT_COMMIT ?? '';
+const projectHubHref = `${import.meta.env.BASE_URL ?? '/'}project/`;
 const hasImmutableSourceRevision = /^[0-9a-f]{40}$/.test(sourceRevision);
 
 const pinGroups: Record<
@@ -351,8 +352,13 @@ const sources = [
   ],
   [
     'TI TMUXHS4512',
-    '20 Gb/s routing for four main pairs plus auxiliary signals; does not switch CC/VBUS.',
+    'Exact research OPN TMUXHS4512IRETT; 20 Gb/s routing for four main pairs, but public S-parameters and prototype supply remain blocked.',
     'https://www.ti.com/product/TMUXHS4512',
+  ],
+  [
+    'Semtech RClamp01012ZC.F',
+    'Named optional two-line 0.17 pF ESD candidate; component-level USB4/TB4 claim is not channel proof.',
+    'https://www.semtech.com/products/circuit-protection/usb/rclamp01012zc',
   ],
   [
     'Diodes PI3DBS16412',
@@ -422,6 +428,7 @@ export default function FieldGuide() {
           <a href="#test">Test</a>
           <a href="#gate">Build gate</a>
           <a href="#glossary">Glossary</a>
+          <a href={projectHubHref}>Project files</a>
         </nav>
         <span className="phase-chip">Design review</span>
       </header>
@@ -1234,10 +1241,10 @@ export default function FieldGuide() {
             href="https://www.infineon.com/part/CYPD5235-96BZXIT"
           />
           <PartRow
-            part="TI TMUXHS4512"
+            part="TI TMUXHS4512IRETT"
             job="Select four 20 Gb/s pairs + AUX"
-            state="Candidate"
-            note="TB3/4 and USB4 named; about 2.5 dB insertion loss at 10 GHz; needs channel simulation."
+            state="Research OPN"
+            note="TI names TB3/4 and USB4, but direct prototype stock and a public multi-state S-parameter model were unavailable at the 2026-09-01 evidence capture."
             href="https://www.ti.com/product/TMUXHS4512"
           />
           <PartRow
@@ -1248,10 +1255,10 @@ export default function FieldGuide() {
             href="https://www.ti.com/product/TS3USB221A"
           />
           <PartRow
-            part="RClamp01012ZC"
+            part="RClamp01012ZC.F"
             job="TB4 lane ESD protection"
-            state="Candidate"
-            note="Two-line, 0.17 pF USB4/TB4 protection; final choice follows Intel channel approval."
+            state="Research OPN / DNP"
+            note="Two-line, 0.17 pF USB4/TB4 research candidate. Keep DNP until lifecycle, model, land-pattern, assembly/source and complete-channel evidence gates close."
             href="https://www.semtech.com/products/circuit-protection/usb/rclamp01012zc"
           />
           <PartRow

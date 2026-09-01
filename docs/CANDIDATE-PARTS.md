@@ -6,14 +6,16 @@ This is research, not an orderable BOM. A component's marketing support for TB4 
 
 | Function | Candidate | Evidence | Release condition |
 | --- | --- | --- | --- |
-| Four fast-pair selector | TI TMUXHS4512, exact OPN pending | Manufacturer names USB4/TB3/TB4 and 20 Gb/s on each main differential channel | Public package plus S-parameter models; full pre/post-layout channel model; lab accepts fixture |
+| Four fast-pair selector | TI `TMUXHS4512IRETT` provisional prototype OPN | Manufacturer lists active/production and names USB4/TB3/TB4 and 20 Gb/s; TI direct stock was unavailable on 2026-09-01 | Obtain current multi-state S-parameters and prototype source; full pre/post-layout model; lab accepts fixture |
 | Alternate selector | Diodes PI2DBS32412 research alternative | Manufacturer explicitly positions newer family for TB4/USB4 | Compare models, availability, controls and reference-design acceptance |
 | Older precedent only | Diodes PI3DBS16412 | Teardown identifies it in a shipping KVM; manufacturer page is TB3/20 Gb/s evidence | Never relabel teardown precedent as primary TB4 approval |
-| Lane ESD option | Semtech RClamp01012ZC or reference-approved equivalent | Manufacturer component-level USB4/TB4 claim | Fit/DNP comparison and full channel model; not automatically populated |
+| Lane ESD option | Semtech `RClamp01012ZC.F` or reference-approved equivalent | Exact manufacturer order code and component-level USB4/TB4 claim; explicit lifecycle/model evidence not public | Fit/DNP comparison and full channel model; not automatically populated |
 | RF launches | Lab-agreed connectors/fixture | Must support calibrated mixed-mode VNA/equivalent S-parameters, de-embedding, and supplemental TDR/TDT | Exact launch, calibration structures and mating hardware agreed before layout |
 | Coupon supply | Clean external 1.8 V input, exact parts pending | TMUX supply requirement follows selected OPN | Noise/ripple budget and safe static control interface reviewed |
 
 The coupon has no USB-C receptacle, CC, VCONN, VBUS, PD controller, router, MCU or display. It cannot power or attach to a laptop.
+
+See [PCB-1A exact candidate-parts evidence](PCB-1A-PARTS-EVIDENCE.md) for dated OPN, model, sourcing and vendor-question details.
 
 ## PCB-1B: low-speed controller/UI board
 

@@ -42,6 +42,7 @@ Record review inputs, findings, severity, disposition, author and evidence in `d
 
 ## Repository discipline
 
+- Work toward `main` directly for now; do not open project pull requests unless the owner changes this policy. Before pushing, run the full repository gate and persist independent review of the exact staged tree. After pushing, verify GitHub Actions against the exact new `main` commit. Never force-push or delete `main`.
 - Existing project-wide canonical documents remain at `docs/*.md`; use `docs/decisions/`, `docs/research/` and `docs/validation/` for new multi-file domain records when those collections are created. Keep fabrication releases in immutable revision folders under `hardware/releases/`.
 - Store source models, scripts and tool versions—not only exports.
 - Never commit vendor-confidential collateral, credentials, tokens or personally identifying machine data. Record the document title/revision/access restriction instead.
