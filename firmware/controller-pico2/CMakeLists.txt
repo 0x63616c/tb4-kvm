@@ -9,7 +9,7 @@ project(tb4kvm_controller_pico2_binding C CXX ASM)
 
 pico_sdk_init()
 
-add_library(tb4kvm_controller_core STATIC controller_core.c)
+add_library(tb4kvm_controller_core STATIC controller_core.c low_speed_frontend.c)
 target_include_directories(tb4kvm_controller_core PUBLIC
                            "${CMAKE_CURRENT_LIST_DIR}")
 target_compile_features(tb4kvm_controller_core PUBLIC c_std_11)
@@ -17,8 +17,9 @@ target_compile_options(tb4kvm_controller_core PRIVATE
                        -Wall -Wextra -Werror -Wpedantic)
 
 # The binding is deliberately inert: it starts the portable state machine with
-# no hosts observed, emits no physical intent, and never initializes an I/O
-# peripheral. In particular it links neither USB nor UART stdio.
+# no hosts observed, projects only through a null-backed portable frontend, and
+# never initializes an I/O peripheral. In particular it links neither USB nor
+# UART stdio.
 add_executable(tb4kvm_pico2_inert main.c)
 target_link_libraries(tb4kvm_pico2_inert PRIVATE pico_stdlib
                                                 tb4kvm_controller_core)

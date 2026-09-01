@@ -64,7 +64,8 @@ reviewed interactive control-experience prototype covering the onboard switch,
 truthful status, optional remote pod and fail-closed edge cases. It is the
 provisional v1 control default. Issue #18 now has a reviewed PD-free executable
 controller model with 57 checks, a live interactive model lab, a portable C11
-controller core with 113 host checks, an isolated Pico 2 bench plan and a
+controller core with 113 host checks, a null-backed low-speed frontend with 39
+host checks, an isolated Pico 2 bench plan and a
 content-verified B1-B13 physical-evidence contract. A software-only binding now
 pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a reviewed exact
 acquisition/build pack prepares the low-value bench without ordering it. The
@@ -81,6 +82,12 @@ compiled through 88% and proved Ubuntu's separate C++ Newlib package is required
 by the SDK's `new_delete.cpp`; that package is now explicit. Exact-head run
 `33549979596` subsequently built the inert ELF to 100%, found no UF2, uploaded
 no artifact and passed. This is compile evidence only.
+In parallel, PCB-1A now has a machine-checked `PROPOSED` RF-only abstract
+topology contract: four lanes, 24 single-ended measurement ports, six states,
+four fixture classes with unresolved physical-instance counts, and an exact
+four-port campaign rule that partitions every path/state into 4 measured, 8
+inactive-bundle, and 12 other matched conductors. It explicitly authorizes no
+footprint, layout, part freeze, product connection, compliance claim, or order.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
@@ -92,7 +99,7 @@ Latest evidence:
 
 - Canonical live map: [GitHub issue #2](https://github.com/0x63616c/tb4-kvm/issues/2).
 - Map audit: [`docs/reviews/2026-09-01-execution-map-audit.md`](docs/reviews/2026-09-01-execution-map-audit.md).
-- Live API audit after the prototype-first revision: 53 child issues (#3–#55), 109 dependency edges, no cycles.
+- Live REST dependency audit on 2026-09-01: 53 child issues (#3–#55), 100 dependency edges, no cycles.
 - Cost-aware agent routing: [`docs/agents/AGENT-SELECTION.md`](docs/agents/AGENT-SELECTION.md).
 - Accepted route: [`docs/decisions/2026-09-01-prototype-first-validation.md`](docs/decisions/2026-09-01-prototype-first-validation.md).
 - Revised-map audit: [`docs/reviews/2026-09-01-prototype-first-map-audit.md`](docs/reviews/2026-09-01-prototype-first-map-audit.md).
@@ -113,12 +120,17 @@ Latest evidence:
 - Owner bench-inventory response: [`design/controller-bench/owner-inventory.response.json`](design/controller-bench/owner-inventory.response.json) (none owned; no purchase/cart authorization).
 - Complete bench owner-approval packet: [`docs/research/issue-18-controller-bench/acquisition/OWNER-APPROVAL-PACKET.md`](docs/research/issue-18-controller-bench/acquisition/OWNER-APPROVAL-PACKET.md) and [`design/controller-bench/acquisition.approval.json`](design/controller-bench/acquisition.approval.json) (prepared, not approved or ordered).
 - Independent bench-packet review: [`docs/reviews/2026-09-01-controller-bench-approval-packet-review.md`](docs/reviews/2026-09-01-controller-bench-approval-packet-review.md) (accepted as a decision aid; no cart/contact/purchase authority).
+- Null-backed low-speed frontend: [`firmware/controller-pico2/low_speed_frontend.c`](firmware/controller-pico2/low_speed_frontend.c) and [`firmware/controller-pico2/test_low_speed_frontend.c`](firmware/controller-pico2/test_low_speed_frontend.c) (host-tested only; no hardware I/O).
+- Proposed PCB-1A abstract topology: [`design/pcb1a/README.md`](design/pcb1a/README.md), [`design/pcb1a/topology.contract.json`](design/pcb1a/topology.contract.json), and [`design/pcb1a/topology.test.mjs`](design/pcb1a/topology.test.mjs) (not frozen or order-ready).
+- Independent frontend review: [`docs/reviews/2026-09-01-pico2-low-speed-frontend-review.md`](docs/reviews/2026-09-01-pico2-low-speed-frontend-review.md) (accepted source; 39 host and fail-closed UBSan checks; hosted exact-head cross-build remains required).
+- Independent topology review: [`docs/reviews/2026-09-01-pcb1a-topology-contract-review.md`](docs/reviews/2026-09-01-pcb1a-topology-contract-review.md) (accepted as a `PROPOSED` pre-schematic contract; 29 adversarial mutations and 16 exact 4+8+12 campaigns).
+- Combined release review: [`docs/reviews/2026-09-01-frontend-topology-release-review.md`](docs/reviews/2026-09-01-frontend-topology-release-review.md) (R-001 through R-008 closed; exact corrected source tree accepted).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- #18 no reversible acquisition work remains before the owner decides whether to authorize a no-purchase cart/address calculation;
+- release the accepted frontend and proposed PCB-1A abstract topology contract, then verify exact-head CI, Pages and Pico cross-build;
 
 Owner participation or acceptance:
 

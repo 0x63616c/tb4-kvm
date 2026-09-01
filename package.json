@@ -14,7 +14,7 @@
     "verify:control": "node scripts/verify-control-model.mjs",
     "verify:controller-prototype": "node firmware/controller-prototype/test.mjs && firmware/controller-pico2/test-host.sh && node design/controller-bench/validate.mjs && node design/controller-bench/validate-evidence.mjs && node design/controller-bench/test-evidence.mjs && node design/controller-bench/acquisition.validate.mjs && node design/controller-bench/acquisition.test.mjs && node design/controller-bench/validate-owner-inventory-response.mjs && node design/controller-bench/owner-inventory.response.test.mjs && node design/controller-bench/validate-acquisition-approval-packet.mjs && node design/controller-bench/acquisition.approval-packet.test.mjs",
     "verify:pico-binding": "cmake --list-presets -S firmware/controller-pico2",
-    "verify:pcb1a": "node scripts/verify-pcb1a-plan.mjs",
+    "verify:pcb1a": "node scripts/verify-pcb1a-plan.mjs && node design/pcb1a/validate-topology.mjs && node design/pcb1a/topology.test.mjs",
     "verify:channel-budget": "node design/channel-budget/validate.mjs",
     "verify:collateral": "node design/collateral-policy/validate.mjs && node design/collateral-policy/test.mjs",
     "verify:product-decisions": "node design/product-decisions/validate.mjs && node design/product-decisions/validate.mjs design/product-decisions/catalog.json design/product-decisions/response.accepted.json && node design/product-decisions/test.mjs",

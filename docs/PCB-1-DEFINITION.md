@@ -12,6 +12,13 @@ Independent review recommends this as the first fabricated PCB. It is measuremen
 
 Would include the selected fabricator stack-up, candidate connector launches, ESD options, mux package/branches, controlled differential structures and de-embedding/calibration structures.
 
+The current pre-schematic connectivity is captured as a deliberately
+[`PROPOSED` abstract topology contract](../design/pcb1a/README.md). It fixes the
+four-lane/three-branch measurement vocabulary, fixture **classes**, and a
+one-path-at-a-time four-port campaign rule while keeping physical fixture
+instance counts, parts, footprints, stack-up, geometry, numeric limits, layout,
+and ordering blocked. It is not the issue #8 topology freeze.
+
 Questions:
 
 - Does the fabricated connector–ESD–mux–via channel match the modeled S-parameters?

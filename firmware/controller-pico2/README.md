@@ -6,12 +6,16 @@ RP2350A). It is a repeatable software build setup, not flash, board, wiring,
 or electrical evidence.
 
 The target is intentionally named `tb4kvm_pico2_inert`. It starts the reviewed
-portable core with no hosts observed, then remains in the Pico SDK idle loop.
-It does **not** initialize GPIO, ADC, I2C, SPI, UART, USB, watchdog, LEDs,
-display, USB-C/CC/PD/VBUS/VCONN, Thunderbolt/USB4, mux, retimer, storage, or
-power-path hardware. It emits no state-machine event into any I/O adapter and
-has both Pico SDK stdio transports disabled. Any produced build artifact is
-compile evidence only; do not flash it or interpret it as bench validation.
+portable core with no hosts observed, creates a null-backed low-speed diagnostic
+projection, then remains in the Pico SDK idle loop. The projection defines
+structured raw/accepted button records and diagnostic states for future
+GPIO/display/UART adapters, but has no peripheral implementation or output
+callback. The target does **not** initialize GPIO, ADC, I2C, SPI, UART, USB,
+watchdog, LEDs, display, USB-C/CC/PD/VBUS/VCONN, Thunderbolt/USB4, mux, retimer,
+storage, or power-path hardware. It emits no state-machine event into any I/O
+adapter and has both Pico SDK stdio transports disabled. Any produced build
+artifact is compile evidence only; do not flash it or interpret it as bench
+validation.
 
 ## Pinned upstream inputs
 
@@ -94,7 +98,44 @@ required build input, even though this repository's application sources are C.
 The workflow therefore installs that package explicitly rather than relying on
 the compiler package's recommendations.
 
-## Next integration boundary
+## Portable low-speed frontend boundary
+
+`low_speed_frontend.{c,h}` is a C11-only adapter boundary compiled by both the
+host checks and the inert Pico target. It accepts already-normalized logical
+button observations and a monotonic timestamp; it does not know GPIO numbers,
+board voltage, or any transport. A single forward sample gap may be at most
+`UINT32_MAX` milliseconds, matching the portable core's one-`TICK` input width;
+larger gaps are rejected before any state or time mutation. It preserves
+bounded raw-edge and accepted-press records and projects only `BOOT`,
+`NO_HOSTS`, `REQUEST`, and `FAULT` diagnostics for a future display/UART/LED
+adapter. It never treats a button as host discovery and provides no output path
+for a controller intent, so it cannot select a host, manipulate a mux, or
+influence power.
+
+The host test includes deterministic checks for that boundary, including
+raw-versus-debounced records, request-only pod forwarding, fault projection,
+the bounded forward-gap rule, and the inability of low-speed samples to create
+a host-selection intent.
+
+The inert Pico `main()` keeps its approximately 2.1 KiB frontend object in
+file-scope static/BSS storage rather than automatic stack storage. The regular
+host test checks that source-level declaration; it is not runtime stack-usage
+evidence. An opt-in UBSan host check is available when the selected compiler
+supports it:
+
+```sh
+firmware/controller-pico2/test-host-ubsan.sh
+```
+
+Its command contract is C11 with `-Wall -Wextra -Werror -pedantic
+-fsanitize=undefined -fno-sanitize-recover=undefined
+-fno-omit-frame-pointer`, compiling the portable core, frontend and frontend
+test. Undefined behaviour therefore terminates the test instead of printing a
+recoverable diagnostic and returning success. The expected final line is
+`controller-pico2-low-speed-frontend: 39 checks passed`. UBSan is deliberately
+not part of the mandatory host command because compiler support varies.
+
+## Next hardware integration boundary
 
 Before adding any low-speed I/O adapter, obtain and independently review an
 exact pin/IO-ownership record and a scoped bench test procedure. Keep the

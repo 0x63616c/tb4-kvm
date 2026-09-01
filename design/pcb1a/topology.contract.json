@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "status": "PROPOSED",
+  "orderReady": false,
+  "claimBoundary": {
+    "purpose": "RF_ONLY_MUX_COUPON",
+    "usb4OrThunderboltComplianceClaimAuthorized": false,
+    "containsUsbC": false,
+    "containsCc": false,
+    "containsPd": false,
+    "containsVbus": false,
+    "containsVconn": false,
+    "containsRouter": false,
+    "containsMcu": false,
+    "containsProductPower": false,
+    "prohibitedDomains": [
+      "USB-C",
+      "CC",
+      "PD",
+      "VBUS",
+      "VCONN",
+      "ROUTER",
+      "MCU",
+      "PRODUCT_POWER"
+    ]
+  },
+  "sourceContracts": [
+    {
+      "id": "PCB1A_MEASUREMENT_MATRIX",
+      "path": "design/pcb1a-measurement-matrix.json",
+      "role": "LANE_STATE_STRUCTURE_PARITY"
+    },
+    {
+      "id": "CHANNEL_BUDGET_CONTRACT",
+      "path": "design/channel-budget/prototype-a-example.json",
+      "role": "PORT_ORDER_AND_RF_BOUNDARY_REFERENCE"
+    },
+    {
+      "id": "ISSUE5_PARTS_EVIDENCE",
+      "path": "design/parts-evidence/issue-5-inventory.json",
+      "role": "PROVISIONAL_PART_IDENTITIES_ONLY"
+    }
+  ],
+  "topology": {
+    "domain": "RF_ONLY",
+    "laneIds": ["D0", "D1", "D2", "D3"],
+    "referencePlanes": [
+      {"id":"CABLE_END","role":"CALIBRATED_RAW","status":"PROPOSED_UNMEASURED"},
+      {"id":"PCB_PACKAGE_LANDS","role":"DEEMBEDDED_TARGET","status":"PROPOSED_UNMEASURED"}
+    ],
+    "branches": [
+      {"id": "HOST_A", "role": "SELECTABLE_INPUT"},
+      {"id": "COMMON", "role": "SELECTABLE_OUTPUT"},
+      {"id": "HOST_B", "role": "SELECTABLE_INPUT"}
+    ],
+    "ports": [
+      {"id":"D0_A_P","lane":"D0","branch":"HOST_A","polarity":"P","singleEndedNumber":1,"plane":"CABLE_END"},
+      {"id":"D0_A_N","lane":"D0","branch":"HOST_A","polarity":"N","singleEndedNumber":2,"plane":"CABLE_END"},
+      {"id":"D0_C_P","lane":"D0","branch":"COMMON","polarity":"P","singleEndedNumber":3,"plane":"CABLE_END"},
+      {"id":"D0_C_N","lane":"D0","branch":"COMMON","polarity":"N","singleEndedNumber":4,"plane":"CABLE_END"},
+      {"id":"D0_B_P","lane":"D0","branch":"HOST_B","polarity":"P","singleEndedNumber":5,"plane":"CABLE_END"},
+      {"id":"D0_B_N","lane":"D0","branch":"HOST_B","polarity":"N","singleEndedNumber":6,"plane":"CABLE_END"},
+      {"id":"D1_A_P","lane":"D1","branch":"HOST_A","polarity":"P","singleEndedNumber":7,"plane":"CABLE_END"},
+      {"id":"D1_A_N","lane":"D1","branch":"HOST_A","polarity":"N","singleEndedNumber":8,"plane":"CABLE_END"},
+      {"id":"D1_C_P","lane":"D1","branch":"COMMON","polarity":"P","singleEndedNumber":9,"plane":"CABLE_END"},
+      {"id":"D1_C_N","lane":"D1","branch":"COMMON","polarity":"N","singleEndedNumber":10,"plane":"CABLE_END"},
+      {"id":"D1_B_P","lane":"D1","branch":"HOST_B","polarity":"P","singleEndedNumber":11,"plane":"CABLE_END"},
+      {"id":"D1_B_N","lane":"D1","branch":"HOST_B","polarity":"N","singleEndedNumber":12,"plane":"CABLE_END"},
+      {"id":"D2_A_P","lane":"D2","branch":"HOST_A","polarity":"P","singleEndedNumber":13,"plane":"CABLE_END"},
+      {"id":"D2_A_N","lane":"D2","branch":"HOST_A","polarity":"N","singleEndedNumber":14,"plane":"CABLE_END"},
+      {"id":"D2_C_P","lane":"D2","branch":"COMMON","polarity":"P","singleEndedNumber":15,"plane":"CABLE_END"},
+      {"id":"D2_C_N","lane":"D2","branch":"COMMON","polarity":"N","singleEndedNumber":16,"plane":"CABLE_END"},
+      {"id":"D2_B_P","lane":"D2","branch":"HOST_B","polarity":"P","singleEndedNumber":17,"plane":"CABLE_END"},
+      {"id":"D2_B_N","lane":"D2","branch":"HOST_B","polarity":"N","singleEndedNumber":18,"plane":"CABLE_END"},
+      {"id":"D3_A_P","lane":"D3","branch":"HOST_A","polarity":"P","singleEndedNumber":19,"plane":"CABLE_END"},
+      {"id":"D3_A_N","lane":"D3","branch":"HOST_A","polarity":"N","singleEndedNumber":20,"plane":"CABLE_END"},
+      {"id":"D3_C_P","lane":"D3","branch":"COMMON","polarity":"P","singleEndedNumber":21,"plane":"CABLE_END"},
+      {"id":"D3_C_N","lane":"D3","branch":"COMMON","polarity":"N","singleEndedNumber":22,"plane":"CABLE_END"},
+      {"id":"D3_B_P","lane":"D3","branch":"HOST_B","polarity":"P","singleEndedNumber":23,"plane":"CABLE_END"},
+      {"id":"D3_B_N","lane":"D3","branch":"HOST_B","polarity":"N","singleEndedNumber":24,"plane":"CABLE_END"}
+    ],
+    "pathTemplates": {
+      "hostToCommon": [
+        "HOST_PORT",
+        "RF_LAUNCH_SLOT",
+        "OPTIONAL_ESD_SLOT",
+        "MUX_BRANCH_SLOT",
+        "MUX_COMMON_SLOT",
+        "OPTIONAL_ESD_SLOT",
+        "RF_LAUNCH_SLOT",
+        "COMMON_PORT"
+      ],
+      "hostBranchIsolation": {
+        "directHostAToHostBNetAllowed": false,
+        "inactiveBranchTerminationRequired": true,
+        "allowedInactiveTerminationKinds": ["matched_50ohm", "open"]
+      }
+    },
+    "paths": [
+      {"id":"D0_HOST_A_TO_COMMON","lane":"D0","activeBranch":"HOST_A","endpointPortIds":["D0_A_P","D0_A_N","D0_C_P","D0_C_N"]},
+      {"id":"D0_HOST_B_TO_COMMON","lane":"D0","activeBranch":"HOST_B","endpointPortIds":["D0_B_P","D0_B_N","D0_C_P","D0_C_N"]},
+      {"id":"D1_HOST_A_TO_COMMON","lane":"D1","activeBranch":"HOST_A","endpointPortIds":["D1_A_P","D1_A_N","D1_C_P","D1_C_N"]},
+      {"id":"D1_HOST_B_TO_COMMON","lane":"D1","activeBranch":"HOST_B","endpointPortIds":["D1_B_P","D1_B_N","D1_C_P","D1_C_N"]},
+      {"id":"D2_HOST_A_TO_COMMON","lane":"D2","activeBranch":"HOST_A","endpointPortIds":["D2_A_P","D2_A_N","D2_C_P","D2_C_N"]},
+      {"id":"D2_HOST_B_TO_COMMON","lane":"D2","activeBranch":"HOST_B","endpointPortIds":["D2_B_P","D2_B_N","D2_C_P","D2_C_N"]},
+      {"id":"D3_HOST_A_TO_COMMON","lane":"D3","activeBranch":"HOST_A","endpointPortIds":["D3_A_P","D3_A_N","D3_C_P","D3_C_N"]},
+      {"id":"D3_HOST_B_TO_COMMON","lane":"D3","activeBranch":"HOST_B","endpointPortIds":["D3_B_P","D3_B_N","D3_C_P","D3_C_N"]}
+    ]
+  },
+  "structureClasses": [
+    {"id":"DUT_FIXTURE","kind":"DUT_FIXTURE","required":true,"instanceRule":"ONE_PER_MATERIALLY_DISTINCT_LAUNCH_ESCAPE_X_ESD_POPULATION","requiredVariantAxes":["LAUNCH_ESCAPE","OPTIONAL_ESD_POPULATION_FITTED_OR_DNP"],"instanceCount":null,"instanceCountStatus":"BLOCKED_UNTIL_LAUNCH_ESD_STACKUP_FREEZE","notes":"Candidate mux path only; no footprint, launch, or ESD population is frozen."},
+    {"id":"PLAIN_NO_MUX_THRU","kind":"PLAIN_THRU_COMPARATOR","required":true,"instanceRule":"ONE_PER_MATERIALLY_DISTINCT_LAUNCH_ESCAPE","requiredVariantAxes":["LAUNCH_ESCAPE"],"instanceCount":null,"instanceCountStatus":"BLOCKED_UNTIL_LAUNCH_ESD_STACKUP_FREEZE","notes":"Comparator only, never automatic network extraction."},
+    {"id":"TWO_X_THRU","kind":"2X_THRU","required":true,"instanceRule":"ONE_PER_MATERIALLY_DISTINCT_LAUNCH_ESCAPE","requiredVariantAxes":["LAUNCH_ESCAPE"],"instanceCount":null,"instanceCountStatus":"BLOCKED_UNTIL_LAUNCH_ESD_STACKUP_FREEZE","notes":"Symmetric IEEE 370 or lab-accepted fixture class; later instances follow frozen launch/escape variants."},
+    {"id":"INACTIVE_PORT_TERMINATION_FIXTURE","kind":"TERMINATION_FIXTURE","required":true,"instanceRule":"AS_REQUIRED_BY_FROZEN_LAB_TERMINATION_IMPLEMENTATION","requiredVariantAxes":["TERMINATION_KIND"],"instanceCount":null,"instanceCountStatus":"BLOCKED_UNTIL_LAB_AND_LAUNCH_FREEZE","notes":"Repeatable matched/open cable-end termination class; no instance count is claimed."}
+  ],
+  "pathCampaignRule": {
+    "scope":"ONE_HOST_TO_COMMON_PATH_AT_A_TIME_4_PORT",
+    "applicableStateIds":["A_SELECTED_B_MATCHED","B_SELECTED_A_MATCHED","A_SELECTED_B_OPEN","B_SELECTED_A_OPEN"],
+    "measurementPlane":"CABLE_END",
+    "measuredPortRule":"EXACTLY_THE_FOUR_PN_ENDPOINTS_OF_THE_PATH",
+    "stateApplicabilityRule":"ONLY_STATES_SELECTING_PATH_ACTIVE_BRANCH",
+    "inactiveBundlePortRule":"EXACTLY_THE_EIGHT_STATE_INACTIVE_TERMINATION_PORT_IDS",
+    "inactiveBundleTerminationRule":"USE_THE_SELECTED_STATE_INACTIVE_TERMINATION_KIND",
+    "remainingUnmeasuredPortRule":"ALL_REMAINING_12_UNMEASURED_CABLE_END_PORTS",
+    "remainingUnmeasuredTerminationKind":"matched_50ohm",
+    "expectedMeasuredPortCount":4,
+    "expectedInactiveBundlePortCount":8,
+    "expectedRemainingUnmeasuredPortCount":12,
+    "campaignStatus":"PROPOSED_UNBOOKED"
+  },
+  "measurementStates": [
+    {"id":"UNPOWERED","activeBranch":null,"inactiveTermination":{"kind":"not_applicable","fixtureId":null,"planeId":null,"portIds":[]},"powerState":"unpowered","hiZAuthority":"NOT_APPLICABLE","controlState":"UNPOWERED_ALL_PATHS_DISABLED"},
+    {"id":"POWERED_ALL_PATHS_HIZ","activeBranch":null,"inactiveTermination":{"kind":"HiZ","fixtureId":"INACTIVE_PORT_TERMINATION_FIXTURE","planeId":"CABLE_END","portIds":[]},"powerState":"powered","hiZAuthority":"CONDITIONAL_BLOCKED_ON_AUTHORITATIVE_DEVICE_STATE_EVIDENCE","controlState":"POWERED_ALL_PATHS_DISABLED"},
+    {"id":"A_SELECTED_B_MATCHED","activeBranch":"HOST_A","inactiveTermination":{"kind":"matched_50ohm","fixtureId":"INACTIVE_PORT_TERMINATION_FIXTURE","planeId":"CABLE_END","portIds":["D0_B_P","D0_B_N","D1_B_P","D1_B_N","D2_B_P","D2_B_N","D3_B_P","D3_B_N"]},"powerState":"powered","hiZAuthority":"NOT_APPLICABLE","controlState":"HOST_A_ENABLED"},
+    {"id":"B_SELECTED_A_MATCHED","activeBranch":"HOST_B","inactiveTermination":{"kind":"matched_50ohm","fixtureId":"INACTIVE_PORT_TERMINATION_FIXTURE","planeId":"CABLE_END","portIds":["D0_A_P","D0_A_N","D1_A_P","D1_A_N","D2_A_P","D2_A_N","D3_A_P","D3_A_N"]},"powerState":"powered","hiZAuthority":"NOT_APPLICABLE","controlState":"HOST_B_ENABLED"},
+    {"id":"A_SELECTED_B_OPEN","activeBranch":"HOST_A","inactiveTermination":{"kind":"open","fixtureId":"INACTIVE_PORT_TERMINATION_FIXTURE","planeId":"CABLE_END","portIds":["D0_B_P","D0_B_N","D1_B_P","D1_B_N","D2_B_P","D2_B_N","D3_B_P","D3_B_N"]},"powerState":"powered","hiZAuthority":"NOT_APPLICABLE","controlState":"HOST_A_ENABLED"},
+    {"id":"B_SELECTED_A_OPEN","activeBranch":"HOST_B","inactiveTermination":{"kind":"open","fixtureId":"INACTIVE_PORT_TERMINATION_FIXTURE","planeId":"CABLE_END","portIds":["D0_A_P","D0_A_N","D1_A_P","D1_A_N","D2_A_P","D2_A_N","D3_A_P","D3_A_N"]},"powerState":"powered","hiZAuthority":"NOT_APPLICABLE","controlState":"HOST_B_ENABLED"}
+  ],
+  "componentSlots": [
+    {
+      "id":"MUX_4_PAIR_2_TO_1",
+      "function":"FOUR_DIFFERENTIAL_CHANNEL_MUX",
+      "candidateMpn":"TMUXHS4512IRETT",
+      "sourceRecord":"ISSUE5_PARTS_EVIDENCE",
+      "evidenceState":"BLOCKED",
+      "freezeStatus":"PROVISIONAL_ONLY",
+      "footprintStatus":"NOT_FROZEN",
+      "modelStatus":"MISSING_PUBLIC_STATE_AND_REFERENCE_PLANE_MODEL",
+      "prototypeSourceStatus":"BLOCKED"
+    },
+    {
+      "id":"OPTIONAL_LANE_ESD",
+      "function":"LOW_CAPACITANCE_TWO_LINE_ESD",
+      "candidateMpn":"RClamp01012ZC.F",
+      "sourceRecord":"ISSUE5_PARTS_EVIDENCE",
+      "evidenceState":"BLOCKED",
+      "freezeStatus":"DNP_COMPARISON_ONLY",
+      "footprintStatus":"NOT_FROZEN",
+      "modelStatus":"MISSING_PUBLIC_BROADBAND_MODEL",
+      "prototypeSourceStatus":"PARTIAL"
+    },
+    {
+      "id":"RF_LAUNCH",
+      "function":"CALIBRATED_BOARD_EDGE_RF_LAUNCH",
+      "candidateMpns":["SMA-J-P-H-ST-EM1","901-10511-1"],
+      "sourceRecord":"ISSUE5_PARTS_EVIDENCE",
+      "evidenceState":"BLOCKED",
+      "freezeStatus":"LAB_AND_STACKUP_SELECTION_REQUIRED",
+      "footprintStatus":"NOT_FROZEN",
+      "modelStatus":"MISSING_BOARD_SPECIFIC_BROADBAND_MODEL",
+      "prototypeSourceStatus":"BLOCKED"
+    }
+  ],
+  "controlAndPower": {
+    "muxSupply": {"net":"VCC_MUX","nominalVoltageV":1.8,"source":"EXTERNAL_CURRENT_LIMITED_BENCH_SUPPLY","status":"PROPOSED"},
+    "controls": [
+      {"id":"MUX_ENABLE","safeDefault":"DISABLED","source":"EXTERNAL_STATIC_TEST_CONTROL"},
+      {"id":"MUX_SELECT","safeDefault":"HOST_A","source":"EXTERNAL_STATIC_TEST_CONTROL"}
+    ],
+    "allPathsDisabledByDefault": true,
+    "controlStateMappings": [
+      {"id":"UNPOWERED_ALL_PATHS_DISABLED","muxEnable":"DISABLED","muxSelect":"HOST_A"},
+      {"id":"POWERED_ALL_PATHS_DISABLED","muxEnable":"DISABLED","muxSelect":"HOST_A"},
+      {"id":"HOST_A_ENABLED","muxEnable":"ENABLED","muxSelect":"HOST_A"},
+      {"id":"HOST_B_ENABLED","muxEnable":"ENABLED","muxSelect":"HOST_B"}
+    ],
+    "maxUncontrolledCurrentA": null,
+    "currentLimitStatus":"BLOCKED_ON_DEVICE_AND_BENCH_SUPPLY_REVIEW",
+    "powerDomain": "RF_DEVICE_BIAS_ONLY",
+    "noHostPowerPath": true
+  },
+  "constraintContract": {
+    "status":"BLOCKED_ON_ISSUE_5_AND_ISSUE_7",
+    "stackupSource":"TBD_FABRICATOR_RESPONSE",
+    "traceGeometry":"TBD_AFTER_FABRICATOR_STACKUP",
+    "numericChannelLimits": {},
+    "layoutGenerationAuthorized": false,
+    "footprintGenerationAuthorized": false
+  },
+  "reviewInputs": {
+    "requiredBeforeSchematic": ["ISSUE5_MODEL_AND_SOURCE_GATE","ISSUE7_STACKUP_AND_DFM_GATE","ISSUE8_TOPOLOGY_REVIEW"],
+    "requiredBeforeOrder": ["ISSUE5_MODEL_AND_SOURCE_GATE","ISSUE7_STACKUP_AND_DFM_GATE","CHANNEL_BUDGET_CLOSURE","INDEPENDENT_SI_REVIEW","MANUFACTURING_RELEASE_REVIEW"],
+    "notClaimedByThisContract": ["USB4_OR_THUNDERBOLT_COMPLIANCE","ORDER_READINESS","FABRICATOR_ACCEPTANCE","MEASURED_CHANNEL_LIMITS"]
+  }
+}
