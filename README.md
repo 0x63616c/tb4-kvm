@@ -13,6 +13,7 @@ An evidence-gated, open-source Thunderbolt 4 KVM: two computers, one real TB4 do
 
 > [!IMPORTANT]
 > This is real hardware engineering in public, currently at design review—not a finished 40 Gb/s product. No PCB is order-ready yet. Every status and blocker is tracked in [`evidence/ledger.json`](evidence/ledger.json).
+> **No KiCad schematic or routed PCB exists yet.** The `PCB-1A` website panel is a topology visualization, not a PCB render or manufacturing design.
 
 ## What we are building
 
@@ -37,6 +38,7 @@ The key design decision is what this project **is not**: a passive three-recepta
 | Safety/control ordering | `MODELED` | [`design/control-state-machine.json`](design/control-state-machine.json) |
 | PCB-1A RF mux coupon | `BLOCKED` | [`docs/PCB-1-DEFINITION.md`](docs/PCB-1-DEFINITION.md) |
 | Integrated TB4 KVM PCB | `BLOCKED` | [`docs/DESIGN-READINESS-CHECKLIST.md`](docs/DESIGN-READINESS-CHECKLIST.md) |
+| Non-electrical hardware/release scaffold | `MODELED` | [`hardware/README.md`](hardware/README.md) |
 | Parametric enclosure/mount | `BLOCKED` | [`docs/CAD-RELEASE-CONTRACT.md`](docs/CAD-RELEASE-CONTRACT.md) |
 
 PCB-1A is deliberately an RF measurement coupon with no USB-C receptacle, VBUS, CC, PD or protocol link. Its proposed minimum measurement setup is a calibrated four-port VNA to 20 GHz; the coupon itself remains no-go until vendor models, lab access, channel limits and a frozen PCBWay construction exist. PCB-1A measurement is not a blocker for prototype A: the project now follows the documented [prototype-first validation route](docs/decisions/2026-09-01-prototype-first-validation.md) with narrower claims and an expected correction revision.

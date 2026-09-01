@@ -56,3 +56,13 @@ four-port measurement.
 formatting, lint, TypeScript, the PCB-1A contract and adversarial topology
 tests, `verify:site-topology`, evidence/link checks, dependency audit, SBOM
 verification and a production site build.
+
+## No-PCB clarity follow-up
+
+Repeated owner questions showed that the section name could still be mistaken
+for an existing routed board. The explorer now presents a prominent warning:
+“No PCB layout exists yet,” followed by an explicit list of absent KiCad
+schematic, traces, Gerbers, assembled board and order package. A local browser
+DOM check confirmed both the headline and details render at `/#pcb1a`.
+`verify:site-topology` locks this boundary so later copy changes cannot silently
+restore the ambiguity.

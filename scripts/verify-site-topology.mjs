@@ -129,6 +129,11 @@ assert.ok(!source.includes('<span style={styles.badgeMuted}>NO ORDER</span>'));
 assert.ok(
   source.includes('Every applicable selected campaign state accounts for'),
 );
+assert.ok(source.includes('No PCB layout exists yet'));
+assert.match(
+  source,
+  /no KiCad schematic, routed traces,[\s\S]*Gerbers, assembled board, or order package has been created/,
+);
 assert.match(
   css,
   /\.site-topology-explorer\s*\{[^}]*min-width:\s*0;[^}]*overflow:\s*hidden;/s,

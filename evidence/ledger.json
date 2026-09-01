@@ -89,6 +89,9 @@
       "id": "EVD-BASE-001", "kind": "evidence", "title": "Existing OWC dock baseline is reported as USB4 40 Gb/s; raw capture not yet retained", "status": "PROPOSED", "owner": "validation", "evidence": ["PROJECT-STATUS.md"], "blockers": []
     },
     {
+      "id": "ART-HARDWARE-SCAFFOLD-001", "kind": "artifact", "title": "Blocked non-electrical KiCad and immutable-release policy scaffold", "status": "REVIEWED", "owner": "hardware/release", "evidence": ["hardware/README.md", "hardware/kicad/README.md", "hardware/kicad/scaffold.json", "hardware/releases/README.md", "scripts/verify-hardware-scaffold.mjs", "scripts/verify-hardware-scaffold.test.mjs", "docs/reviews/2026-09-01-hardware-scaffold-no-pcb-review.md"], "blockers": ["GATE-INT-001", "GATE-DS-001", "GATE-PD-001", "GATE-SI-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-COLLATERAL-ADOPTION-001"]
+    },
+    {
       "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx", "components/site-topology-explorer.tsx", "lib/site-topology-model.mjs", "scripts/verify-site-topology.mjs", "docs/validation/2026-09-01-site-topology-visual-qa.md", "docs/reviews/2026-09-01-site-topology-explorer-review.md", "docs/ARTIFACT-HUB-CONTRACT.md", "docs/SOFTWARE-SUPPLY-CHAIN.md"], "blockers": []
     },
     {

@@ -79,6 +79,14 @@ export function SiteTopologyExplorer() {
         </div>
       </div>
 
+      <output className="site-topology-no-layout">
+        <strong>No PCB layout exists yet</strong>
+        <span>
+          This is a topology model only: no KiCad schematic, routed traces,
+          Gerbers, assembled board, or order package has been created.
+        </span>
+      </output>
+
       <div style={styles.controls}>
         <fieldset style={styles.fieldset}>
           <legend style={styles.legend}>Choose lane</legend>

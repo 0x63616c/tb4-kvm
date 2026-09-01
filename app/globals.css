@@ -2202,6 +2202,25 @@ footer > p {
 .site-topology-frontend code {
   overflow-wrap: anywhere;
 }
+.site-topology-no-layout {
+  display: grid;
+  gap: 5px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 200, 97, 0.45);
+  border-left: 4px solid var(--amber);
+  background: rgba(255, 200, 97, 0.08);
+}
+.site-topology-no-layout strong {
+  color: var(--amber);
+  font: 700 12px var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.site-topology-no-layout span {
+  color: #c4cfc9;
+  font-size: 13px;
+  line-height: 1.5;
+}
 .site-topology-inspector {
   display: grid;
   grid-template-columns: 1fr auto;
