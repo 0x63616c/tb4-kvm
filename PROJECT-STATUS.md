@@ -16,6 +16,9 @@ Pre-PCB design review. The full project goal remains active. Work is not blocked
 - A small always-on controller and optional local display.
 - Open source documentation, firmware, PCB and mechanical interface wherever vendor licensing permits.
 - No PCB layout before the research package is reviewed.
+- Prototype-first delivery: get a narrow, safe, desk-specific 40 Gb/s functional prototype working, expect correction revisions, then broaden validation.
+- Do as much design, simulation, firmware, bring-up and functional testing ourselves as practical.
+- Paid RF-lab measurement is not a blocker for the first integrated prototype; it remains a later diagnostic and claims-strengthening route.
 
 ## Recommended but not yet approved
 
@@ -42,16 +45,18 @@ On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the 
 
 ## Current execution checkpoint
 
-The execution map and repository operating rules are complete and independently reviewed. The immediate checkpoint is to publish this exact tree to `main`, verify exact-head CI/Pages and materialize the usual `ghq` checkout before agents resolve implementation tickets.
+The prototype-first execution map and repository operating rules are complete and independently reviewed. Optional PCB-1A RF measurement no longer blocks the first integrated prototype; the preserved safety, reference, model, review and owner gates are recorded in the live graph.
 
-Why this comes first: the design contains high-speed channel, Type-C/PD, power-domain, fabrication, equipment-safety and physical-measurement gates. A reviewed graph prevents agents from designing or ordering later artifacts before their evidence and owner-authority prerequisites exist.
+Why: the owner prioritizes a working prototype soon and accepts iterative PCB revisions. We still require reference-backed design, modeling, power/PD safety, independent release review and protected bring-up, but paid high-speed measurement moves later unless a failure makes it necessary.
 
 Latest evidence:
 
 - Canonical live map: [GitHub issue #2](https://github.com/0x63616c/tb4-kvm/issues/2).
 - Map audit: [`docs/reviews/2026-09-01-execution-map-audit.md`](docs/reviews/2026-09-01-execution-map-audit.md).
-- Live API audit after dispositions: 53 child issues (#3–#55), 113 dependency edges, no cycles.
+- Live API audit after the prototype-first revision: 53 child issues (#3–#55), 109 dependency edges, no cycles.
 - Cost-aware agent routing: [`docs/agents/AGENT-SELECTION.md`](docs/agents/AGENT-SELECTION.md).
+- Accepted route: [`docs/decisions/2026-09-01-prototype-first-validation.md`](docs/decisions/2026-09-01-prototype-first-validation.md).
+- Revised-map audit: [`docs/reviews/2026-09-01-prototype-first-map-audit.md`](docs/reviews/2026-09-01-prototype-first-map-audit.md).
 
 ## Current frontier
 
@@ -59,7 +64,7 @@ Agent-ready, safely parallel research:
 
 - #4 PCB-1A channel-budget method and schema;
 - #5 accepted PCB-1A models and sourcing evidence;
-- #6 measurement-route qualification;
+- #6 optional later measurement-route qualification;
 - #19 router and Type-C/PD reference evidence;
 - #22 early open-source collateral policy.
 
@@ -75,13 +80,13 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Claim only unblocked issues. Resolve the independent research frontier in parallel without multiple agents duplicating the same broad work.
-2. Persist primary-source evidence and independent review before closing each issue and unlocking PCB-1A topology.
-3. Ask the owner only for actions that genuinely require them: product-envelope acceptance, vendor contact/approval, purchasing, equipment connection and physical measurements.
+1. Delegate unblocked research and controller work to bounded, cost-appropriate agents without duplicate broad work.
+2. Persist primary-source evidence and independent review before freezing the first integrated schematic/layout.
+3. Ask the owner only for actions that genuinely require them: product-envelope acceptance, external contact/terms, purchasing, equipment connection and physical measurements.
 
 ## Execution limits
 
 - Research is not a compliance result.
 - PCB CAD, simulation and DFM artifacts do not yet exist for an orderable revision.
-- Physical fabrication, VNA/TDR measurement and compatibility evidence necessarily occur after owner-approved orders and receipt.
+- Physical fabrication and compatibility evidence necessarily occur after owner-approved orders and receipt; VNA/TDR evidence may occur later or when functional diagnosis requires it.
 - No agent may purchase, accept a quote, submit fabrication or expose valuable equipment without the mapped owner gate.

@@ -115,7 +115,7 @@ Candidate scopes:
 2. Low-speed PD/power/control evaluation board, used only with supported controllers/reference hardware.
 3. Minimal integrated router validation board if vendor collateral eliminates the value of separate coupons.
 
-Every included circuit must map to a named question, measurement method, pass/fail threshold and follow-on decision. A coupon that cannot be measured with available/rented equipment is not useful merely because it is cheap.
+Every included circuit must map to a named question, test method, pass/fail threshold and follow-on decision. PCB-1A may be designed and retained as an optional RF diagnostic without delaying the first integrated prototype. Fabricating or booking paid RF measurement is triggered only when its expected diagnostic value justifies the time/cost, or before stronger electrical-performance claims.
 
 ### Pre-order release gate
 
@@ -129,7 +129,9 @@ Every included circuit must map to a named question, measurement method, pass/fa
 - Release manifest and plain-English risk report.
 - No purchase without explicit owner approval.
 
-## Phase 5 — PCB 1 fabrication and bring-up
+## Phase 5 — optional engineering-vehicle fabrication and bring-up
+
+This phase is not a hard predecessor of the first integrated prototype. The PD-free controller proof should run early using affordable equipment. PCB-1A fabrication/measurement may run in parallel or later when needed for diagnosis/model correlation.
 
 ### Incoming inspection
 
@@ -155,9 +157,9 @@ Every included circuit must map to a named question, measurement method, pass/fa
 - Signal measurements and/or 40 Gb/s functional link evidence appropriate to PCB-1 scope.
 - Raw logs, photos, instrument configuration and failures committed to `docs/validation/results/`.
 
-## Phase 6 — PCB 2 integrated minimal KVM
+## Phase 6 — first integrated minimal KVM prototype
 
-Use PCB-1 evidence to create the first complete daily-use electrical prototype:
+Use accepted reference evidence, modeled channel constraints, the PD-free controller proof and protected power/PD evidence to create the first complete daily-use electrical prototype. Measured PCB-1A evidence improves confidence but is not required for the first order:
 
 - Host A and Host B TB4 receptacles.
 - One real downstream TB4 receptacle for the existing dock.
@@ -168,6 +170,8 @@ Use PCB-1 evidence to create the first complete daily-use electrical prototype:
 - No redundant dock peripherals.
 
 Repeat the full virtual, independent-review and manufacturing-release gates before ordering.
+
+The design target is deliberately narrow: the owner's two target hosts, existing OWC dock, target display and known cables/peripherals. Revision A is an engineering prototype, not a compliance or universal-compatibility claim. Budget and plan for at least one correction revision.
 
 ## Phase 7 — integrated validation
 

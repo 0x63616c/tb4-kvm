@@ -11,6 +11,9 @@
       "id": "DEC-PCB1-001", "kind": "decision", "title": "PCB-1A is a measurement-only high-speed mux coupon", "status": "REVIEWED", "owner": "hardware", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCB-1A-PARTS-EVIDENCE.md", "docs/reviews/2026-09-01-pcb1-manufacturing-audit.md"], "blockers": ["GATE-LAB-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-PCB1-BUDGET-001"]
     },
     {
+      "id": "DEC-PROTOTYPE-001", "kind": "decision", "title": "Prototype A proceeds from reviewed models and protected safety evidence without paid PCB-1A measurement", "status": "REVIEWED", "owner": "project owner", "evidence": ["docs/decisions/2026-09-01-prototype-first-validation.md", "docs/PROJECT-PLAN.md", "docs/VALIDATION-PLAN.md"], "blockers": []
+    },
+    {
       "id": "GATE-INT-001", "kind": "gate", "title": "Current Intel reference design, package, topology, NVM and firmware access", "status": "BLOCKED", "owner": "architecture", "evidence": ["docs/CANDIDATE-PARTS.md"], "blockers": []
     },
     {
@@ -56,7 +59,10 @@
       "id": "ART-PCB1-001", "kind": "artifact", "title": "Order-ready PCB-1A manufacturing package", "status": "BLOCKED", "owner": "hardware", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCB-1A-MEASUREMENT-METHOD.md", "docs/PCB-1A-PARTS-EVIDENCE.md", "docs/PCBWAY-PREQUOTE-INQUIRY.md"], "blockers": ["GATE-LAB-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-PCB1-BUDGET-001"]
     },
     {
-      "id": "ART-CAD-001", "kind": "artifact", "title": "Parametric enclosure and mount release", "status": "BLOCKED", "owner": "mechanical", "evidence": ["docs/MECHANICAL-INTERFACE.md", "docs/CAD-RELEASE-CONTRACT.md"], "blockers": ["ART-PCB1-001"]
+      "id": "ART-INT-PROTOTYPE-001", "kind": "artifact", "title": "Owner-approved first integrated TB4 KVM prototype release", "status": "BLOCKED", "owner": "hardware", "evidence": ["docs/decisions/2026-09-01-prototype-first-validation.md", "docs/PROJECT-PLAN.md", "docs/DESIGN-READINESS-CHECKLIST.md"], "blockers": ["GATE-INT-001", "GATE-DS-001", "GATE-PD-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-PCB1-BUDGET-001"]
+    },
+    {
+      "id": "ART-CAD-001", "kind": "artifact", "title": "Parametric enclosure and mount release", "status": "BLOCKED", "owner": "mechanical", "evidence": ["docs/MECHANICAL-INTERFACE.md", "docs/CAD-RELEASE-CONTRACT.md"], "blockers": ["ART-INT-PROTOTYPE-001"]
     }
   ]
 }

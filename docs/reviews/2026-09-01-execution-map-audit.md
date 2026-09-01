@@ -1,5 +1,7 @@
 # Execution-map audit — 2026-09-01
 
+> Historical checkpoint: this audit covers the original measurement-first 113-edge graph. The later prototype-first decision intentionally removed four measurement-predecessor edges; see `docs/decisions/2026-09-01-prototype-first-validation.md` and the subsequent prototype-first map audit.
+
 ## Scope
 
 Independent review of the live [TB4 KVM v1 wayfinding map](https://github.com/0x63616c/tb4-kvm/issues/2), including native sub-issues, dependency edges, authority gates and the genuinely actionable frontier.

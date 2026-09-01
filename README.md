@@ -39,7 +39,7 @@ The key design decision is what this project **is not**: a passive three-recepta
 | Integrated TB4 KVM PCB | `BLOCKED` | [`docs/DESIGN-READINESS-CHECKLIST.md`](docs/DESIGN-READINESS-CHECKLIST.md) |
 | Parametric enclosure/mount | `BLOCKED` | [`docs/CAD-RELEASE-CONTRACT.md`](docs/CAD-RELEASE-CONTRACT.md) |
 
-PCB-1A is deliberately an RF measurement coupon with no USB-C receptacle, VBUS, CC, PD or protocol link. Its proposed minimum measurement setup is a calibrated four-port VNA to 20 GHz; it remains no-go until vendor models, lab access, channel limits and a frozen PCBWay construction exist.
+PCB-1A is deliberately an RF measurement coupon with no USB-C receptacle, VBUS, CC, PD or protocol link. Its proposed minimum measurement setup is a calibrated four-port VNA to 20 GHz; the coupon itself remains no-go until vendor models, lab access, channel limits and a frozen PCBWay construction exist. PCB-1A measurement is not a blocker for prototype A: the project now follows the documented [prototype-first validation route](docs/decisions/2026-09-01-prototype-first-validation.md) with narrower claims and an expected correction revision.
 
 ## Explore and run the field guide
 

@@ -40,6 +40,19 @@ The author of an artifact cannot be its only reviewer. Use independent agents fo
 
 Record review inputs, findings, severity, disposition, author and evidence in `docs/reviews/`. Re-run the review after material changes.
 
+## Primary-agent role
+
+The primary agent acts as project lead, systems integrator and release owner—not as the default individual contributor for every artifact.
+
+- Maintain the critical path, dependency graph, evidence state and owner-decision queue.
+- Break work into bounded, non-overlapping tickets and delegate each to the least expensive capable agent.
+- Give each worker an exact output contract, accepted inputs, file ownership and validation requirement.
+- Prevent duplicate research and concurrent edits to shared PCB, firmware or CAD sources.
+- Inspect and integrate agent work, resolve cross-domain conflicts, obtain independent review and verify exact-tree CI/Pages after delivery.
+- Personally handle small coordination/glue changes, release operations and narrow gaps when delegation would cost more than the work.
+- Escalate to the owner only for product choices, external contact/terms, purchases, fabrication submission, valuable-equipment exposure and physical evidence that requires them.
+- Keep `PROJECT-STATUS.md` and the live issue map current so a future primary agent can resume from persisted evidence.
+
 ## Repository discipline
 
 - Work toward `main` directly for now; do not open project pull requests unless the owner changes this policy. Before pushing, run the full repository gate and persist independent review of the exact staged tree. After pushing, verify GitHub Actions against the exact new `main` commit. Never force-push or delete `main`.

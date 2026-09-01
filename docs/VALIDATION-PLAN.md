@@ -36,6 +36,7 @@ No-go if the project cannot reproduce the Intel/Infineon firmware path legally a
 
 ### Signal proof
 
+- For the first integrated prototype, close the reference-backed channel model and layout constraints, then collect desk-specific functional evidence. This is the fast path and does not establish electrical compliance.
 - Build the RF-launch-only PCB-1A controlled-impedance mux coupon; it has no USB-C receptacle, CC/PD, router or laptop connection.
 - Keep all four fast differential channels and both input branches measurable/selectable in every required powered, unpowered and unselected mux state.
 - Use an adequately ported, calibrated VNA or lab-equivalent setup over the frequency span agreed before layout. TDR alone is limited to impedance/discontinuity unless the chosen system supports the required calibrated TDT/S-parameter conversion.
@@ -43,6 +44,8 @@ No-go if the project cannot reproduce the Intel/Infineon firmware path legally a
 - Compare insertion loss, return loss, crosstalk and mode conversion against written pre-layout limits and simulation.
 
 The coupon proves only the measured component/package/PCB channel. Live 40 Gb/s link training, plug orientation and certified-cable-vendor tests belong to the later protocol-capable integrated functional matrix, not PCB-1A.
+
+PCB-1A RF measurement is optional before the first integrated order. Trigger it later when functional failures need channel diagnosis, model correlation is valuable, or the project is preparing stronger reliability/electrical claims. Lack of that measurement must remain explicit in the evidence ledger and public claims.
 
 ### PD/control proof
 

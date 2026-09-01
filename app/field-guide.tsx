@@ -1392,32 +1392,32 @@ export default function FieldGuide() {
         <div className="module-heading">
           <p className="eyebrow">Fastest responsible revision path</p>
           <h2>
-            Spend one cheap board cycle answering the existential question.
+            Get a narrow prototype working, then measure where it matters.
           </h2>
         </div>
         <div className="revision-path">
           <Revision
             n="0"
-            title="Access + measurement gate"
-            text="Register with Intel, request current router/reference collateral, obtain CCG5 firmware path, source a golden-reference KVM, and model the proposed channel."
+            title="Reference + safety gate"
+            text="Obtain the current router/reference and firmware routes, settle port power ownership, freeze a fabricator construction, and model the proposed channel."
             result="Go/no-go without fabrication"
           />
           <Revision
             n="A"
-            title="Signal and control proofs"
-            text="Run the RF-only mux coupon in parallel with a PD-free low-speed controller/UI board. PD/power work follows only after reference, firmware and safety gates."
-            result="Measured channel evidence + verified low-speed control"
+            title="Controller + modeled channel"
+            text="Prove the PD-free controller and fault-state logic, close the modeled high-speed constraints, and independently review power/PD safety. Keep the RF coupon as an optional diagnostic branch."
+            result="Safe order package for prototype A"
           />
           <Revision
             n="B"
-            title="Integrated KVM router"
+            title="Integrated prototype A"
             text="Two upstream ports, one TB4 router, one downstream port, selected-host 60 W power, MCU and display header."
-            result="Functional daily-use prototype"
+            result="Desk-specific functional 40 Gb/s evidence"
           />
           <Revision
             n="C"
-            title="Correction + enclosure"
-            text="Fix measured SI/thermal/PD issues, lock the PCB outline and then build the 3D-printed mount around the proven board."
+            title="Correction + stronger evidence"
+            text="Fix functional, SI, thermal and PD findings; trigger RF-lab measurement when diagnosis or stronger claims justify it; then lock the PCB outline and enclosure."
             result="Open-source release candidate"
           />
         </div>
@@ -1472,7 +1472,9 @@ export default function FieldGuide() {
         <div className="gate-columns">
           <article className="readiness-card">
             <p className="eyebrow">Integrated-board gate</p>
-            <h3>Rev B stays closed until these are evidence, not hopes.</h3>
+            <h3>
+              Prototype A stays closed until these are evidence, not hopes.
+            </h3>
             <ul>
               {[
                 'Current Intel reference design, legal firmware/NVM path and prototype sourcing',
@@ -1520,9 +1522,10 @@ export default function FieldGuide() {
           <Check />
           <p>
             <b>Allowed now:</b> documentation, controller-access work, channel
-            models, test fixtures, supported evaluation boards and measurement
-            coupons. <b>Still gated:</b> an integrated production schematic, PCB
-            outline and finished enclosure.
+            models, test fixtures, supported evaluation boards and an optional
+            measurement coupon. <b>Still gated:</b> the integrated schematic and
+            order package until their reference, safety, model and review gates
+            close; paid RF measurement is not a prototype-A predecessor.
           </p>
         </div>
       </section>
@@ -1584,9 +1587,10 @@ export default function FieldGuide() {
           </span>
         </div>
         <p>
-          Next gate: agree an adequately ported calibrated VNA/lab method and a
-          frozen PCBWay stack-up for the measurement-only PCB-1A coupon; the
-          integrated router remains blocked.
+          Next gate: close the controller/reference, exact-part, power-safety,
+          channel-model and PCBWay construction evidence for a reviewed
+          prototype-A order package. RF-lab measurement remains available later
+          for diagnosis and stronger claims.
         </p>
       </footer>
     </main>

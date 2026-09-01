@@ -10,7 +10,7 @@ The safe early frontier has independent lanes for:
 
 - PCB-1A channel allocation;
 - exact mux/ESD models and prototype sourcing;
-- lab/measurement-route qualification;
+- optional later lab/measurement-route qualification;
 - owner-captured pre-KVM desk baseline;
 - owner-authorized PCBWay pre-layout construction inquiry;
 - router and Type-C/PD reference access;
@@ -18,9 +18,11 @@ The safe early frontier has independent lanes for:
 
 These can progress concurrently because none edits a shared released PCB source. Each result closes a decision or supplies evidence that sharpens later work.
 
-## Serialized hardware spine
+## Prototype-first hardware spine
 
-The PCB-1A topology, schematic, layout, release-specific DFM, owner orders, receipt/assembly readiness, lab booking, measurement and correction convergence form a serialized evidence spine with safe procurement branches. The integrated schematic cannot freeze until the measured channel decision, controller prototype, reference route, redistribution audit and power-safety proof exist. Integrated layout/models, firmware/release, owner order, incoming inspection, bring-up, compatibility/pre-compliance and correction convergence follow their mapped gates.
+The first integrated prototype is gated by accepted reference access, exact parts/models, a modeled channel allocation, the controller prototype, redistribution audit and power-safety proof—not by paid PCB-1A RF measurement. Integrated schematic, layout/models, firmware/release, owner order, incoming inspection, protected bring-up, desk-specific compatibility and correction form the working-prototype critical path.
+
+PCB-1A remains a useful RF coupon and diagnostic branch. Its layout/order/lab/measurement/correction workflow can proceed in parallel or be triggered later if the first integrated link is unreliable, a model needs correlation, or stronger electrical evidence is required. Until that measurement exists, claims remain functional and setup-specific rather than electrical-compliance claims.
 
 Mechanical interface freeze waits for measured integrated hardware. Parametric enclosure/mount/pod design can then proceed in parallel with later compatibility work, but physical fit release waits for the final correction revision.
 
