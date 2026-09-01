@@ -59,6 +59,8 @@ const faultState = controlStates.find(
   (state) => state.id === controllerModel.faultTarget,
 )!;
 const evidenceRecords = evidenceLedger.records as EvidenceRecord[];
+const sourceRevision = import.meta.env.VITE_GIT_COMMIT ?? '';
+const hasImmutableSourceRevision = /^[0-9a-f]{40}$/.test(sourceRevision);
 
 const pinGroups: Record<
   PinGroup,
@@ -489,22 +491,20 @@ export default function FieldGuide() {
           <span>{evidenceLedger.updated}</span>
         </div>
         <div className="evidence-summary">
-          {['VALIDATED', 'MEASURED', 'REVIEWED', 'MODELED', 'BLOCKED'].map(
-            (status) => (
-              <div
-                key={status}
-                className={`evidence-count evidence-${status.toLowerCase()}`}
-              >
-                <b>
-                  {
-                    evidenceRecords.filter((record) => record.status === status)
-                      .length
-                  }
-                </b>
-                <span>{status}</span>
-              </div>
-            ),
-          )}
+          {evidenceLedger.statusVocabulary.map((status) => (
+            <div
+              key={status}
+              className={`evidence-count evidence-${status.toLowerCase()}`}
+            >
+              <b>
+                {
+                  evidenceRecords.filter((record) => record.status === status)
+                    .length
+                }
+              </b>
+              <span>{status}</span>
+            </div>
+          ))}
         </div>
         <div className="evidence-gates">
           {evidenceRecords
@@ -524,13 +524,51 @@ export default function FieldGuide() {
                 </div>
                 <h3>{record.title}</h3>
                 <p>Owner: {record.owner}</p>
+                <dl className="evidence-links">
+                  <div>
+                    <dt>Evidence</dt>
+                    <dd>
+                      {record.evidence.map((item) => (
+                        <span key={item}>
+                          {hasImmutableSourceRevision ? (
+                            <a
+                              href={`https://github.com/0x63616c/tb4-kvm/blob/${sourceRevision}/${item}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {item}
+                            </a>
+                          ) : (
+                            item
+                          )}
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Blockers</dt>
+                    <dd>
+                      {record.blockers.length
+                        ? record.blockers.join(' · ')
+                        : 'None recorded'}
+                    </dd>
+                  </div>
+                </dl>
               </article>
             ))}
         </div>
         <p className="evidence-caveat">
           This dashboard is generated from <code>evidence/ledger.json</code>.
           “Modeled” means an identified model passed its own checks; it does not
-          mean fabricated, measured or compliant.
+          mean fabricated, measured or compliant. Evidence links are enabled
+          only when the build carries an immutable 40-character Git revision;
+          this build reports{' '}
+          <code>
+            {hasImmutableSourceRevision
+              ? sourceRevision
+              : 'unreleased-working-tree'}
+          </code>
+          .
         </p>
       </section>
 
@@ -1159,7 +1197,7 @@ export default function FieldGuide() {
           </div>
           <p className="model-note">
             <ShieldCheck /> This demonstrator is generated from the
-            machine-readable review model. Its verifier executes eight
+            machine-readable review model. Its verifier executes nine
             architectural invariants across independent A/B commands and
             readbacks. It deliberately reports integrated design authorization
             as false: downstream PD, vendor commands, thresholds and timings
@@ -1176,8 +1214,8 @@ export default function FieldGuide() {
         <div className="module-heading">
           <p className="eyebrow">Research BOM · not frozen</p>
           <h2>
-            The fast mux is buyable. Controller access and firmware are the
-            gating parts.
+            Candidate high-speed muxes exist. Exact OPNs, usable models,
+            controller access and firmware remain gates.
           </h2>
         </div>
         <div className="parts-table" aria-label="Candidate components">
@@ -1290,7 +1328,8 @@ export default function FieldGuide() {
             title="High-speed engineering"
             cost="Rent / engage lab"
             items={[
-              'VNA or TDR for channel S-parameters and impedance',
+              'Adequately ported calibrated VNA/equivalent for mixed-mode S-parameters',
+              'TDR/TDT for impedance and discontinuity localization',
               'USB4/TB4 analyzer for discovery and link-training traces',
               'BERT and high-bandwidth scope for eye/jitter and receiver tolerance',
               'Intel interoperability and certification program',
@@ -1301,7 +1340,7 @@ export default function FieldGuide() {
           <div>
             <Gauge />
             <span>
-              <b>Current local baseline observed</b>
+              <b>Baseline reported · raw recapture required</b>
               <small>
                 OWC Thunderbolt Dock 96W · Mode USB4 · reported Speed 40 Gb/s
               </small>
@@ -1309,9 +1348,11 @@ export default function FieldGuide() {
           </div>
           <code>system_profiler SPThunderboltDataType</code>
           <p>
-            This command was run on the current Mac and returned a connected OWC
-            dock at 40 Gb/s. It proves the baseline link and gives us an exact
-            before/after check for prototypes; it is not electrical compliance.
+            This command was previously reported to return a connected OWC dock
+            at 40 Gb/s, but its raw sanitized output and exact host/cable
+            context were not retained. The repository therefore does not count
+            it as measured evidence yet. A future recapture remains functional
+            evidence, not electrical compliance.
           </p>
         </div>
         <div className="orientation-matrix">
@@ -1357,7 +1398,7 @@ export default function FieldGuide() {
           <Revision
             n="A"
             title="Signal and control proofs"
-            text="Run a short mux coupon in parallel with a low-speed PD/power/UI prototype. Do not polish the enclosure yet."
+            text="Run the RF-only mux coupon in parallel with a PD-free low-speed controller/UI board. PD/power work follows only after reference, firmware and safety gates."
             result="Measured channel evidence + verified low-speed control"
           />
           <Revision
@@ -1536,8 +1577,9 @@ export default function FieldGuide() {
           </span>
         </div>
         <p>
-          Next gate: agree VNA/TDR access and a frozen PCBWay stack-up for the
-          measurement-only PCB-1A coupon; the integrated router remains blocked.
+          Next gate: agree an adequately ported calibrated VNA/lab method and a
+          frozen PCBWay stack-up for the measurement-only PCB-1A coupon; the
+          integrated router remains blocked.
         </p>
       </footer>
     </main>

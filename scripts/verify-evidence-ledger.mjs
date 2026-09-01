@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { execFileSync } from 'node:child_process';
 
 const root = path.resolve(import.meta.dirname, '..');
 const ledger = JSON.parse(
@@ -8,23 +9,64 @@ const ledger = JSON.parse(
 );
 const failures = [];
 const ids = new Set();
-const allowedKinds = new Set([
-  'objective',
-  'requirement',
-  'decision',
-  'gate',
-  'test',
-  'evidence',
-  'artifact',
+const canonicalStatuses = [
+  'PROPOSED',
+  'MODELED',
+  'REVIEWED',
+  'FABRICATED',
+  'MEASURED',
+  'VALIDATED',
+  'BLOCKED',
+];
+const kindPrefixes = {
+  objective: 'OBJ-',
+  requirement: 'REQ-',
+  decision: 'DEC-',
+  gate: 'GATE-',
+  test: 'TEST-',
+  evidence: 'EVD-',
+  artifact: 'ART-',
+};
+const allowedKinds = new Set(Object.keys(kindPrefixes));
+const allowedStatuses = new Set(canonicalStatuses);
+const allowedTopLevelFields = new Set([
+  'schemaVersion',
+  'project',
+  'updated',
+  'statusVocabulary',
+  'records',
 ]);
-const allowedStatuses = new Set(ledger.statusVocabulary);
+const allowedRecordFields = new Set([
+  'id',
+  'kind',
+  'title',
+  'status',
+  'owner',
+  'evidence',
+  'blockers',
+]);
+const trackedFiles = new Set(
+  execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
+    .split('\0')
+    .filter(Boolean),
+);
 
 function check(condition, message) {
   if (!condition) failures.push(message);
 }
 
 check(ledger.schemaVersion === 1, 'unsupported ledger schema');
+check(
+  JSON.stringify(ledger.statusVocabulary) === JSON.stringify(canonicalStatuses),
+  'ledger status vocabulary must exactly match the canonical evidence-state enum',
+);
+for (const key of Object.keys(ledger)) {
+  check(allowedTopLevelFields.has(key), `unknown top-level field ${key}`);
+}
 for (const record of ledger.records) {
+  for (const key of Object.keys(record)) {
+    check(allowedRecordFields.has(key), `${record.id}: unknown field ${key}`);
+  }
   check(!ids.has(record.id), `duplicate id ${record.id}`);
   ids.add(record.id);
   check(
@@ -34,6 +76,10 @@ for (const record of ledger.records) {
   check(
     allowedStatuses.has(record.status),
     `${record.id}: unknown status ${record.status}`,
+  );
+  check(
+    record.id.startsWith(kindPrefixes[record.kind] ?? 'INVALID-'),
+    `${record.id}: id prefix does not match kind ${record.kind}`,
   );
   check(record.owner?.length > 0, `${record.id}: owner is required`);
   check(
@@ -45,9 +91,34 @@ for (const record of ledger.records) {
     `${record.id}: blockers must be an array`,
   );
   for (const evidencePath of record.evidence ?? []) {
+    const normalized = path.posix.normalize(evidencePath.replaceAll('\\', '/'));
+    const absolute = path.resolve(root, normalized);
+    const insideRoot = absolute.startsWith(`${root}${path.sep}`);
     check(
-      fs.existsSync(path.join(root, evidencePath)),
+      !path.isAbsolute(evidencePath),
+      `${record.id}: absolute evidence path is forbidden: ${evidencePath}`,
+    );
+    check(
+      normalized === evidencePath && !normalized.startsWith('../'),
+      `${record.id}: non-normalized or traversing evidence path ${evidencePath}`,
+    );
+    check(
+      insideRoot,
+      `${record.id}: evidence path escapes repository: ${evidencePath}`,
+    );
+    check(
+      insideRoot && fs.existsSync(absolute) && fs.statSync(absolute).isFile(),
       `${record.id}: missing evidence file ${evidencePath}`,
+    );
+    if (insideRoot && fs.existsSync(absolute)) {
+      check(
+        fs.realpathSync(absolute).startsWith(`${root}${path.sep}`),
+        `${record.id}: evidence symlink escapes repository: ${evidencePath}`,
+      );
+    }
+    check(
+      trackedFiles.has(normalized),
+      `${record.id}: evidence file is not Git-tracked: ${evidencePath}`,
     );
   }
   if (record.status === 'VALIDATED') {

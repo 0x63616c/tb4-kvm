@@ -32,6 +32,6 @@ Pre-PCB design review.
 
 The authoritative close criteria for these gates are tracked in [Design-readiness checklist](docs/DESIGN-READINESS-CHECKLIST.md). Signal responsibilities are fixed at the pre-schematic level in [Signal and power ownership](docs/SIGNAL-POWER-OWNERSHIP.md). Mechanical work is limited to the interface rules in [Mechanical interface guidance](docs/MECHANICAL-INTERFACE.md) until a measured integrated board exists.
 
-## Current local evidence
+## Reported baseline requiring recapture
 
-On 2026-09-01, `system_profiler SPThunderboltDataType` reported the connected OWC Thunderbolt Dock 96W in USB4 mode at 40 Gb/s. This is the baseline functional check for future prototypes; it is not an electrical compliance result.
+On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the connected OWC Thunderbolt Dock 96W in USB4 mode at 40 Gb/s. The raw sanitized command capture, exact host/cable context and immutable evidence record were not retained in this repository, so the ledger deliberately downgrades this to `PROPOSED`. Re-run the documented baseline capture before using it as measured evidence. Even after recapture it will be a functional baseline, not electrical compliance.

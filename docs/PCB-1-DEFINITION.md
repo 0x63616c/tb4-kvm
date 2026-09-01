@@ -21,9 +21,10 @@ Questions:
 
 Required measurement access:
 
-- appropriate VNA/TDR fixtures or rented lab;
-- agreed port/de-embedding plan;
-- raw Touchstone results and comparison script.
+- adequately ported VNA or lab-equivalent setup with agreed frequency span and dynamic range;
+- exact calibration reference plane, RF launches, thru/2x-thru structures, de-embedding method, inactive-port terminations and mux-state matrix;
+- TDR/TDT only for the impedance/discontinuity evidence it can actually produce;
+- raw single-ended and mixed-mode Touchstone outputs plus the comparison script.
 
 It must not be described as a compliant USB-C extender or complete KVM.
 
@@ -53,15 +54,16 @@ It combines every major risk in one expensive board. It is not PCB-1. It remains
 
 Release PCB-1A only after answering:
 
-1. Which vendor/reference materials and programmable images are actually available?
-2. Which high-speed models and accepted channel limits are available?
-3. Which instruments or rental/lab services can measure a coupon?
-4. Can supported evaluation boards prove PD/power behavior without custom copper?
-5. What exact decision follows every test result?
-6. Which option minimizes total time to a reliable integrated KVM, not merely time to first shipment?
+1. Which exact mux/ESD/launch OPNs and usable S-parameter/package models are available?
+2. Which written channel limits and simulation assumptions will PCB-1A test?
+3. Which VNA/lab setup can produce the required calibrated mixed-mode evidence?
+4. What exact decision follows every test result?
+5. Does the coupon minimize total time to a reliable integrated KVM, not merely time to first shipment?
 
-If no VNA/TDR or agreed lab fixture/de-embedding route is available, PCB-1A is a no-go because it would create copper without decision-quality evidence.
+If no adequately ported calibrated VNA/lab-equivalent and agreed fixture/de-embedding route is available, PCB-1A is a no-go because it would create copper without decision-quality mixed-mode evidence. TDR/TDT is supplemental unless the chosen system demonstrably provides the required calibrated conversion.
 
 ## Order-ready definition
 
 PCB 1 becomes order-ready only when its owner-approved questions, schematic/layout, BOM, stack-up, measurement procedure, pass/fail limits, independent reviews, DFM confirmation, manufacturing outputs and release manifest are all present and have no unresolved release blocker.
+
+For PCBWay specifically, the release package also requires written job-specific stack-up and tolerances; accepted impedance/de-embedding coupon geometry; per-panel impedance/TDR report requirement; as-built stack-up/microsection or equivalent construction evidence; named material and lot traceability/CoC expectation; and the measurement lab's acceptance of the fabricated coupon geometry. Generic capability-page claims do not close this gate.

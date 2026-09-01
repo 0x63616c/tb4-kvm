@@ -5,7 +5,7 @@
   "statusVocabulary": ["PROPOSED", "MODELED", "REVIEWED", "FABRICATED", "MEASURED", "VALIDATED", "BLOCKED"],
   "records": [
     {
-      "id": "OBJ-001", "kind": "objective", "title": "Minimal open-source two-host/one-dock TB4 KVM", "status": "PROPOSED", "owner": "project owner", "evidence": ["docs/PRODUCT-REQUIREMENTS.md"], "blockers": ["GATE-INT-001", "GATE-DS-001", "GATE-SI-001", "GATE-PD-001"]
+      "id": "OBJ-001", "kind": "objective", "title": "Minimal open-source two-host/one-dock TB4 KVM", "status": "PROPOSED", "owner": "project owner", "evidence": ["docs/PRODUCT-REQUIREMENTS.md"], "blockers": ["GATE-INT-001", "GATE-DS-001", "GATE-SI-001", "GATE-PD-001", "GATE-AVAIL-001"]
     },
     {
       "id": "DEC-PCB1-001", "kind": "decision", "title": "PCB-1A is a measurement-only high-speed mux coupon", "status": "REVIEWED", "owner": "hardware", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/reviews/2026-09-01-pcb1-manufacturing-audit.md"], "blockers": ["GATE-LAB-001", "GATE-FAB-001"]
@@ -23,19 +23,25 @@
       "id": "GATE-PD-001", "kind": "gate", "title": "Reference-derived upstream power/PD design passes fault testing", "status": "BLOCKED", "owner": "electrical/PD", "evidence": ["docs/CONTROL-STATE-MACHINE.md", "docs/SIGNAL-POWER-OWNERSHIP.md"], "blockers": ["GATE-INT-001", "GATE-DS-001"]
     },
     {
-      "id": "GATE-LAB-001", "kind": "gate", "title": "VNA/TDR lab and de-embedding method agreed before coupon fabrication", "status": "BLOCKED", "owner": "signal integrity", "evidence": ["docs/PCB-1-DEFINITION.md"], "blockers": []
+      "id": "GATE-LAB-001", "kind": "gate", "title": "Adequately ported calibrated VNA/lab method and de-embedding plan agreed before coupon fabrication", "status": "BLOCKED", "owner": "signal integrity", "evidence": ["docs/PCB-1-DEFINITION.md"], "blockers": []
     },
     {
-      "id": "GATE-FAB-001", "kind": "gate", "title": "PCBWay supplies written frozen stack-up and job-specific DFM", "status": "BLOCKED", "owner": "manufacturing", "evidence": ["docs/reviews/2026-09-01-pcb1-manufacturing-audit.md"], "blockers": []
+      "id": "GATE-FAB-001", "kind": "gate", "title": "PCBWay supplies written frozen stack-up and job-specific DFM", "status": "BLOCKED", "owner": "manufacturing", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/reviews/2026-09-01-pcb1-manufacturing-audit.md"], "blockers": []
+    },
+    {
+      "id": "GATE-AVAIL-001", "kind": "gate", "title": "Detached-host discovery and startup/failover policy is reference-supported and modeled", "status": "BLOCKED", "owner": "product/electrical", "evidence": ["docs/PRODUCT-REQUIREMENTS.md", "docs/CONTROL-STATE-MACHINE.md"], "blockers": ["GATE-PD-001"]
+    },
+    {
+      "id": "GATE-GOV-001", "kind": "gate", "title": "Protected release branch and independent qualified human approval", "status": "BLOCKED", "owner": "release governance", "evidence": ["docs/GOVERNANCE.md"], "blockers": []
     },
     {
       "id": "TEST-CTRL-001", "kind": "test", "title": "Architectural control model executable invariants", "status": "MODELED", "owner": "firmware", "evidence": ["design/control-state-machine.json", "scripts/verify-control-model.mjs"], "blockers": ["GATE-DS-001", "GATE-PD-001"]
     },
     {
-      "id": "EVD-BASE-001", "kind": "evidence", "title": "Existing OWC dock functional baseline reports USB4 40 Gb/s", "status": "MEASURED", "owner": "validation", "evidence": ["PROJECT-STATUS.md"], "blockers": []
+      "id": "EVD-BASE-001", "kind": "evidence", "title": "Existing OWC dock baseline is reported as USB4 40 Gb/s; raw capture not yet retained", "status": "PROPOSED", "owner": "validation", "evidence": ["PROJECT-STATUS.md"], "blockers": []
     },
     {
-      "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx"], "blockers": []
+      "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx", "docs/SOFTWARE-SUPPLY-CHAIN.md"], "blockers": ["GATE-GOV-001"]
     },
     {
       "id": "ART-PCB1-001", "kind": "artifact", "title": "Order-ready PCB-1A manufacturing package", "status": "BLOCKED", "owner": "hardware", "evidence": ["docs/PCB-1-DEFINITION.md"], "blockers": ["GATE-LAB-001", "GATE-FAB-001"]

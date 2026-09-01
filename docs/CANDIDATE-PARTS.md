@@ -10,7 +10,7 @@ This is research, not an orderable BOM. A component's marketing support for TB4 
 | Alternate selector | Diodes PI2DBS32412 research alternative | Manufacturer explicitly positions newer family for TB4/USB4 | Compare models, availability, controls and reference-design acceptance |
 | Older precedent only | Diodes PI3DBS16412 | Teardown identifies it in a shipping KVM; manufacturer page is TB3/20 Gb/s evidence | Never relabel teardown precedent as primary TB4 approval |
 | Lane ESD option | Semtech RClamp01012ZC or reference-approved equivalent | Manufacturer component-level USB4/TB4 claim | Fit/DNP comparison and full channel model; not automatically populated |
-| RF launches | Lab-agreed connectors/fixture | Must support the chosen VNA/TDR and de-embedding method | Exact launch, calibration structures and mating hardware agreed before layout |
+| RF launches | Lab-agreed connectors/fixture | Must support calibrated mixed-mode VNA/equivalent S-parameters, de-embedding, and supplemental TDR/TDT | Exact launch, calibration structures and mating hardware agreed before layout |
 | Coupon supply | Clean external 1.8 V input, exact parts pending | TMUX supply requirement follows selected OPN | Noise/ripple budget and safe static control interface reviewed |
 
 The coupon has no USB-C receptacle, CC, VCONN, VBUS, PD controller, router, MCU or display. It cannot power or attach to a laptop.

@@ -25,7 +25,13 @@ READY A
 
 Host B to Host A is symmetric. Exact command order, timers, voltage thresholds and status registers must be replaced with values from the supported Intel and Infineon reference designs.
 
-The JSON represents A-route, B-route, A-source and B-source commands and physical readbacks independently. This is essential: a single enum can hide the real failure where two enable pins or two FET paths conduct at once. Normal transitions are restricted to adjacent states in the declared sequences, every non-fault state has a higher-priority asynchronous fault edge, and timeout disposition is latched fault.
+The JSON represents A-route, B-route, A-source, B-source and discharge commands/readbacks independently. This is essential: a single enum can hide the real failure where two enable pins conduct, two FET paths conduct, or a source drives its own discharge network. Normal transitions are restricted to adjacent states in the declared sequences, every non-fault state has an explicit higher-priority asynchronous fault edge, and every transient state maps a vendor-derived timeout to latched fault.
+
+Reset and fault states are deliberately labeled `ISOLATING`, not “safe”: source and route commands are off and a future hardware-owned automatic-discharge function is commanded, but VBUS safe0 is not claimed until measured. The exact protection/discharge owner remains a reference-design and schematic-review gate.
+
+## Product-behavior coverage blocker
+
+The electrical handover sequences do not yet model power-up selection, idle scanning, one-host-only discovery, an unavailable requested host, a second host appearing or unexpected active-host removal. These product requirements remain explicit, but the electrically detached-host discovery policy is unresolved. The model records this as `INCOMPLETE_BLOCKER` rather than implying full behavior coverage.
 
 ## Downstream dock blocker
 

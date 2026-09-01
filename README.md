@@ -4,7 +4,7 @@ This repository is the pre-PCB research and learning package for a two-host, one
 
 The full living execution roadmap is in [End-to-end project plan](docs/PROJECT-PLAN.md). Product behavior is controlled by [Product requirements](docs/PRODUCT-REQUIREMENTS.md), and no artifact can be released outside the [Review and release policy](docs/REVIEW-AND-RELEASE-POLICY.md).
 
-The integrated product is intentionally held at the design-review gate. Independent review selected a measurement-only mux coupon as PCB-1A, but even that coupon is not order-ready until the VNA/TDR method and frozen fabricator stack-up are agreed. No production schematic, integrated PCB layout, enclosure dimensions, or Thunderbolt product claims are approved yet.
+The integrated product is intentionally held at the design-review gate. Independent review selected a measurement-only mux coupon as PCB-1A, but even that coupon is not order-ready until an adequately ported calibrated VNA/equivalent mixed-mode S-parameter method, supplemental TDR/TDT plan, and frozen fabricator stack-up are agreed. No production schematic, integrated PCB layout, enclosure dimensions, or Thunderbolt product claims are approved yet.
 
 ## Current conclusion
 
@@ -50,6 +50,6 @@ The local MCU can truthfully show selected host, attachment/orientation, PD cont
 
 ## Status
 
-The interactive site, documentation, v2 architectural control model and initial independent audits exist. `npm run check` verifies formatting, lint, TypeScript, the control-model invariants, evidence-ledger references and a production build. Eight ledger items remain blocked, including Intel collateral, downstream PD ownership, lab access and PCBWay's job-specific stack-up/DFM.
+The interactive site, documentation, v3 architectural control model and initial independent audits exist. `npm run check` verifies formatting, lint, TypeScript, the control-model invariants, evidence-ledger references and a production build. The ledger remains deliberately blocker-heavy, including Intel collateral, downstream PD ownership, host-availability policy, lab access and PCBWay's job-specific stack-up/DFM.
 
 Read the append-only [independent review records](docs/reviews/README.md), [PCB-1 decision](docs/PCB-1-DEFINITION.md) and [parametric CAD release contract](docs/CAD-RELEASE-CONTRACT.md) before changing scope.

@@ -42,7 +42,7 @@ Record review inputs, findings, severity, disposition, author and evidence in `d
 
 ## Repository discipline
 
-- Keep decisions in `docs/decisions/`, research and sources in `docs/research/`, test plans/results in `docs/validation/`, and fabrication releases in immutable revision folders under `hardware/releases/`.
+- Existing project-wide canonical documents remain at `docs/*.md`; use `docs/decisions/`, `docs/research/` and `docs/validation/` for new multi-file domain records when those collections are created. Keep fabrication releases in immutable revision folders under `hardware/releases/`.
 - Store source models, scripts and tool versions—not only exports.
 - Never commit vendor-confidential collateral, credentials, tokens or personally identifying machine data. Record the document title/revision/access restriction instead.
 - Every generated release must include a manifest with source commit, tool versions, input hashes, output hashes and check results.

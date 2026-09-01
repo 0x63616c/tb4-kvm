@@ -8,7 +8,7 @@ This is the stop/go record for schematic capture and PCB layout. “Plausible,�
 |---|---|---|
 | Product behavior | **Review required** | User accepts selected-host detach/re-enumerate behavior and target switch time |
 | Selected-host charging | **Review required** | User accepts the v1 wattage target and external power-supply size |
-| Existing dock baseline | **Partially evidenced** | Current OWC dock reports USB4/40 Gb/s; record display, Ethernet, USB and storage matrix |
+| Existing dock baseline | **Recapture required** | Retain sanitized raw topology output plus exact host, cable, dock, display, Ethernet, USB and storage context |
 | Intel controller access | **Open — hard blocker for integrated layout** | Current reference schematic, layout rules, firmware/NVM path, legal prototype terms and sourcing |
 | Infineon PD implementation | **Open — hard blocker for integrated layout** | Supported dual-upstream application firmware/configuration and programming/debug route |
 | Channel model | **Open** | Connector, ESD, mux, package and trace S-parameters in the chosen stack-up pass simulation |
@@ -46,9 +46,9 @@ Do not start the integrated PCB until all are attached to the project record:
 
 ## Rev A authorization boundary
 
-A signal coupon may begin before full router access only if it is labeled as a measurement vehicle, not a compliant USB-C extender or product prototype. It may contain receptacles, ESD options, candidate muxes and calibration structures, but it must not be presented as validating CC/PD topology or Thunderbolt certification.
+PCB-1A may begin before full router access only if it remains the frozen RF-launch-only measurement vehicle: lab-agreed RF launches, DNP/fitted ESD options, candidate mux and calibration/de-embedding structures. It contains no USB-C receptacle, CC/PD, VCONN, VBUS or router and cannot connect to a laptop. A different topology requires a new decision and independent review.
 
-A low-speed PD/control/UI proof may proceed in parallel using supported evaluation hardware. It must not connect two source VBUS rails without the reviewed protection topology.
+A low-speed PD/control/UI proof may proceed in parallel only on supported evaluation hardware as a separate experiment; this is not the PD-free PCB-1B. It must retain its reference, firmware and safety gates and must not connect two source VBUS rails without the reviewed protection topology.
 
 ## Definition of ready for Rev B layout
 

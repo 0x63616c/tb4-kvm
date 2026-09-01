@@ -11,7 +11,7 @@ Passing a storage benchmark is not the same as proving electrical compliance. Ev
 - Capture sleep/wake and power-cycle behavior.
 - Keep exact cable models and lengths in the test record.
 
-Current baseline captured on 2026-09-01:
+Baseline reported on 2026-09-01, but not yet accepted as measured evidence because the raw sanitized capture and full test context were not retained:
 
 ```text
 Thunderbolt Dock 96W
@@ -36,13 +36,13 @@ No-go if the project cannot reproduce the Intel/Infineon firmware path legally a
 
 ### Signal proof
 
-- Build a short controlled-impedance mux coupon.
-- Keep both input branches measurable/selectable.
-- Measure channel S-parameters if VNA access is available.
-- Train a 40 Gb/s link using short certified TB4 cables.
-- Test both plug orientations and multiple cable vendors.
+- Build the RF-launch-only PCB-1A controlled-impedance mux coupon; it has no USB-C receptacle, CC/PD, router or laptop connection.
+- Keep all four fast differential channels and both input branches measurable/selectable in every required powered, unpowered and unselected mux state.
+- Use an adequately ported, calibrated VNA or lab-equivalent setup over the frequency span agreed before layout. TDR alone is limited to impedance/discontinuity unless the chosen system supports the required calibrated TDT/S-parameter conversion.
+- Record calibration reference plane, launch/fixture models, thru and 2x-thru structures, de-embedding method, inactive-port terminations and raw single-ended/mixed-mode Touchstone data.
+- Compare insertion loss, return loss, crosstalk and mode conversion against written pre-layout limits and simulation.
 
-The coupon proves only signal feasibility, not a compliant product topology.
+The coupon proves only the measured component/package/PCB channel. Live 40 Gb/s link training, plug orientation and certified-cable-vendor tests belong to the later protocol-capable integrated functional matrix, not PCB-1A.
 
 ### PD/control proof
 
@@ -83,7 +83,8 @@ For each host:
 
 ## 6. Lab tools
 
-- VNA/TDR for impedance, insertion loss, return loss and mode conversion;
+- sufficiently ported VNA or equivalent calibrated lab setup for insertion loss, return loss, crosstalk and mixed-mode conversion across the agreed frequency span;
+- TDR/TDT for impedance and discontinuity localization, with calibrated conversion only if the chosen setup demonstrably supports it;
 - USB4/TB4 analyzer for discovery, training and tunnels;
 - BERT and approved high-bandwidth oscilloscope for eye/jitter and receiver tolerance;
 - USB4CV and Intel interoperability/certification testing.
