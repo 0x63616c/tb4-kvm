@@ -1,8 +1,8 @@
 # Pico 2 controller core (host-tested)
 
-**Status: prototype only.** This directory is the first embedded-shaped follow-on to the JavaScript control model. It is deliberately a small portable C state machine; no Pico SDK, GPIO, USB-C, USB-PD, VBUS, Thunderbolt/USB4, mux, retimer, storage, or power-path code exists here.
+**Status: prototype only.** This directory is the first embedded-shaped follow-on to the JavaScript control model. The portable C state machine remains separate from the named, pinned Pico SDK build binding. That binding emits an intentionally inert Pico 2 image only; it adds no GPIO, USB-C, USB-PD, VBUS, Thunderbolt/USB4, mux, retimer, storage, or power-path control code.
 
-The `pico2` name means the proposed bench target is Raspberry Pi Pico 2. It does **not** claim that this source has been flashed, that a Pico 2 has been acquired, or that it has touched the isolated bench.
+The `pico2` name means the proposed bench target is Raspberry Pi Pico 2. It does **not** claim that this source has been flashed, that a Pico 2 has been acquired, or that it has touched the isolated bench. See the [pinned SDK binding README](../../firmware/controller-pico2/README.md) for the software-only CMake setup.
 
 ## Contract
 
@@ -30,6 +30,6 @@ The script uses the system `cc` (or `CC` if set), compiles C11 with warnings tre
 
 ## Integration boundary
 
-This source remains intentionally separate from the validated production controller design. Before any hardware integration, we need an independent code review, a named Pico SDK/toolchain release, reviewed pin/IO ownership, and proof that all low-speed inputs and outputs stay behind the isolated controller boundary documented in the bench plan. The physical B1–B13 bench evidence is still not collected.
+This source remains intentionally separate from the validated production controller design. The named Pico SDK/toolchain release is now pinned in the [Pico 2 binding](../../firmware/controller-pico2/README.md), but the target has no I/O adapter and remains inert. Before any hardware integration, we still need reviewed pin/IO ownership and proof that all low-speed inputs and outputs stay behind the isolated controller boundary documented in the bench plan. The physical B1–B13 bench evidence is still not collected.
 
 The host test is part of the repository's mandatory `npm run check` gate.

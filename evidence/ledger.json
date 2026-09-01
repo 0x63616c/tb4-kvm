@@ -29,6 +29,12 @@
       "id": "GATE-CONTROLLER-BENCH-EVIDENCE-001", "kind": "gate", "title": "Physical PD-free controller bench B1-B13 evidence is complete and independently reviewed", "status": "BLOCKED", "owner": "firmware/validation", "evidence": ["docs/research/issue-18-controller-bench/README.md", "design/controller-bench/evidence-schema.json", "design/controller-bench/evidence.example.json"], "blockers": []
     },
     {
+      "id": "ART-PICO2-SDK-BINDING-001", "kind": "artifact", "title": "Pinned inert Pico 2 SDK build binding", "status": "PROPOSED", "owner": "firmware/control", "evidence": ["firmware/controller-pico2/README.md", "firmware/controller-pico2/CMakeLists.txt", "firmware/controller-pico2/CMakePresets.json", "firmware/controller-pico2/cmake/verify-pico-sdk-pin.cmake", "docs/reviews/2026-09-01-pico2-binding-acquisition-review.md"], "blockers": ["GATE-CONTROLLER-BENCH-EVIDENCE-001"]
+    },
+    {
+      "id": "ART-CONTROLLER-BENCH-ACQ-001", "kind": "artifact", "title": "Proposed isolated controller-bench acquisition and build pack", "status": "PROPOSED", "owner": "firmware/validation", "evidence": ["docs/research/issue-18-controller-bench/acquisition/README.md", "docs/research/issue-18-controller-bench/acquisition/OWNER-PURCHASE-CHECKLIST.md", "design/controller-bench/acquisition.inventory.json", "design/controller-bench/acquisition.validate.mjs", "design/controller-bench/acquisition.test.mjs", "docs/reviews/2026-09-01-pico2-binding-acquisition-review.md"], "blockers": ["GATE-CONTROLLER-BENCH-EVIDENCE-001"]
+    },
+    {
       "id": "ART-CHMETHOD-001", "kind": "artifact", "title": "Reference-plane-specific channel-budget method and deterministic closure contract", "status": "REVIEWED", "owner": "signal integrity", "evidence": ["docs/research/pcb1a-channel-budget-method.md", "design/channel-budget/schema.json", "design/channel-budget/prototype-a-example.json", "design/channel-budget/test-only-closed-fixture.json", "design/channel-budget/validate.mjs", "docs/reviews/2026-09-01-channel-budget-contract-review.md"], "blockers": []
     },
     {

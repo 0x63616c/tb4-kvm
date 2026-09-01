@@ -1,0 +1,25 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "pico2-rp2350-arm-s",
+      "displayName": "Raspberry Pi Pico 2 (RP2350 Arm)",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/pico2-rp2350-arm-s",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "PICO_BOARD": "pico2",
+        "PICO_PLATFORM": "rp2350-arm-s",
+        "PICO_COMPILER": "pico_arm_cortex_m33_gcc",
+        "PICO_NO_PICOTOOL": "ON",
+        "PICO_SDK_FETCH_FROM_GIT": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "pico2-rp2350-arm-s",
+      "configurePreset": "pico2-rp2350-arm-s"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0x63616c/tb4-kvm/design/controller-bench/acquisition.schema.json",
+  "title": "Issue 18 isolated controller-bench acquisition pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "issue",
+    "status",
+    "acquisitionStatus",
+    "captureDate",
+    "sourcePolicy",
+    "boundary",
+    "power",
+    "measurementRanges",
+    "evidenceCapture",
+    "items",
+    "costSummary",
+    "wiring",
+    "buildSequence",
+    "ownerChecklist",
+    "unresolvedAvailability"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "issue": { "const": 18 },
+    "status": { "const": "PROPOSED" },
+    "acquisitionStatus": { "const": "PREPARED_NOT_ORDERED" },
+    "captureDate": { "type": "string", "pattern": "^2026-09-01$" },
+    "currency": { "const": "USD" },
+    "sourcePolicy": { "$ref": "#/$defs/nonEmptyObject" },
+    "boundary": { "$ref": "#/$defs/boundary" },
+    "power": { "$ref": "#/$defs/nonEmptyObject" },
+    "measurementRanges": { "$ref": "#/$defs/nonEmptyObject" },
+    "evidenceCapture": { "$ref": "#/$defs/nonEmptyObject" },
+    "items": {
+      "type": "array",
+      "minItems": 14,
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "costSummary": { "$ref": "#/$defs/nonEmptyObject" },
+    "wiring": {
+      "type": "array",
+      "minItems": 7,
+      "items": { "$ref": "#/$defs/nonEmptyObject" }
+    },
+    "buildSequence": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "type": "string", "minLength": 10 }
+    },
+    "ownerChecklist": {
+      "type": "array",
+      "minItems": 8,
+      "items": { "$ref": "#/$defs/check" }
+    },
+    "unresolvedAvailability": {
+      "type": "array",
+      "minItems": 3,
+      "items": { "type": "string", "minLength": 10 }
+    }
+  },
+  "$defs": {
+    "nonEmptyObject": { "type": "object", "minProperties": 1 },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "isolatedLowVoltageOnly",
+        "usbC",
+        "pd",
+        "vbus",
+        "thunderbolt",
+        "highSpeed",
+        "targetMacBooks",
+        "dock",
+        "productPowerDomain",
+        "valuableEquipment",
+        "maximumBenchVoltageVolts",
+        "maximumBenchSupplyCurrentMilliamp",
+        "simultaneousUsbAndVsys",
+        "documentedOringRequiredForSimultaneous"
+      ],
+      "properties": {
+        "isolatedLowVoltageOnly": { "const": true },
+        "usbC": { "const": false },
+        "pd": { "const": false },
+        "vbus": { "const": false },
+        "thunderbolt": { "const": false },
+        "highSpeed": { "const": false },
+        "targetMacBooks": { "const": false },
+        "dock": { "const": false },
+        "productPowerDomain": { "const": false },
+        "valuableEquipment": { "const": false },
+        "maximumBenchVoltageVolts": { "const": 5.5 },
+        "maximumBenchSupplyCurrentMilliamp": { "const": 250 },
+        "simultaneousUsbAndVsys": { "const": false },
+        "documentedOringRequiredForSimultaneous": { "const": true }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "category",
+        "role",
+        "requiredness",
+        "ownerLikelyHas",
+        "buyAction",
+        "manufacturer",
+        "mpn",
+        "orderCode",
+        "quantity",
+        "specification",
+        "manufacturerSource",
+        "distributorSnapshots",
+        "substitutions"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "category": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "requiredness": { "type": "string", "minLength": 1 },
+        "ownerLikelyHas": { "type": "boolean" },
+        "buyAction": { "type": "string", "minLength": 1 },
+        "manufacturer": { "type": "string", "minLength": 1 },
+        "mpn": { "type": "string", "minLength": 1 },
+        "orderCode": { "type": "string", "minLength": 1 },
+        "quantity": { "type": "integer", "minimum": 1 },
+        "specification": { "type": "string", "minLength": 1 },
+        "manufacturerSource": { "$ref": "#/$defs/source" },
+        "distributorSnapshots": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/snapshot" }
+        },
+        "substitutions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/substitution" }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["url", "accessedDate", "claims"],
+      "properties": {
+        "url": { "type": "string", "pattern": "^https://" },
+        "accessedDate": { "const": "2026-09-01" },
+        "claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vendor", "url", "accessedDate", "stock"],
+      "properties": {
+        "vendor": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https://" },
+        "accessedDate": { "const": "2026-09-01" },
+        "stock": { "type": "string", "minLength": 1 },
+        "unitPriceUsd": {
+          "type": "object",
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "number", "minimum": 0 },
+            "max": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "unitPriceSnapshot": { "type": "string", "minLength": 1 },
+        "distributorPartNumber": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "substitution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manufacturer",
+        "mpn",
+        "orderCode",
+        "quantity",
+        "constraint",
+        "sourceUrl"
+      ],
+      "properties": {
+        "manufacturer": { "type": "string", "minLength": 1 },
+        "mpn": { "type": "string", "minLength": 1 },
+        "orderCode": { "type": "string", "minLength": 1 },
+        "quantity": { "type": "integer", "minimum": 1 },
+        "constraint": { "type": "string", "minLength": 1 },
+        "sourceUrl": { "type": "string", "pattern": "^https://" }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "done"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^O[1-9][0-9]*$" },
+        "action": { "type": "string", "minLength": 1 },
+        "done": { "const": false }
+      }
+    }
+  }
+}

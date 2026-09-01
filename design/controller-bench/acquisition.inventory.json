@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 1,
+  "issue": 18,
+  "status": "PROPOSED",
+  "acquisitionStatus": "PREPARED_NOT_ORDERED",
+  "captureDate": "2026-09-01",
+  "currency": "USD",
+  "sourcePolicy": {
+    "manufacturer": "Authoritative for identity, electrical limits, package and operating instructions.",
+    "distributor": "Dated availability and price snapshots only; re-check before any owner-approved purchase.",
+    "price": "Every numeric price is a 2026-09-01 snapshot or a range derived from that snapshot; tax, freight and regional currency are excluded.",
+    "orderAction": "This pack prepares an owner checklist only. It places no order, opens no cart, and makes no vendor contact."
+  },
+  "boundary": {
+    "isolatedLowVoltageOnly": true,
+    "usbC": false,
+    "pd": false,
+    "vbus": false,
+    "thunderbolt": false,
+    "highSpeed": false,
+    "targetMacBooks": false,
+    "dock": false,
+    "productPowerDomain": false,
+    "valuableEquipment": false,
+    "maximumBenchVoltageVolts": 5.5,
+    "maximumBenchSupplyCurrentMilliamp": 250,
+    "simultaneousUsbAndVsys": false,
+    "documentedOringRequiredForSimultaneous": true
+  },
+  "power": {
+    "recommendedSupplySetVolts": 3.3,
+    "initialCurrentLimitMilliamp": 100,
+    "hardCurrentLimitMilliamp": 250,
+    "connection": "Supply positive to Pico 2 VSYS, supply return to Pico 2 GND; never connect supply positive to VBUS or micro-USB.",
+    "workflow": [
+      "program-over-Pico-micro-USB",
+      "disconnect-USB-at-both-ends",
+      "verify-disconnected-USB-VBUS-is-0V-with-DMM",
+      "set-current-limited-supply-to-3.3V-and-100mA",
+      "connect-only-VSYS-and-GND",
+      "increase-limit-no-higher-than-250mA-if-needed",
+      "test-and-log"
+    ],
+    "stopConditions": [
+      "Any voltage appears on the disconnected micro-USB VBUS pin.",
+      "The supply enters current limit during a no-load or normal-idle test.",
+      "Any cable, probe ground, display pin or UART VCC creates an unreviewed second power path.",
+      "VSYS exceeds 5.5V or any GPIO exceeds the local 0-3.3V logic boundary."
+    ]
+  },
+  "measurementRanges": {
+    "vsysDmmVolts": {
+      "min": 0,
+      "max": 5.5,
+      "unit": "V DC",
+      "procedure": "Measure VSYS-to-GND before attaching the Pico; use the DMM 6V DC range when available."
+    },
+    "gpioLogicVolts": {
+      "min": 0,
+      "max": 3.3,
+      "unit": "V DC",
+      "procedure": "Probe GP2/GP3/GP6/GP7/GP8 only relative to local GND."
+    },
+    "adcPinVolts": {
+      "min": 0,
+      "max": 3.3,
+      "unit": "V DC",
+      "procedure": "Never drive GP26 above ADC_VREF; the external divider maps 0-5.5V VSYS to at most 2.89V with the specified 5% resistors."
+    },
+    "serial": {
+      "logic": "3.3V",
+      "baud": 115200,
+      "format": "8N1",
+      "unit": "UART"
+    },
+    "scope": {
+      "min": 0,
+      "max": 5.5,
+      "unit": "V DC",
+      "procedure": "Use 1x/10x probe only on local low-voltage nodes; no mains or product rails."
+    },
+    "continuityAndResistance": {
+      "min": 0,
+      "max": 200000,
+      "unit": "ohm",
+      "procedure": "De-energize and disconnect USB before resistance or continuity checks."
+    }
+  },
+  "evidenceCapture": {
+    "usbPoweredSetup": "Use the Pico micro-USB and FTDI logger only for programming, normal button/UI cases and reset-cause serial logs. FTDI VCC remains physically disconnected.",
+    "directVsysCases": "For B9/B10 brownout and power-loss cases, unplug Pico USB and the FTDI USB cable at both ends. Capture the direct-VSYS voltage/current waveform and supply record with DMM/scope. If a reset-cause log is needed, run the identical scripted case separately in the USB-powered setup and label it USB-powered; never present it as direct-VSYS evidence.",
+    "requiredSeparation": "Serial logs and direct-VSYS waveforms are separate sequential evidence. No USB VBUS, UART VCC, display power or instrument lead may create a second source during direct-VSYS tests."
+  },
+  "items": [
+    {
+      "id": "pico2-board",
+      "category": "controller",
+      "role": "Recommended controller for the isolated bench",
+      "requiredness": "REQUIRED",
+      "ownerLikelyHas": false,
+      "buyAction": "BUY_IF_MISSING",
+      "manufacturer": "Raspberry Pi",
+      "mpn": "SC1631",
+      "orderCode": "SC1631",
+      "quantity": 1,
+      "specification": "Pico 2, RP2350A, 3.3V GPIO, 26 multifunction GPIO, 1.8-5.5V VSYS, micro-USB only for programming/logical setup",
+      "manufacturerSource": {
+        "url": "https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "SC1631 order code",
+          "VSYS 1.8-5.5V",
+          "3.3V GPIO",
+          "3V3 external load recommended below 300mA",
+          "on-board VBUS-to-VSYS diode and separate VSYS input"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/raspberry-pi/SC1631/24627142",
+          "accessedDate": "2026-09-01",
+          "stock": "23618 shown",
+          "unitPriceUsd": { "min": 6.12, "max": 6.12 },
+          "distributorPartNumber": "2648-SC1631CT-ND",
+          "notes": "Cut tape snapshot; verify board form and exact SC1631 before purchase."
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "Raspberry Pi",
+          "mpn": "SC1632",
+          "orderCode": "SC1632",
+          "quantity": 1,
+          "constraint": "Same Pico 2 hardware with factory-soldered headers; accept the higher price and use only if the owner prefers headers.",
+          "sourceUrl": "https://pip.raspberrypi.com/categories/1264-raspberry-pi-pico-2-h"
+        }
+      ]
+    },
+    {
+      "id": "breadboard",
+      "category": "mechanical",
+      "role": "Solderless isolated build surface",
+      "requiredness": "REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "BusBoard Prototype Systems",
+      "mpn": "BB830",
+      "orderCode": "BB830",
+      "quantity": 1,
+      "specification": "830 tie points, four power rails, 21-26 AWG wire, 36V/2A board rating; use only at 3.3V and <=250mA here",
+      "manufacturerSource": {
+        "url": "https://www.busboard.com/BB830",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "830 tie points",
+          "four power rails",
+          "21-26 AWG",
+          "36V/2A rating"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/busboard-prototype-systems/BB830/19200392",
+          "accessedDate": "2026-09-01",
+          "stock": "1386 shown",
+          "unitPriceUsd": { "min": 8.95, "max": 8.95 },
+          "distributorPartNumber": "4526-BB830-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "BusBoard Prototype Systems",
+          "mpn": "BB400",
+          "orderCode": "BB400",
+          "quantity": 1,
+          "constraint": "Only if the layout still leaves a visibly separated power and signal area; do not substitute a solderless board with unknown contacts.",
+          "sourceUrl": "https://www.busboard.com/BB400"
+        }
+      ]
+    },
+    {
+      "id": "local-button",
+      "category": "input",
+      "role": "Local momentary button",
+      "requiredness": "REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "Omron (listed by DigiKey as Aratas formerly Omron Components)",
+      "mpn": "B3F-1000",
+      "orderCode": "B3F-1000",
+      "quantity": 1,
+      "specification": "Through-hole SPST-NO, 4.3mm actuator, 100gf, 0.05A at 24VDC, 1,000,000 cycles; use as a dry contact to GND",
+      "manufacturerSource": {
+        "url": "https://components.omron.com/us-en/asset/ds_related_pdf/Y234-E1.pdf",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "B3F-1000 through-hole model",
+          "SPST-NO",
+          "0.05A at 24VDC",
+          "1,000,000 operations"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/aratas-formerly-omron-components/B3F-1000/33150",
+          "accessedDate": "2026-09-01",
+          "stock": "43967 shown",
+          "unitPriceUsd": { "min": 0.35, "max": 0.35 },
+          "distributorPartNumber": "SW400-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "C&K",
+          "mpn": "PTS645SL43SMTR92 LFS",
+          "orderCode": "PTS645SL43SMTR92 LFS",
+          "quantity": 1,
+          "constraint": "Surface-mount substitute only for an owner able to solder it; not the beginner default.",
+          "sourceUrl": "https://www.digikey.com/en/products/detail/c-k/PTS645SL43SMTR92-LFS/3861373"
+        }
+      ]
+    },
+    {
+      "id": "remote-button",
+      "category": "input",
+      "role": "Optional request-only remote button; no output authority or power returned",
+      "requiredness": "REQUIRED_FOR_B5_B7",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "Omron (listed by DigiKey as Aratas formerly Omron Components)",
+      "mpn": "B3F-1000",
+      "orderCode": "B3F-1000",
+      "quantity": 1,
+      "specification": "Same dry-contact switch as local input; install on a short insulated two-wire lead no longer than 300mm",
+      "manufacturerSource": {
+        "url": "https://components.omron.com/us-en/asset/ds_related_pdf/Y234-E1.pdf",
+        "accessedDate": "2026-09-01",
+        "claims": ["B3F-1000 contact rating and through-hole form"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/aratas-formerly-omron-components/B3F-1000/33150",
+          "accessedDate": "2026-09-01",
+          "stock": "43967 shown",
+          "unitPriceUsd": { "min": 0.35, "max": 0.35 },
+          "distributorPartNumber": "SW400-ND"
+        }
+      ],
+      "substitutions": []
+    },
+    {
+      "id": "display",
+      "category": "display",
+      "role": "3.3V I2C diagnostic display",
+      "requiredness": "REQUIRED_FOR_UI_CASES",
+      "ownerLikelyHas": false,
+      "buyAction": "BUY_IF_MISSING",
+      "manufacturer": "Adafruit Industries",
+      "mpn": "938",
+      "orderCode": "938",
+      "quantity": 1,
+      "specification": "1.3in 128x64 SSD1306 OLED, I2C default, 3.3V logic/power internally regulated and level shifted, typical 40mA",
+      "manufacturerSource": {
+        "url": "https://www.adafruit.com/product/938",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "Product ID 938",
+          "SSD1306",
+          "I2C",
+          "3.3V power and logic",
+          "average 40mA from 3.3V"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/938/5774238",
+          "accessedDate": "2026-09-01",
+          "stock": "2530 shown",
+          "unitPriceUsd": { "min": 19.95, "max": 19.95 },
+          "distributorPartNumber": "1528-1512-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "SparkFun Electronics",
+          "mpn": "LCD-24606",
+          "orderCode": "LCD-24606",
+          "quantity": 1,
+          "constraint": "3.3V Qwiic SSD1306 display; use only with a 3.3V-to-0.1in breakout lead and verify stock because the manufacturer page currently shows backorder.",
+          "sourceUrl": "https://www.sparkfun.com/sparkfun-qwiic-oled-display-0-91-in-128x32-lcd-24606.html"
+        }
+      ]
+    },
+    {
+      "id": "status-led",
+      "category": "indicator",
+      "role": "One red/green diagnostic LED; labels must remain REQUEST/FAULT/BOOT",
+      "requiredness": "REQUIRED_FOR_LED_CASES",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "Kingbright",
+      "mpn": "WP59EGW/CA",
+      "orderCode": "WP59EGW/CA",
+      "quantity": 1,
+      "specification": "5mm common-anode red/green, Vf typ 2.0V red / 2.2V green at 20mA; drive each color through its own 1k resistor at approximately 1mA",
+      "manufacturerSource": {
+        "url": "https://www.kingbrightusa.com/images/catalog/SPEC/WP59EGW-CA.pdf",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "common-anode 3-lead package",
+          "Vf and absolute maximum current",
+          "red/green optical characteristics"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/kingbright/WP59EGW-CA/2033663",
+          "accessedDate": "2026-09-01",
+          "stock": "46237 shown",
+          "unitPriceUsd": { "min": 0.45, "max": 0.45 },
+          "distributorPartNumber": "754-2191-ND"
+        }
+      ],
+      "substitutions": []
+    },
+    {
+      "id": "resistor-1k",
+      "category": "passive",
+      "role": "LED and button-entry current limiting",
+      "requiredness": "REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "YAGEO",
+      "mpn": "CFR-25JB-52-1K",
+      "orderCode": "CFR-25JB-52-1K",
+      "quantity": 4,
+      "specification": "1kOhm, 5%, 0.25W axial; two for LED channels, one for local input, one spare",
+      "manufacturerSource": {
+        "url": "https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET",
+        "accessedDate": "2026-09-01",
+        "claims": ["CFR carbon-film ordering and 0.25W series information"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/yageo/CFR-25JB-52-1K/96",
+          "accessedDate": "2026-09-01",
+          "stock": "239598 shown",
+          "unitPriceUsd": { "min": 0.1, "max": 0.1 },
+          "distributorPartNumber": "1.0KQBK-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "Any authorized resistor manufacturer",
+          "mpn": "1kOhm 0.25W axial 5%",
+          "orderCode": "value-equivalent",
+          "quantity": 4,
+          "constraint": "Must be a traceable 1kOhm, >=0.25W part; do not use an unmarked assortment for acceptance evidence.",
+          "sourceUrl": "https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET"
+        }
+      ]
+    },
+    {
+      "id": "resistor-10k",
+      "category": "passive",
+      "role": "Remote-input pull/entry protection and bounce injection",
+      "requiredness": "REQUIRED_FOR_REMOTE_AND_BOUNCE",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "YAGEO",
+      "mpn": "CFR-25JB-52-10K",
+      "orderCode": "CFR-25JB-52-10K",
+      "quantity": 4,
+      "specification": "10kOhm, 5%, 0.25W axial; use one per remote/injection entry and spares; do not inject faster or beyond 0-3.3V",
+      "manufacturerSource": {
+        "url": "https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET",
+        "accessedDate": "2026-09-01",
+        "claims": ["CFR carbon-film ordering and 0.25W series information"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.in/en/products/detail/yageo/CFR-25JB-52-10K/338",
+          "accessedDate": "2026-09-01",
+          "stock": "37560 shown",
+          "unitPriceSnapshot": "INR 9.56 each on localized page",
+          "unitPriceUsd": { "min": 0.1, "max": 0.2 },
+          "distributorPartNumber": "13-CFR-25JB-52-10K-ND",
+          "notes": "USD conversion is a planning range only; re-check region and currency before purchase."
+        }
+      ],
+      "substitutions": []
+    },
+    {
+      "id": "resistor-100k-divider",
+      "category": "passive",
+      "role": "External VSYS divider for GP26 ADC",
+      "requiredness": "REQUIRED_FOR_ADC_CASES",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "YAGEO",
+      "mpn": "CFR-25JB-52-100K",
+      "orderCode": "CFR-25JB-52-100K",
+      "quantity": 2,
+      "specification": "100kOhm, 5%, 0.25W axial; use a matched pair for 1:1 divider and calibrate against DMM; 100k is conservative for current",
+      "manufacturerSource": {
+        "url": "https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET",
+        "accessedDate": "2026-09-01",
+        "claims": ["CFR carbon-film ordering and 0.25W series information"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/yageo/CFR-25JB-52-100K/245",
+          "accessedDate": "2026-09-01",
+          "stock": "51839 shown",
+          "unitPriceUsd": { "min": 0.1, "max": 0.1 },
+          "distributorPartNumber": "13-CFR-25JB-52-100K-ND"
+        }
+      ],
+      "substitutions": []
+    },
+    {
+      "id": "adc-filter-capacitor",
+      "category": "passive",
+      "role": "GP26 ADC divider filter",
+      "requiredness": "REQUIRED_FOR_ADC_CASES",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "KEMET (YAGEO Group)",
+      "mpn": "C315C104K5R5TA",
+      "orderCode": "C315C104K5R5TA",
+      "quantity": 1,
+      "specification": "0.1uF, 50V, X7R, 10%, radial through-hole; connect from GP26 divider midpoint to GND",
+      "manufacturerSource": {
+        "url": "https://search.kemet.com/component-documentation/download/specsheet/C315C104K5R5TA",
+        "accessedDate": "2026-09-01",
+        "claims": ["0.1uF 50V X7R", "2.54mm through-hole lead spacing"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/kemet/C315C104K5R5TA/12701330",
+          "accessedDate": "2026-09-01",
+          "stock": "7250 shown",
+          "unitPriceUsd": { "min": 0.62, "max": 0.62 },
+          "distributorPartNumber": "399-C315C104K5R5TA-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "KEMET",
+          "mpn": "C315C104K5R5TA7303",
+          "orderCode": "C315C104K5R5TA7303",
+          "quantity": 1,
+          "constraint": "Same value/package family; cut-tape substitute captured at the same distributor, but verify lead form before insertion.",
+          "sourceUrl": "https://www.digikey.com/en/products/detail/kemet/C315C104K5R5TA7303/26657780"
+        }
+      ]
+    },
+    {
+      "id": "remote-esd",
+      "category": "protection",
+      "role": "Optional single-line ESD clamp for a remote cable only",
+      "requiredness": "OPTIONAL_REVIEW_REQUIRED",
+      "ownerLikelyHas": false,
+      "buyAction": "DO_NOT_BUY_UNTIL_REVIEWED",
+      "manufacturer": "Nexperia",
+      "mpn": "PESD3V3U1UL,315",
+      "orderCode": "PESD3V3U1UL,315",
+      "quantity": 1,
+      "specification": "3.3V reverse standoff, unidirectional, 2.6pF typical, DFN1006-2; optional only and not a substitute for a reviewed external interface",
+      "manufacturerSource": {
+        "url": "https://www.nexperia.com/product/PESD3V3U1UL-Q",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "single-line unidirectional ESD protection",
+          "2.6pF typical",
+          "9kV IEC 61000-4-2",
+          "DFN1006-2"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/nexperia-usa-inc/PESD3V3U1UL-315/1993006",
+          "accessedDate": "2026-09-01",
+          "stock": "0 shown; 10000 expected 2027-09-07",
+          "unitPriceUsd": { "min": 0.34, "max": 0.34 },
+          "distributorPartNumber": "1727-4154-1-ND",
+          "notes": "SMD and unavailable in the snapshot; the base bench has no remote cable. A later cabled interface requires independent protection review."
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "STMicroelectronics",
+          "mpn": "ESDALC12-1T2",
+          "orderCode": "ESDALC12-1T2",
+          "quantity": 1,
+          "constraint": "Similar SMD protection only after checking clamp/leakage/capacitance for the exact line; not automatically approved and the current manufacturer page marks it obsolete.",
+          "sourceUrl": "https://www.st.com/en/protections-and-emi-filters/esdalc12-1t2.html"
+        }
+      ]
+    },
+    {
+      "id": "uart-cable",
+      "category": "logging",
+      "role": "3.3V UART serial event logger",
+      "requiredness": "REQUIRED_FOR_EVIDENCE",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "FTDI",
+      "mpn": "TTL-232R-3V3",
+      "orderCode": "TTL-232R-3V3",
+      "quantity": 1,
+      "specification": "USB-A to 0.1in 6-pin cable, 3.3V UART I/O; connect only GND, TXD and RXD; leave VCC disconnected",
+      "manufacturerSource": {
+        "url": "https://ftdichip.com/products/ttl-232r-3v3/",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "TTL-232R-3V3 exact cable part",
+          "3.3V TTL signals",
+          "0.1in header and USB-A cable"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/ftdi-future-technology-devices-international-ltd/TTL-232R-3V3/1836393",
+          "accessedDate": "2026-09-01",
+          "stock": "225 shown",
+          "unitPriceUsd": { "min": 23.8, "max": 23.8 },
+          "distributorPartNumber": "768-1015-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "FTDI",
+          "mpn": "TTL-232R-3V3-WE",
+          "orderCode": "TTL-232R-3V3-WE",
+          "quantity": 1,
+          "constraint": "Wire-ended equivalent; owner must terminate and verify TX/RX/GND polarity before use.",
+          "sourceUrl": "https://ftdichip.com/document/cable-data-sheets/"
+        }
+      ]
+    },
+    {
+      "id": "jumper-wires",
+      "category": "wiring",
+      "role": "Short insulated point-to-point wiring",
+      "requiredness": "REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "Adafruit Industries",
+      "mpn": "1957",
+      "orderCode": "1957",
+      "quantity": 1,
+      "specification": "20 male/male 6in 28AWG jumper wires; use color-coded wires and keep remote lead <=300mm",
+      "manufacturerSource": {
+        "url": "https://www.adafruit.com/product/1957",
+        "accessedDate": "2026-09-01",
+        "claims": ["20-wire pack", "150mm length", "0.1in male contacts"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/1957/6827090",
+          "accessedDate": "2026-09-01",
+          "stock": "6541 shown",
+          "unitPriceUsd": { "min": 1.95, "max": 1.95 },
+          "distributorPartNumber": "1528-1967-ND"
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "Adafruit Industries",
+          "mpn": "793",
+          "orderCode": "793",
+          "quantity": 1,
+          "constraint": "Female/female 300mm pack; use only with suitable headers and keep the remote run short.",
+          "sourceUrl": "https://www.adafruit.com/product/793"
+        }
+      ]
+    },
+    {
+      "id": "dmm",
+      "category": "instrument",
+      "role": "Low-voltage verification meter",
+      "requiredness": "OWNER_SUPPLIED_REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "Fluke",
+      "mpn": "FLUKE-101",
+      "orderCode": "FLUKE-101",
+      "quantity": 1,
+      "specification": "Handheld DMM with 6.000V DC range, continuity and resistance; use only on de-energized circuits for this bench",
+      "manufacturerSource": {
+        "url": "https://www.fluke.com/en-sg/product/electrical-testing/digital-multimeters/fluke-101",
+        "accessedDate": "2026-09-01",
+        "claims": ["6.000V DC range", "continuity", "CAT III 600V"]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "Fluke authorized-channel lookup",
+          "url": "https://www.fluke.com/en-us/where-to-buy",
+          "accessedDate": "2026-09-01",
+          "stock": "UNCONFIRMED; select local distributor at acquisition time",
+          "notes": "No US exact-product price snapshot captured because the owner is expected to use an existing meter; do not infer stock or price."
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "Any traceable DMM",
+          "mpn": "owner-selected",
+          "orderCode": "owner-selected",
+          "quantity": 1,
+          "constraint": "Must measure 0-5.5V DC, continuity and resistance; record exact model and calibration/known-voltage check before evidence.",
+          "sourceUrl": "https://www.fluke.com/en-us/where-to-buy"
+        }
+      ]
+    },
+    {
+      "id": "bench-supply",
+      "category": "instrument",
+      "role": "Current-limited isolated DC source",
+      "requiredness": "OWNER_SUPPLIED_REQUIRED",
+      "ownerLikelyHas": true,
+      "buyAction": "CHECK_OWN_STOCK_THEN_BUY_IF_MISSING",
+      "manufacturer": "KORAD Technology / SRA Soldering Products",
+      "mpn": "KA3005P",
+      "orderCode": "KA3005P",
+      "quantity": 1,
+      "specification": "Single output 0-30V, 0-5A, CV/CC; configure to 3.3V and 100mA initial limit, never exceed the pack's 250mA hard limit",
+      "manufacturerSource": {
+        "url": "https://www.koradtechnology.com/product/83.html",
+        "accessedDate": "2026-09-01",
+        "claims": [
+          "KA3005P 0-30V/0-5A range",
+          "regulated programmable output",
+          "CV/CC operation"
+        ]
+      },
+      "distributorSnapshots": [
+        {
+          "vendor": "DigiKey",
+          "url": "https://www.digikey.pl/en/products/detail/sra-soldering-products/KA3005P/10709868",
+          "accessedDate": "2026-09-01",
+          "stock": "145 shown on localized page",
+          "unitPriceSnapshot": "443.09 PLN without VAT",
+          "unitPriceUsd": { "min": 100, "max": 180 },
+          "distributorPartNumber": "2260-KA3005P-ND",
+          "notes": "USD range is a planning conversion/region allowance; no US price claim is made."
+        }
+      ],
+      "substitutions": [
+        {
+          "manufacturer": "RIGOL",
+          "mpn": "DP711",
+          "orderCode": "DP711",
+          "quantity": 1,
+          "constraint": "0-30V/0-5A single-output CV/CC alternative; verify local authorized channel and set the same 3.3V/100mA start limit.",
+          "sourceUrl": "https://www.rigol.com/dam/global/downloads/brochures/en/user-manual/dc-powers/DP700_UserGuide_EN.pdf"
+        }
+      ]
+    }
+  ],
+  "costSummary": {
+    "requiredElectronicsIfNothingIsOnHandUsd": {
+      "min": 63.54,
+      "max": 63.94,
+      "itemIds": [
+        "pico2-board",
+        "breadboard",
+        "local-button",
+        "remote-button",
+        "display",
+        "status-led",
+        "resistor-1k",
+        "resistor-10k",
+        "resistor-100k-divider",
+        "adc-filter-capacitor",
+        "uart-cable",
+        "jumper-wires"
+      ],
+      "excludes": [
+        "tax",
+        "shipping",
+        "optional ESD",
+        "bench supply",
+        "DMM",
+        "scope"
+      ]
+    },
+    "likelyMinimumOwnerPurchaseUsd": {
+      "min": 0,
+      "max": 63.94,
+      "notes": "The owner may already have the breadboard, passives, switches, wiring, UART and instruments; buy only missing lines after checklist confirmation."
+    },
+    "optionalSupplySnapshotUsd": {
+      "min": 100,
+      "max": 180,
+      "notes": "Planning range derived from the dated localized distributor snapshot; currency/shipping/tax must be rechecked."
+    },
+    "optionalScopeSnapshotUsd": {
+      "min": 369,
+      "max": 369,
+      "notes": "Rigol DS1054Z is not required; use an existing scope or logic analyzer if available. DigiKey marketplace snapshot is a reference only."
+    }
+  },
+  "wiring": [
+    {
+      "signal": "GP2 local button",
+      "connect": "GP2 -> 1k series -> B3F-1000 -> GND; enable Pico internal pull-up",
+      "limit": "dry contact only, no external voltage"
+    },
+    {
+      "signal": "GP3 second request input",
+      "connect": "Base bench: GP3 -> 1k series -> adjacent breadboard B3F-1000 -> local GND; add 10k locally for bounce/injection as directed by firmware test",
+      "limit": "no exposed remote cable until the exact entry protection is selected and independently reviewed"
+    },
+    {
+      "signal": "I2C display",
+      "connect": "GP4 SDA, GP5 SCL, 3V3, GND to Adafruit 938; inspect pull-ups and do not add a second rail",
+      "limit": "3.3V only; display typical current 40mA"
+    },
+    {
+      "signal": "status LED",
+      "connect": "3V3 -> common anode; each red/green cathode -> separate 1k -> GP6/GP7; firmware sinks approximately 1mA",
+      "limit": "diagnostic labels only; never READY/PD/USB4"
+    },
+    {
+      "signal": "UART",
+      "connect": "Pico GP0 TX -> FTDI RXD, Pico GP1 RX -> FTDI TXD, GND -> GND; leave FTDI VCC unconnected",
+      "limit": "3.3V UART, 115200 8N1, logger USB is removed before VSYS testing"
+    },
+    {
+      "signal": "GP26 VSYS divider",
+      "connect": "VSYS -> 100k -> GP26 -> 100k -> GND; 100nF from GP26 to GND",
+      "limit": "0-5.5V VSYS maps to <=2.89V worst case with the specified 5% parts; calibrate with DMM"
+    },
+    {
+      "signal": "GP8 marker",
+      "connect": "GP8 to scope/logic probe only",
+      "limit": "no actuator, no external rail"
+    }
+  ],
+  "buildSequence": [
+    "Inventory parts and mark a separate LOW-SPEED BENCH area; reject any USB-C, dock, target laptop or product-power item.",
+    "Inspect the Pico order code and headers; install it across the breadboard center gap.",
+    "Program firmware through Pico micro-USB; confirm boot/reset logging; disconnect USB at both ends.",
+    "With the Pico disconnected, measure micro-USB VBUS to local GND and record 0V before VSYS wiring.",
+    "Set the supply to 3.3V, 100mA current limit, output off; verify with DMM; connect only VSYS and GND.",
+    "Add and test GP2 local button, then add UART logger with VCC omitted; prove inactive outputs and event logs.",
+    "Add the display and LED through their resistors; use diagnostic labels only.",
+    "Add the GP26 divider and capacitor; calibrate ADC readings against the DMM across 0-5.5V only.",
+    "Add the second request button locally on the breadboard; test open, clean press, bounce and short-to-ground at the current limit; do not attach a remote cable.",
+    "Capture raw serial logs, current/voltage notes, reset causes and wiring photo; leave USB disconnected for direct-VSYS evidence."
+  ],
+  "ownerChecklist": [
+    {
+      "id": "O1",
+      "action": "Locate or approve one exact Pico 2 board: SC1631 default or SC1632 with headers.",
+      "done": false
+    },
+    {
+      "id": "O2",
+      "action": "Confirm a single-output current-limited supply can be set to 3.3V and <=100mA; do not buy a supply until checking existing equipment.",
+      "done": false
+    },
+    {
+      "id": "O3",
+      "action": "Confirm a DMM with a 6V DC range or better, test leads and continuity/resistance mode.",
+      "done": false
+    },
+    {
+      "id": "O4",
+      "action": "Confirm breadboard, 28AWG jumpers, two dry-contact buttons, passives and a 3.3V-safe display.",
+      "done": false
+    },
+    {
+      "id": "O5",
+      "action": "Confirm a 3.3V UART logger; if buying, use FTDI TTL-232R-3V3 and leave its VCC pin disconnected.",
+      "done": false
+    },
+    {
+      "id": "O6",
+      "action": "Confirm that the base build has no remote cable; any TVS and remote-cable plan requires independent review before connection.",
+      "done": false
+    },
+    {
+      "id": "O7",
+      "action": "Re-open each manufacturer and authorized-distributor URL and record current stock, exact order code, price, shipping and tax before asking for purchase approval.",
+      "done": false
+    },
+    {
+      "id": "O8",
+      "action": "After approval, acquire traceable parts; record received MPN, date code/lot where present, and actual quantities. Do not substitute silently.",
+      "done": false
+    }
+  ],
+  "unresolvedAvailability": [
+    "SC1632 header variant has manufacturer identity but no separate current authorized-distributor price snapshot in this pack; use SC1631 unless headers are worth the premium.",
+    "PESD3V3U1UL,315 is out of stock at the captured DigiKey page with a 2027 expected date; the base bench has no remote cable, and a later cabled interface requires independent protection review.",
+    "KA3005P distributor price was shown in PLN on a localized DigiKey page; US landed cost and authorized-channel status must be rechecked.",
+    "Display substitutions vary in stock and connector style; verify 3.3V logic, pull-ups, address and lead compatibility before substitution.",
+    "No exact owner inventory was inspected; every ownerLikelyHas value is a planning assumption, not proof of possession."
+  ]
+}

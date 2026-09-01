@@ -37,3 +37,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Pico SDK local cross-build artifacts
+/firmware/controller-pico2/build/

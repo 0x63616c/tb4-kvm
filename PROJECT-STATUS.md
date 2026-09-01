@@ -65,8 +65,11 @@ truthful status, optional remote pod and fail-closed edge cases. It is the
 provisional v1 control default. Issue #18 now has a reviewed PD-free executable
 controller model with 57 checks, a live interactive model lab, a portable C11
 controller core with 113 host checks, an isolated Pico 2 bench plan and a
-content-verified B1-B13 physical-evidence contract. No Pico has been flashed and
-no physical bench has run yet. Later owner feedback may refine the UX without stopping
+content-verified B1-B13 physical-evidence contract. A software-only binding now
+pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a proposed exact
+acquisition/build pack prepares the low-value bench without ordering it. The
+local host lacks the Arm cross-compiler, so the target has not been cross-built;
+no Pico has been flashed and no physical bench has run yet. Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
 proven complete contract.
@@ -98,10 +101,11 @@ Latest evidence:
 
 Agent-ready implementation:
 
-- #18 bind the portable C core to a named Pico SDK/toolchain and prepare the exact low-value physical bench acquisition/build pack;
+- #18 independently review and cross-build the pinned inert Pico 2 target; the proposed low-value bench acquisition/build pack is prepared;
 
 Owner participation or acceptance:
 
+- #18 confirm which proposed controller-bench items are already owned and approve only the missing low-value items after release review;
 - #6 written capability/terms/quote confirmation only if the optional measurement branch is later triggered;
 - #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
@@ -115,8 +119,8 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Independently review the portable C core, then bind it to a named Pico SDK/toolchain while preserving abstract I/O boundaries.
-2. Prepare the exact isolated-bench BOM/acquisition and wiring package; request owner purchase authority only when the package is reviewed.
+1. Independently review the pinned inert Pico 2 binding and proposed acquisition/build pack.
+2. Cross-build with a verified Arm toolchain without flashing; after review, ask the owner to confirm existing bench inventory and approve only missing items.
 3. Continue collecting owner feedback without pausing reversible downstream work.
 4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
 5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
