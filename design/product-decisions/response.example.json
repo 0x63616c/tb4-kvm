@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "catalogIssue": 3,
+  "responseStatus": "DRAFT",
+  "answers": [
+    { "decisionId": "startup", "value": "restore-last-safe" },
+    { "decisionId": "charging", "value": "up-to-60w" },
+    { "decisionId": "failover", "value": "wait-for-button" },
+    { "decisionId": "compatibility", "value": "named-owc-first" },
+    { "decisionId": "power-loss", "value": "isolate-no-pass-through" },
+    { "decisionId": "switching", "value": "record-before-promise" },
+    { "decisionId": "status", "value": "truthful-minimal" },
+    { "decisionId": "mechanical-envelope", "value": "defer-until-measured" }
+  ],
+  "notes": "",
+  "ownerAcceptance": {
+    "owner": null,
+    "date": null,
+    "evidence": null,
+    "acknowledgement": null
+  }
+}

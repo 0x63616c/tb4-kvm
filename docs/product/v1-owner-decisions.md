@@ -13,6 +13,15 @@ validation matrix must still prove every selected behaviour.
 
 Use the interactive **Decide v1** section on the project site to create a
 copyable response. Its answers stay only in that browser until you copy them.
+The exact eight-option catalog is
+[`design/product-decisions/catalog.json`](../../design/product-decisions/catalog.json).
+Machine-readable responses use the fail-closed
+[`response.schema.json`](../../design/product-decisions/response.schema.json);
+the site can only export a local `DRAFT`, never an owner acceptance.
+Choosing any `other` option, or the lower charging target, requires a note;
+the local export controls stay disabled until one is provided. The canonical
+owner-acceptance acknowledgement is defined in the response schema and is only
+valid when an owner records it with their identity, date and evidence reference.
 
 ## Decisions
 

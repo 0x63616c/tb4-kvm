@@ -45,7 +45,7 @@ On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the 
 
 ## Current execution checkpoint
 
-The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is closed; the later numeric allocation remains blocked. A beginner-facing v1 owner-decision workbench now converts issue #3 into eight explicit, copyable choices without silently adopting them. Optional measurement-route research for issue #6 found plausible staffed and rental leads but no publicly proven complete contract.
+The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is closed; the later numeric allocation remains blocked. A beginner-facing v1 owner-decision workbench converts issue #3 into eight explicit, copyable choices without silently adopting them. Its UI now consumes one machine-readable catalog, and a fail-closed response contract plus adversarial tests distinguish browser-local drafts from explicit owner acceptance. Optional measurement-route research for issue #6 found plausible staffed and rental leads but no publicly proven complete contract.
 
 Why: the owner prioritizes a working prototype soon and accepts iterative PCB revisions. We still require reference-backed design, modeling, power/PD safety, independent release review and protected bring-up, but paid high-speed measurement moves later unless a failure makes it necessary.
 
@@ -61,8 +61,10 @@ Latest evidence:
 - Channel-budget contract review: [`docs/reviews/2026-09-01-channel-budget-contract-review.md`](docs/reviews/2026-09-01-channel-budget-contract-review.md).
 - Collateral-policy review: [`docs/reviews/2026-09-01-collateral-policy-review.md`](docs/reviews/2026-09-01-collateral-policy-review.md).
 - V1 owner decision packet: [`docs/product/v1-owner-decisions.md`](docs/product/v1-owner-decisions.md).
+- Product-decision catalog and acceptance contract: [`design/product-decisions/catalog.json`](design/product-decisions/catalog.json) and [`design/product-decisions/response.schema.json`](design/product-decisions/response.schema.json).
 - Optional measurement-route evidence: [`docs/research/issue-6-measurement-route/README.md`](docs/research/issue-6-measurement-route/README.md).
 - Owner-decisions/measurement-route review: [`docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md`](docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md).
+- Product-decision contract review: [`docs/reviews/2026-09-01-product-decision-contract-review.md`](docs/reviews/2026-09-01-product-decision-contract-review.md).
 
 ## Current frontier
 

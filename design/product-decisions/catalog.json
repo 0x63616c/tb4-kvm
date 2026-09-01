@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "issue": 3,
+  "status": "DRAFT",
+  "title": "TB4 KVM v1 owner decision catalog",
+  "decisions": [
+    {
+      "id": "startup",
+      "title": "1. Start-up selection",
+      "question": "When both hosts are attached at power-up, what should happen?",
+      "defaultValue": "restore-last-safe",
+      "rationale": "Default: restore the last safe host; otherwise select HOST A. It avoids a surprise desk change after a power event.",
+      "boundary": "This still waits for supported Type-C/PD discovery. It cannot energise both hosts.",
+      "options": [
+        {
+          "value": "restore-last-safe",
+          "label": "Restore the last safe host; otherwise HOST A"
+        },
+        { "value": "always-host-a", "label": "Always choose HOST A" },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "charging",
+      "title": "2. Selected-host charging",
+      "question": "What charging promise should v1 make to the selected host?",
+      "defaultValue": "up-to-60w",
+      "rationale": "Default: up to 60 W for the selected host, with no promised charging for the unselected host.",
+      "boundary": "The supply budget, dock power ownership and reverse-current protection still need reference-backed proof.",
+      "options": [
+        {
+          "value": "up-to-60w",
+          "label": "Up to 60 W selected host; none promised to the other"
+        },
+        {
+          "value": "lower-target",
+          "label": "Choose a lower charging target",
+          "requiresNotes": true
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "failover",
+      "title": "3. Active-host removal",
+      "question": "When the selected host disconnects, should the dock move automatically?",
+      "defaultValue": "wait-for-button",
+      "rationale": "Default: show the loss and wait for a button press. It avoids an unexpected desktop change.",
+      "boundary": "Automatic failover needs a reference-supported discovery and guard sequence before it can be promised.",
+      "options": [
+        { "value": "wait-for-button", "label": "Wait for a button press" },
+        {
+          "value": "auto-after-validated-guard",
+          "label": "Auto-fail over only after a validated guard sequence"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "compatibility",
+      "title": "4. Downstream compatibility",
+      "question": "What should v1 promise downstream?",
+      "defaultValue": "named-owc-first",
+      "rationale": "Default: validate the named OWC Thunderbolt Dock 96W first, rather than claiming arbitrary-dock support.",
+      "boundary": "The named dock still needs recorded cable, display, firmware and functional validation evidence.",
+      "options": [
+        {
+          "value": "named-owc-first",
+          "label": "Named OWC Thunderbolt Dock 96W first"
+        },
+        {
+          "value": "broader-after-validation",
+          "label": "Broader devices only after separate validation"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "power-loss",
+      "title": "5. External-power loss",
+      "question": "What should the KVM do if its external supply is absent or fails?",
+      "defaultValue": "isolate-no-pass-through",
+      "rationale": "Default: isolate both hosts and do not promise dock-powered pass-through.",
+      "boundary": "The detailed VBUS, VCONN and discharge policy must come from the accepted reference design.",
+      "options": [
+        {
+          "value": "isolate-no-pass-through",
+          "label": "Isolate both hosts; no pass-through promise"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "switching",
+      "title": "6. Switching experience",
+      "question": "What should the v1 validation plan target for switching?",
+      "defaultValue": "record-before-promise",
+      "rationale": "Default: record each switching stage first; do not promise a time until the supported path is measured.",
+      "boundary": "The owner can set a desired experience, but vendor/reference timing and safety checks control the actual sequence.",
+      "options": [
+        {
+          "value": "record-before-promise",
+          "label": "Record before making a time promise"
+        },
+        {
+          "value": "target-under-10-seconds",
+          "label": "Aim for under 10 seconds, subject to validation"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "title": "7. Status surface",
+      "question": "What should the indicator or optional display communicate?",
+      "defaultValue": "truthful-minimal",
+      "rationale": "Default: selected host plus switching, waiting and fault state. Add PD/link facts only when the controller supports them.",
+      "boundary": "It must not imply live throughput, compliance or host activity without named evidence.",
+      "options": [
+        {
+          "value": "truthful-minimal",
+          "label": "Selected host and truthful state only"
+        },
+        {
+          "value": "supported-pd-link",
+          "label": "Also show controller-supported PD/link facts"
+        },
+        {
+          "value": "other",
+          "label": "Other (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    },
+    {
+      "id": "mechanical-envelope",
+      "title": "8. Mechanical envelope",
+      "question": "What physical-size boundary should define a successful v1?",
+      "defaultValue": "defer-until-measured",
+      "rationale": "Default: keep the three-port main unit, onboard control and protected remote-pod connector minimal, but defer a hard size promise until the released PCB and thermal map are measured.",
+      "boundary": "A compact intention is not a dimension. Choose a maximum below only as an owner target; PCB clearances, cable bend space, insulation and cooling can require a reviewed change.",
+      "options": [
+        {
+          "value": "defer-until-measured",
+          "label": "Defer exact size until PCB and thermal measurements"
+        },
+        {
+          "value": "target-180x120x45",
+          "label": "Target at most 180 × 120 × 45 mm, excluding power brick and cables"
+        },
+        {
+          "value": "other",
+          "label": "Other maximum (explain below)",
+          "requiresNotes": true
+        }
+      ]
+    }
+  ]
+}
