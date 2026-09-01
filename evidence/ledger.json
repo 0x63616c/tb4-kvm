@@ -14,6 +14,9 @@
       "id": "DEC-PROTOTYPE-001", "kind": "decision", "title": "Prototype A proceeds from reviewed models and protected safety evidence without paid PCB-1A measurement", "status": "REVIEWED", "owner": "project owner", "evidence": ["docs/decisions/2026-09-01-prototype-first-validation.md", "docs/PROJECT-PLAN.md", "docs/VALIDATION-PLAN.md"], "blockers": []
     },
     {
+      "id": "DEC-PRODUCT-001", "kind": "decision", "title": "Reviewed transcription of owner-accepted v1 product behaviour and Prototype A conditions", "status": "REVIEWED", "owner": "project owner", "evidence": ["design/product-decisions/response.accepted.json", "docs/product/v1-owner-decisions.md", "docs/reviews/2026-09-01-owner-acceptance-review.md"], "blockers": []
+    },
+    {
       "id": "ART-CHMETHOD-001", "kind": "artifact", "title": "Reference-plane-specific channel-budget method and deterministic closure contract", "status": "REVIEWED", "owner": "signal integrity", "evidence": ["docs/research/pcb1a-channel-budget-method.md", "design/channel-budget/schema.json", "design/channel-budget/prototype-a-example.json", "design/channel-budget/test-only-closed-fixture.json", "design/channel-budget/validate.mjs", "docs/reviews/2026-09-01-channel-budget-contract-review.md"], "blockers": []
     },
     {

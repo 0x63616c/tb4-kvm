@@ -1,8 +1,12 @@
 # V1 owner decision packet
 
-Status: `PROPOSED` — this packet collects product choices. It does not approve
-an electrical design, alter the safety model, accept vendor terms, or close
-issue #3.
+Status: `OWNER_ACCEPTED` on 2026-09-01 — the exact signed-off response is
+[`response.accepted.json`](../../design/product-decisions/response.accepted.json),
+with owner evidence recorded on
+[issue #3](https://github.com/0x63616c/tb4-kvm/issues/3#issuecomment-5497738070).
+This acceptance fixes v1 product behaviour; it does not approve an electrical
+design, alter the safety model, accept vendor terms, authorize a purchase or
+declare hardware validated.
 
 ## How to use this packet
 
@@ -22,6 +26,11 @@ Choosing any `other` option, or the lower charging target, requires a note;
 the local export controls stay disabled until one is provided. The canonical
 owner-acceptance acknowledgement is defined in the response schema and is only
 valid when an owner records it with their identity, date and evidence reference.
+
+The accepted response deliberately uses `other` for start-up because its exact
+rule is more precise than either catalog shortcut: prefer `HOST A`; if A is
+absent and B is the sole attached host, select `HOST B`; if neither is attached,
+remain safely disconnected.
 
 ## Decisions
 
@@ -98,6 +107,10 @@ team can set a later measurable acceptance criterion.
 training timing are vendor/reference-design values, not values an owner choice
 can override.
 
+**Accepted operating condition:** stop or eject external-storage activity
+before switching. V1 does not promise a safe hot switch while writes are in
+flight.
+
 ### 7. Status surface
 
 What should the always-on display or indicator communicate?
@@ -122,6 +135,15 @@ than 180 × 120 × 45 mm excluding the external power brick and cables.
 **Engineering boundary:** a compact intention is not a dimension. Connector
 clearances, cable bend space, insulation, cooling and the reviewed PCB can
 require the owner to accept a revised envelope.
+
+## Prototype A conditions
+
+- The KVM may use its own separate external power brick.
+- The unselected laptop may use a separate charger; v1 promises no charging on
+  its detached KVM port.
+- Product acceptance does not waive the reference-design, electrical safety,
+  signal-integrity, independent-review, purchasing, fabrication or protected
+  bring-up gates.
 
 ## Copyable response
 

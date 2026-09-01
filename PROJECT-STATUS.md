@@ -19,12 +19,19 @@ Pre-PCB design review. The full project goal remains active. Work is not blocked
 - Prototype-first delivery: get a narrow, safe, desk-specific 40 Gb/s functional prototype working, expect correction revisions, then broaden validation.
 - Do as much design, simulation, firmware, bring-up and functional testing ourselves as practical.
 - Paid RF-lab measurement is not a blocker for the first integrated prototype; it remains a later diagnostic and claims-strengthening route.
+- Start-up prefers Host A; if A is absent and B is the sole attached host, select B; with neither present, remain disconnected.
+- The selected host target is up to 60 W; no charging is promised to the detached host, which may use a separate charger.
+- Active-host removal waits for an explicit button press; v1 has no automatic failover.
+- V1 validates the named OWC Thunderbolt Dock 96W first and makes no arbitrary-dock promise.
+- Loss of KVM power isolates both hosts; no passive or dock-powered bypass is promised.
+- Switching latency is measured before any time promise, and external-storage activity must be stopped or ejected before switching.
+- Status is truthful and minimal; exact enclosure size is deferred until PCB and thermal measurements exist.
+- Prototype A may use a separate KVM power brick.
 
 ## Recommended but not yet approved
 
 - One TB4 accessory router with selectable upstream front end.
 - One downstream TB4 port connected to the existing dock.
-- Selected host receives up to 60 W; unselected host is electrically detached and unpowered.
 - Separate low-speed display/button daughterboard to keep its wiring away from TB4 traces.
 - One signal/control proof followed by one integrated board and one correction revision.
 
@@ -45,7 +52,16 @@ On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the 
 
 ## Current execution checkpoint
 
-The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is closed; the later numeric allocation remains blocked. A beginner-facing v1 owner-decision workbench converts issue #3 into eight explicit, copyable choices without silently adopting them. Its UI now consumes one machine-readable catalog, and a fail-closed response contract plus adversarial tests distinguish browser-local drafts from explicit owner acceptance. Optional measurement-route research for issue #6 found plausible staffed and rental leads but no publicly proven complete contract.
+The prototype-first execution map is active. The project owner accepted all eight
+v1 product choices and the Prototype A conditions on 2026-09-01; the exact
+machine-readable response and issue evidence are now the product contract.
+Public controller/firmware and high-speed component/model research is complete
+and independently reviewed; both gates remain blocked on exact external
+evidence, with unsent owner-ready request packets prepared. The channel-budget
+method/schema has completed multi-round adversarial SI review and is closed;
+the later numeric allocation remains blocked. Optional measurement-route
+research for issue #6 found plausible staffed and rental leads but no publicly
+proven complete contract.
 
 Why: the owner prioritizes a working prototype soon and accepts iterative PCB revisions. We still require reference-backed design, modeling, power/PD safety, independent release review and protected bring-up, but paid high-speed measurement moves later unless a failure makes it necessary.
 
@@ -62,19 +78,20 @@ Latest evidence:
 - Collateral-policy review: [`docs/reviews/2026-09-01-collateral-policy-review.md`](docs/reviews/2026-09-01-collateral-policy-review.md).
 - V1 owner decision packet: [`docs/product/v1-owner-decisions.md`](docs/product/v1-owner-decisions.md).
 - Product-decision catalog and acceptance contract: [`design/product-decisions/catalog.json`](design/product-decisions/catalog.json) and [`design/product-decisions/response.schema.json`](design/product-decisions/response.schema.json).
+- Owner-accepted v1 response: [`design/product-decisions/response.accepted.json`](design/product-decisions/response.accepted.json) and [issue evidence](https://github.com/0x63616c/tb4-kvm/issues/3#issuecomment-5497738070).
 - Optional measurement-route evidence: [`docs/research/issue-6-measurement-route/README.md`](docs/research/issue-6-measurement-route/README.md).
 - Owner-decisions/measurement-route review: [`docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md`](docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md).
 - Product-decision contract review: [`docs/reviews/2026-09-01-product-decision-contract-review.md`](docs/reviews/2026-09-01-product-decision-contract-review.md).
+- Owner-acceptance transcription review: [`docs/reviews/2026-09-01-owner-acceptance-review.md`](docs/reviews/2026-09-01-owner-acceptance-review.md).
 
 ## Current frontier
 
 Agent-ready, safely parallel research:
 
-- none at this checkpoint; substantive downstream tasks are dependency-gated rather than merely unassigned;
+- #17 button/display/control-experience prototype, once the accepted contract is independently reviewed and issue #3 closes;
 
 Owner participation or acceptance:
 
-- #3 v1 product behavior and success envelope;
 - #6 written capability/terms/quote confirmation only if the optional measurement branch is later triggered;
 - #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
@@ -88,10 +105,11 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Ask the owner to use the published workbench to adopt or amend the eight issue-#3 product choices; only then close #3 and unblock the button/display prototype (#17).
-2. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22).
-3. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
-4. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
+1. Independently review and publish the owner-accepted contract, then close issue #3.
+2. Build and review the interactive button/display/control-experience prototype in issue #17 against the accepted behaviour.
+3. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22).
+4. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
+5. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits
 

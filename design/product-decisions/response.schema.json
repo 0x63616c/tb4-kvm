@@ -41,7 +41,7 @@
         "acknowledgement": {
           "anyOf": [
             { "type": "null" },
-            { "const": "I accept these eight v1 product choices as the owner." }
+            { "const": "I accept these eight v1 product choices and the listed Prototype A conditions as the owner." }
           ]
         }
       }

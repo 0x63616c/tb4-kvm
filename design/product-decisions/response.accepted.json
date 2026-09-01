@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "catalogIssue": 3,
+  "responseStatus": "OWNER_ACCEPTED",
+  "answers": [
+    { "decisionId": "startup", "value": "other" },
+    { "decisionId": "charging", "value": "up-to-60w" },
+    { "decisionId": "failover", "value": "wait-for-button" },
+    { "decisionId": "compatibility", "value": "named-owc-first" },
+    { "decisionId": "power-loss", "value": "isolate-no-pass-through" },
+    { "decisionId": "switching", "value": "record-before-promise" },
+    { "decisionId": "status", "value": "truthful-minimal" },
+    { "decisionId": "mechanical-envelope", "value": "defer-until-measured" }
+  ],
+  "notes": "Startup prefers Host A. If Host A is absent and Host B is the sole attached host, select Host B; if neither is attached, remain safely disconnected. The user must stop or eject external-storage activity before switching. Prototype A may use a separate KVM power brick and a separate charger for the unselected laptop. These choices do not waive electrical, reference-design, validation, review, purchase or fabrication gates.",
+  "ownerAcceptance": {
+    "owner": "Calum, project owner",
+    "date": "2026-09-01",
+    "evidence": "https://github.com/0x63616c/tb4-kvm/issues/3#issuecomment-5497738070",
+    "acknowledgement": "I accept these eight v1 product choices and the listed Prototype A conditions as the owner."
+  }
+}
