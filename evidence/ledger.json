@@ -35,7 +35,7 @@
       "id": "GATE-PD-001", "kind": "gate", "title": "Reference-derived upstream power/PD design passes fault testing", "status": "BLOCKED", "owner": "electrical/PD", "evidence": ["docs/CONTROL-STATE-MACHINE.md", "docs/SIGNAL-POWER-OWNERSHIP.md"], "blockers": ["GATE-INT-001", "GATE-DS-001"]
     },
     {
-      "id": "GATE-LAB-001", "kind": "gate", "title": "Adequately ported calibrated VNA/lab method and de-embedding plan agreed before coupon fabrication", "status": "BLOCKED", "owner": "signal integrity", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCB-1A-MEASUREMENT-METHOD.md", "design/pcb1a-measurement-matrix.json"], "blockers": []
+      "id": "GATE-LAB-001", "kind": "gate", "title": "Adequately ported calibrated VNA/lab method and de-embedding plan agreed before coupon fabrication", "status": "BLOCKED", "owner": "signal integrity", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCB-1A-MEASUREMENT-METHOD.md", "design/pcb1a-measurement-matrix.json", "docs/research/issue-6-measurement-route/README.md", "design/measurement-route/inventory.json", "docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md"], "blockers": []
     },
     {
       "id": "GATE-FAB-001", "kind": "gate", "title": "PCBWay supplies written frozen stack-up and job-specific DFM", "status": "BLOCKED", "owner": "manufacturing", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCBWAY-PREQUOTE-INQUIRY.md", "docs/reviews/2026-09-01-pcb1-manufacturing-audit.md"], "blockers": []
@@ -63,6 +63,9 @@
     },
     {
       "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx", "docs/ARTIFACT-HUB-CONTRACT.md", "docs/SOFTWARE-SUPPLY-CHAIN.md"], "blockers": []
+    },
+    {
+      "id": "ART-OWNER-DECISIONS-001", "kind": "artifact", "title": "Beginner-friendly v1 owner decision packet and browser-local workbench", "status": "REVIEWED", "owner": "product", "evidence": ["docs/product/v1-owner-decisions.md", "components/owner-decision-workbench.tsx", "docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md"], "blockers": []
     },
     {
       "id": "ART-PCB1-001", "kind": "artifact", "title": "Order-ready PCB-1A manufacturing package", "status": "BLOCKED", "owner": "hardware", "evidence": ["docs/PCB-1-DEFINITION.md", "docs/PCB-1A-MEASUREMENT-METHOD.md", "docs/PCB-1A-PARTS-EVIDENCE.md", "docs/PCBWAY-PREQUOTE-INQUIRY.md"], "blockers": ["GATE-LAB-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-PCB1-BUDGET-001"]

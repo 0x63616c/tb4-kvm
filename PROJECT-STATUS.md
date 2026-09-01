@@ -45,7 +45,7 @@ On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the 
 
 ## Current execution checkpoint
 
-The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is positively closable; the later numeric allocation remains blocked.
+The prototype-first execution map is active. Public controller/firmware and high-speed component/model research is complete and independently reviewed; both gates remain blocked on exact external evidence, with unsent owner-ready request packets prepared. The channel-budget method/schema has completed multi-round adversarial SI review and is closed; the later numeric allocation remains blocked. A beginner-facing v1 owner-decision workbench now converts issue #3 into eight explicit, copyable choices without silently adopting them. Optional measurement-route research for issue #6 found plausible staffed and rental leads but no publicly proven complete contract.
 
 Why: the owner prioritizes a working prototype soon and accepts iterative PCB revisions. We still require reference-backed design, modeling, power/PD safety, independent release review and protected bring-up, but paid high-speed measurement moves later unless a failure makes it necessary.
 
@@ -60,16 +60,20 @@ Latest evidence:
 - Vendor/model evidence review: [`docs/reviews/2026-09-01-vendor-evidence-review.md`](docs/reviews/2026-09-01-vendor-evidence-review.md).
 - Channel-budget contract review: [`docs/reviews/2026-09-01-channel-budget-contract-review.md`](docs/reviews/2026-09-01-channel-budget-contract-review.md).
 - Collateral-policy review: [`docs/reviews/2026-09-01-collateral-policy-review.md`](docs/reviews/2026-09-01-collateral-policy-review.md).
+- V1 owner decision packet: [`docs/product/v1-owner-decisions.md`](docs/product/v1-owner-decisions.md).
+- Optional measurement-route evidence: [`docs/research/issue-6-measurement-route/README.md`](docs/research/issue-6-measurement-route/README.md).
+- Owner-decisions/measurement-route review: [`docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md`](docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md).
 
 ## Current frontier
 
 Agent-ready, safely parallel research:
 
-- #6 optional later measurement-route qualification;
+- none at this checkpoint; substantive downstream tasks are dependency-gated rather than merely unassigned;
 
 Owner participation or acceptance:
 
 - #3 v1 product behavior and success envelope;
+- #6 written capability/terms/quote confirmation only if the optional measurement branch is later triggered;
 - #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
 - #19 Intel/Infineon developer access and exact topology/controller questions;
@@ -82,9 +86,9 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Publish the reviewed research checkpoint and update issues #4/#5/#19 with exact evidence and blockers.
-2. Ask the owner to adopt or amend the independently reviewed early collateral policy.
-3. Continue agent-owned control work while presenting the owner only the prepared external-access, product-envelope and baseline actions.
+1. Ask the owner to use the published workbench to adopt or amend the eight issue-#3 product choices; only then close #3 and unblock the button/display prototype (#17).
+2. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22).
+3. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
 4. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits

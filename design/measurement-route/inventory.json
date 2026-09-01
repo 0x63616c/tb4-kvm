@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "issue": 6,
+  "captureDate": "2026-09-01",
+  "status": "PROPOSED_BLOCKED",
+  "contract": { "minFrequencyGHz": 20, "preferredFrequencyGHz": 26.5, "minPorts": 4, "requiresFixtureRemoval": true, "requiresMixedMode": true, "requiresUncertainty": true, "requiresPublicRawDataTerms": true },
+  "candidates": [
+    { "id": "granite-river-labs", "routeType": "staffed-lab", "name": "Granite River Labs SI/PI services", "sourceUrl": "https://www.graniteriverlabs.com/en-us/engineering-services/signal-power-integrity-test-analysis", "accessedDate": "2026-09-01", "evidence": ["VNA/TDR bench measurement", "fixture de-embedding", "S-parameter extraction", "custom fixture development"], "frequencyGHz": null, "ports": null, "contractFields": { "calibration": "UNKNOWN", "fixtureRemoval": "ADVERTISED_NOT_SPECIFIED", "mixedMode": "UNKNOWN", "uncertainty": "UNKNOWN", "publicRawDataTerms": "UNKNOWN" }, "status": "PROPOSED_BLOCKED" },
+    { "id": "electrorent-keysight-p5025a", "routeType": "rental", "name": "Keysight P5025A-402 with S97007A option", "sourceUrl": "https://www.electrorent.com/us/products/rf-and-microwave-network-analyzers/modular-vna/keysight-technologies/p5025a/01t1O00000CkjW0QAJ", "accessedDate": "2026-09-01", "evidence": ["4 ports", "100 kHz–26.5 GHz", "automatic fixture-removal option", "availability on quote"], "frequencyGHz": 26.5, "ports": 4, "contractFields": { "calibration": "UNKNOWN", "fixtureRemoval": "OPTION_LISTED_NOT_VALIDATED", "mixedMode": "UNKNOWN", "uncertainty": "UNKNOWN", "publicRawDataTerms": "UNKNOWN" }, "status": "PROPOSED_BLOCKED" },
+    { "id": "rohde-zna26-znz86", "routeType": "rental-or-borrow", "name": "R&S ZNA26 with ZN-Z86 switch matrix", "sourceUrl": "https://www.rohde-schwarz.com/us/products/test-and-measurement/vnas/rs-zna-vector-network-analyzers_63493-551810.html", "accessedDate": "2026-09-01", "evidence": ["4-port 10 MHz–26.5 GHz ZNA26", "ZN-Z86 up to 24 test ports", "official fixture de-embedding guidance"], "frequencyGHz": 26.5, "ports": 4, "contractFields": { "calibration": "UNKNOWN", "fixtureRemoval": "METHOD_DOCUMENTED_NOT_VALIDATED", "mixedMode": "UNKNOWN", "uncertainty": "UNKNOWN", "publicRawDataTerms": "UNKNOWN" }, "status": "PROPOSED_BLOCKED" }
+  ]
+}
