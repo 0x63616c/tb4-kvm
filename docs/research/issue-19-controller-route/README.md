@@ -2,6 +2,9 @@
 
 Status: `BLOCKED` for an integrated schematic/layout; research complete as of 2026-09-01.
 
+The [integrated schematic-entry contract](../../../design/integrated-schematic-entry/README.md) machine-checks this result as `PROPOSED`: it records candidates only, no accepted collateral/revision/review/test/model evidence, and no schematic-entry authorization.
+It links dual-host/downstream power ownership and protected power validation to issues #20 and #21; those are not inferred as closed by this controller-access research.
+
 ## Decision-safe result
 
 There is a credible, manufacturer-operated route to obtain the required material, but no public evidence establishes that this project may receive or redistribute the current Intel JHL9440 reference package, NVM image, programming/recovery procedure, or a complete two-host/one-dock implementation. Therefore issue #19 **cannot positively close** yet.

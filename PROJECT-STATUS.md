@@ -109,9 +109,21 @@ explicitly `BLOCKED`, non-electrical scaffold only. It records null source and
 manufacturing paths, the real ledger gates and issues, local KiCad 10.0.4, the
 documented 9.0.9 reference mismatch, no compatibility claim and no Pages
 artifact. Its validator and 22 adversarial mutations reject fake PCB,
-BOM, Gerber, release, order-ready and Pages-exposure states. No `.kicad_sch`,
-`.kicad_pcb` or manufacturing output has been created. Independent review
-accepted the corrected implementation; hosted release proof remains pending.
+BOM, Gerber, release, order-ready and Pages-exposure states. No integrated
+`.kicad_sch`, `.kicad_pcb` or manufacturing output has been created. Independent
+review accepted the corrected implementation. Exact `main` commit
+`094a8f4d851def3c00f5b399fa9509075c9df110` passed the hosted repository gate
+([run `33564174170`](https://github.com/0x63616c/tb4-kvm/actions/runs/33564174170)),
+Pages ([run `33564174235`](https://github.com/0x63616c/tb4-kvm/actions/runs/33564174235))
+and Pico 2 cross-build ([run `33564174177`](https://github.com/0x63616c/tb4-kvm/actions/runs/33564174177));
+the live page reports that exact commit and the explicit no-layout warning.
+The next pre-capture tranche adds a machine-checked integrated schematic-entry
+contract: three independent Type-C domains, seven future sheets, eight blocked
+gates and six controlled fact groups. Independent review caught and closed a
+P1 that allowed fact mappings to drift and a P2 that failed to bind the live
+ledger. The corrected local contract rejects 23 contract mutations, three
+ledger drifts and malformed input. It remains `PROPOSED`, with every acceptance
+field null and both capture/order authorization false.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
@@ -154,13 +166,15 @@ Latest evidence:
 - Hosted site-explorer release: exact commit [`0510902`](https://github.com/0x63616c/tb4-kvm/commit/0510902671b93e7e4d9afbd99fbd91ad9a34bf2e), [repository gate](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541779), [Pages](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541550), [Pico 2 cross-build](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541547), [live explorer](https://0x63616c.github.io/tb4-kvm/#pcb1a), [issue #8 evidence](https://github.com/0x63616c/tb4-kvm/issues/8#issuecomment-5500739144), and [map evidence](https://github.com/0x63616c/tb4-kvm/issues/2#issuecomment-5500739314).
 - Local blocked hardware scaffold: [`hardware/README.md`](hardware/README.md), [`hardware/kicad/scaffold.json`](hardware/kicad/scaffold.json), and [`scripts/verify-hardware-scaffold.test.mjs`](scripts/verify-hardware-scaffold.test.mjs) (policy/checking structure only; no electrical design or order artifact).
 - Independent scaffold/no-PCB review: [`docs/reviews/2026-09-01-hardware-scaffold-no-pcb-review.md`](docs/reviews/2026-09-01-hardware-scaffold-no-pcb-review.md) (P1 guard gap closed; 22 false-state mutations rejected; no electrical or order-readiness claim).
+- Integrated schematic-entry contract and review: [`design/integrated-schematic-entry/README.md`](design/integrated-schematic-entry/README.md) and [`docs/reviews/2026-09-01-integrated-schematic-entry-review.md`](docs/reviews/2026-09-01-integrated-schematic-entry-review.md) (complete fact mappings and live blocked-ledger state are fail-closed; not an electrical schematic or capture authorization).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- release the independently reviewed blocked hardware/release-check scaffold and explicit no-PCB site warning;
-- continue the first order-package design gate that does not require vendor contact or purchase authority;
+- release the independently reviewed integrated schematic-entry contract;
+- continue the experimental low-speed CTRL-1A carrier in parallel without weakening the integrated design gates;
+- continue the next integrated order-package gate that does not require vendor contact or purchase authority;
 
 Owner participation or acceptance:
 
@@ -178,10 +192,10 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Stage the hardware scaffold and explicit no-PCB warning, run the full gate, and obtain independent exact-tree site/governance review.
-2. Push accepted work to `main`; verify exact-head checks, Pages, Pico cross-build and the live warning.
-3. Keep the scaffold explicitly non-electrical and non-orderable until Intel/Infineon references, the three-port power architecture, parts/models and fabricator rules close.
-4. Advance the next reversible order-package artifact while keeping vendor/developer/fabricator requests unsent.
+1. Release the reviewed integrated schematic-entry contract; verify exact-head checks, Pages and Pico cross-build.
+2. Keep integrated KiCad capture blocked until the contract's controlled facts are accepted from permitted Intel/Infineon, power, SI, fabricator and collateral evidence.
+3. Finish the separate CTRL-1A low-speed experimental carrier with a real schematic/netlist, zero-error ERC/DRC, independent electrical/layout review and explicit non-product boundary.
+4. Advance the next reversible integrated order-package artifact while keeping vendor/developer/fabricator requests unsent.
 5. Ask separately for no-purchase cart/address-calculation authority only when it would unblock physical controller-bench work; purchase authorization remains an exact-item/max-landed-spend decision.
 
 ## Execution limits

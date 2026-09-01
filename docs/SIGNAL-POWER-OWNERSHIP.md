@@ -2,6 +2,8 @@
 
 This is the pre-schematic contract for the two-host/one-dock TB4 KVM. It prevents the common mistake of treating all 24 USB-C contacts as one bus that can be switched by one part.
 
+The future-sheet names, three-domain separation, and fail-safe defaults are also locked as a pre-capture record in the [integrated schematic-entry contract](../design/integrated-schematic-entry/README.md). That record is not an electrical schematic and cannot authorize capture.
+
 ## Ownership matrix
 
 | Electrical system | USB-C contacts | Required owner | Selected path | Safe unselected state | Evidence before layout |

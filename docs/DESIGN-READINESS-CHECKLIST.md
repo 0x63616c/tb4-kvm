@@ -2,6 +2,8 @@
 
 This is the stop/go record for schematic capture and PCB layout. “Plausible,” “ordered,” or “OS reports 40 Gb/s” do not count as complete evidence.
 
+The machine-checked [integrated schematic-entry contract](../design/integrated-schematic-entry/README.md) mirrors this boundary. It is `PROPOSED`, leaves capture/order unauthorized, and cannot close any gate in this checklist.
+
 ## Current gate status
 
 | Gate | Current state | Evidence required to close it |

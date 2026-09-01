@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0x63616c/tb4-kvm/design/integrated-schematic-entry/schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","status","captureAuthorized","orderReady","claimBoundary","sourceContracts","portDomains","futureSheets","safetyInvariants","safeDefaults","integratedGates","controlledFacts"],
+  "properties": {
+    "schemaVersion":{"const":1}, "status":{"const":"PROPOSED"}, "captureAuthorized":{"const":false}, "orderReady":{"const":false},
+    "claimBoundary":{"type":"object","additionalProperties":false,"required":["isSchematic","isNetlist","isBom","isFootprint","schematicEntryAcceptance"],"properties":{"isSchematic":{"const":false},"isNetlist":{"const":false},"isBom":{"const":false},"isFootprint":{"const":false},"schematicEntryAcceptance":{"const":null}}},
+    "sourceContracts":{"type":"array","items":{"type":"string"},"minItems":4},
+    "portDomains":{"type":"array","items":{"$ref":"#/$defs/domain"},"minItems":3,"maxItems":3},
+    "futureSheets":{"type":"array","items":{"type":"string"},"minItems":7,"maxItems":7},
+    "safetyInvariants":{"type":"array","items":{"type":"string"},"minItems":8},
+    "safeDefaults":{"type":"object","additionalProperties":false,"required":["onPowerOn","onMcuReset","onBrownout","hostAVbusSource","hostBVbusSource","highSpeedSelect","usb2Select","sbuSelect","newHostPdAdvertise"],"properties":{"onPowerOn":{"const":"ALL_PATHS_DISABLED"},"onMcuReset":{"const":"ALL_PATHS_DISABLED"},"onBrownout":{"const":"ALL_PATHS_DISABLED"},"hostAVbusSource":{"const":"DISABLED"},"hostBVbusSource":{"const":"DISABLED"},"highSpeedSelect":{"const":"DISABLED"},"usb2Select":{"const":"DISABLED"},"sbuSelect":{"const":"DISABLED"},"newHostPdAdvertise":{"const":"DISABLED_UNTIL_OLD_HOST_ISOLATION_VERIFIED"}}},
+    "integratedGates":{"type":"array","items":{"$ref":"#/$defs/gate"},"minItems":8},
+    "controlledFacts":{"type":"array","items":{"$ref":"#/$defs/fact"},"minItems":6}
+  },
+  "$defs": {
+    "domain":{"type":"object","additionalProperties":false,"required":["id","role","ownedSignals","sharesCcOrVbusWith"],"properties":{"id":{"enum":["UPSTREAM_A","UPSTREAM_B","DOWNSTREAM_DOCK"]},"role":{"enum":["HOST","DOCK"]},"ownedSignals":{"type":"array","items":{"enum":["CC","PD","VBUS","VCONN"]},"minItems":4,"maxItems":4},"sharesCcOrVbusWith":{"type":"array","maxItems":0}}},
+    "gate":{"type":"object","additionalProperties":false,"required":["id","status"],"properties":{"id":{"type":"string","pattern":"^GATE-[A-Z0-9-]+$"},"status":{"const":"BLOCKED"}}},
+    "fact":{"type":"object","additionalProperties":false,"required":["id","issueIds","gateIds","candidateIdentities","selectedCandidate","collateralClass","permittedPublicMetadata","requiredSourceRevision","requiredReviewTestModel","blockedAcceptance"],"properties":{"id":{"type":"string","pattern":"^[A-Z0-9_]+$"},"issueIds":{"type":"array","items":{"type":"integer","minimum":1},"minItems":1},"gateIds":{"type":"array","items":{"type":"string","pattern":"^GATE-[A-Z0-9-]+$"},"minItems":1},"candidateIdentities":{"type":"array","items":{"type":"string","minLength":1}},"selectedCandidate":{"const":null},"collateralClass":{"type":"string","minLength":1},"permittedPublicMetadata":{"type":"array","items":{"type":"string","minLength":1},"minItems":1},"requiredSourceRevision":{"type":"string","minLength":1},"requiredReviewTestModel":{"type":"array","items":{"type":"string","minLength":1},"minItems":1},"blockedAcceptance":{"type":"object","additionalProperties":false,"required":["sourceRevision","review","test","model"],"properties":{"sourceRevision":{"const":null},"review":{"const":null},"test":{"const":null},"model":{"const":null}}}}}
+  }
+}
