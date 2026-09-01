@@ -95,8 +95,12 @@ explain the 4 + 8 + 12 measurement campaign and claim boundary. Desktop and
 Independent review then caught and closed overstated campaign wording and
 insufficient path/responsive drift protection. Corrected exact staged tree
 `113a2f3e750e064fdaccaf3e28526b3d83ae704b` is accepted with no remaining
-P0-P3 findings and the full repository gate passes. This site tranche remains
-local until the resulting commit passes hosted CI and Pages deployment.
+P0-P3 findings and the full repository gate passes. Exact `main` commit
+`0510902671b93e7e4d9afbd99fbd91ad9a34bf2e` is now published: the hosted
+repository gate, Pages deployment and Pico 2 cross-build all passed for that
+commit. The live `/#pcb1a` route reports the exact revision, resolves D3/Host B
+to the correct D3_B and D3_C endpoints, and remains free of horizontal overflow
+at a 390 px viewport.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
@@ -136,13 +140,14 @@ Latest evidence:
 - Combined release review: [`docs/reviews/2026-09-01-frontend-topology-release-review.md`](docs/reviews/2026-09-01-frontend-topology-release-review.md) (R-001 through R-008 closed; exact corrected source tree accepted).
 - PCB-1A site explorer and visual QA: [`components/site-topology-explorer.tsx`](components/site-topology-explorer.tsx), [`scripts/verify-site-topology.mjs`](scripts/verify-site-topology.mjs), and [`docs/validation/2026-09-01-site-topology-visual-qa.md`](docs/validation/2026-09-01-site-topology-visual-qa.md) (contract-driven, responsive, not an electrical or order-readiness claim).
 - Independent site-explorer review: [`docs/reviews/2026-09-01-site-topology-explorer-review.md`](docs/reviews/2026-09-01-site-topology-explorer-review.md) (two P2 findings closed; corrected exact staged tree accepted).
+- Hosted site-explorer release: exact commit [`0510902`](https://github.com/0x63616c/tb4-kvm/commit/0510902671b93e7e4d9afbd99fbd91ad9a34bf2e), [repository gate](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541779), [Pages](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541550), [Pico 2 cross-build](https://github.com/0x63616c/tb4-kvm/actions/runs/33561541547), [live explorer](https://0x63616c.github.io/tb4-kvm/#pcb1a), [issue #8 evidence](https://github.com/0x63616c/tb4-kvm/issues/8#issuecomment-5500739144), and [map evidence](https://github.com/0x63616c/tb4-kvm/issues/2#issuecomment-5500739314).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- release and verify the independently accepted interactive PCB-1A topology explorer;
-- then advance the first order-package design gate that does not require vendor contact or purchase authority;
+- establish the revisioned KiCad project/release-check scaffold without inventing a schematic, footprint, stack-up or electrical rule;
+- continue the first order-package design gate that does not require vendor contact or purchase authority;
 
 Owner participation or acceptance:
 
@@ -160,8 +165,8 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Push the accepted explorer tranche directly to `main`; verify exact-head repository checks, Pages and Pico cross-build, then inspect the live `/#pcb1a` route.
-2. Synchronize issues #8/#2 and send a concise milestone notification only after hosted proof passes.
+1. Audit the local KiCad toolchain and existing release contract, then create only the safe project/checking scaffold needed for a later revisioned schematic and PCB.
+2. Keep the scaffold explicitly non-electrical and non-orderable until Intel/Infineon references, the three-port power architecture, parts/models and fabricator rules close.
 3. Advance the next reversible order-package artifact while keeping vendor/developer/fabricator requests unsent.
 4. Ask separately for no-purchase cart/address-calculation authority only when it would unblock physical controller-bench work; purchase authorization remains an exact-item/max-landed-spend decision.
 5. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
