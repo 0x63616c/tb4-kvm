@@ -82,6 +82,12 @@ toolchain is an input of the CI environment; the workflow logs its compiler
 version so a later toolchain change remains visible rather than silently being
 treated as equivalent evidence.
 
+Strict `-Wall -Wextra -Werror -Wpedantic` checks apply to this repository's
+portable core and `main.c`, not to Pico SDK sources. The first hosted run exposed
+why that boundary matters: applying the flags target-wide rejected intentional
+function/object-pointer conversions in SDK 2.3.0's IRQ implementation before
+our inert program could link.
+
 ## Next integration boundary
 
 Before adding any low-speed I/O adapter, obtain and independently review an

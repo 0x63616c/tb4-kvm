@@ -73,7 +73,11 @@ no Pico has been flashed and no physical bench has run yet. A GitHub Actions
 workflow now provisions the Ubuntu 24.04 distro Arm toolchain, checks out the
 exact SDK commit with its pinned submodules, builds the inert target and asserts
 that no UF2 is emitted; it uploads no firmware artifact. The workflow has not
-run on this uncommitted checkout, so it is not yet cross-build evidence. Later owner feedback may refine the UX without stopping
+yet passed: exact-head run `33549186026` proved toolchain/SDK/board setup but
+failed because target-wide strict application warnings were also applied to
+deliberate pointer conversions inside the pinned SDK IRQ source. The correction
+now scopes those warnings to our `main.c`; a new exact-head run is required.
+Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
 proven complete contract.

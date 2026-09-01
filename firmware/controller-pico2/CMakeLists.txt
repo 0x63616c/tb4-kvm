@@ -23,8 +23,13 @@ add_executable(tb4kvm_pico2_inert main.c)
 target_link_libraries(tb4kvm_pico2_inert PRIVATE pico_stdlib
                                                 tb4kvm_controller_core)
 target_compile_features(tb4kvm_pico2_inert PRIVATE c_std_11)
-target_compile_options(tb4kvm_pico2_inert PRIVATE
-                       -Wall -Wextra -Werror -Wpedantic)
+# Keep strict warnings on our application source without imposing them on the
+# pinned SDK sources that pico_stdlib adds to this target. Pico SDK 2.3.0 uses
+# deliberate function/object-pointer conversions in its IRQ implementation;
+# applying -Wpedantic -Werror target-wide incorrectly turns those upstream
+# implementation choices into application build failures.
+set_source_files_properties(main.c PROPERTIES
+                            COMPILE_OPTIONS "-Wall;-Wextra;-Werror;-Wpedantic")
 target_compile_definitions(tb4kvm_pico2_inert PRIVATE
                            TB4KVM_PICO2_INERT_BINDING=1)
 
