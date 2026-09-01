@@ -28,6 +28,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { OwnerDecisionWorkbench } from '@/components/owner-decision-workbench';
+import { ControlExperiencePrototype } from '@/components/control-experience-prototype';
 import controllerModel from '@/design/control-state-machine.json';
 import evidenceLedger from '@/evidence/ledger.json';
 
@@ -427,6 +428,7 @@ export default function FieldGuide() {
           <a href="#architecture">Architecture</a>
           <a href="#parts">Parts</a>
           <a href="#test">Test</a>
+          <a href="#control-experience">Controls</a>
           <a href="#decide">Decide v1</a>
           <a href="#gate">Build gate</a>
           <a href="#glossary">Glossary</a>
@@ -1427,6 +1429,14 @@ export default function FieldGuide() {
 
       <div className="section-rule">
         <span>07</span>
+        <p>Control experience</p>
+      </div>
+      <div id="control-experience">
+        <ControlExperiencePrototype />
+      </div>
+
+      <div className="section-rule">
+        <span>08</span>
         <p>Owner choices</p>
       </div>
       <div id="decide">
@@ -1434,7 +1444,7 @@ export default function FieldGuide() {
       </div>
 
       <div className="section-rule">
-        <span>08</span>
+        <span>09</span>
         <p>Before copper and plastic</p>
       </div>
       <section className="module-surface gate-section" id="gate">
@@ -1541,7 +1551,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>09</span>
+        <span>10</span>
         <p>Terminology and evidence</p>
       </div>
       <section className="module glossary-section" id="glossary">

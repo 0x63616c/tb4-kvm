@@ -59,7 +59,10 @@ Public controller/firmware and high-speed component/model research is complete
 and independently reviewed; both gates remain blocked on exact external
 evidence, with unsent owner-ready request packets prepared. The channel-budget
 method/schema has completed multi-round adversarial SI review and is closed;
-the later numeric allocation remains blocked. Optional measurement-route
+the later numeric allocation remains blocked. Issue #17 now has an independently
+reviewed interactive control-experience prototype covering the onboard switch,
+truthful status, optional remote pod and fail-closed edge cases; it awaits owner
+feedback before those UX choices become frozen requirements. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
 proven complete contract.
 
@@ -83,15 +86,17 @@ Latest evidence:
 - Owner-decisions/measurement-route review: [`docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md`](docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md).
 - Product-decision contract review: [`docs/reviews/2026-09-01-product-decision-contract-review.md`](docs/reviews/2026-09-01-product-decision-contract-review.md).
 - Owner-acceptance transcription review: [`docs/reviews/2026-09-01-owner-acceptance-review.md`](docs/reviews/2026-09-01-owner-acceptance-review.md).
+- Interactive control-experience prototype and review: [`components/control-experience-prototype.tsx`](components/control-experience-prototype.tsx), [`docs/prototypes/control-experience.md`](docs/prototypes/control-experience.md) and [`docs/reviews/2026-09-01-control-experience-review.md`](docs/reviews/2026-09-01-control-experience-review.md).
 
 ## Current frontier
 
 Agent-ready, safely parallel research:
 
-- #17 button/display/control-experience prototype, once the accepted contract is independently reviewed and issue #3 closes;
+- none at this checkpoint; the next product step needs owner feedback on the published prototype;
 
 Owner participation or acceptance:
 
+- #17 adopt or amend the published onboard-button, status-display and remote-pod experience;
 - #6 written capability/terms/quote confirmation only if the optional measurement branch is later triggered;
 - #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
@@ -105,11 +110,10 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Independently review and publish the owner-accepted contract, then close issue #3.
-2. Build and review the interactive button/display/control-experience prototype in issue #17 against the accepted behaviour.
-3. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22).
-4. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
-5. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
+1. Ask the owner to try and adopt or amend the published issue-#17 control experience; then translate the accepted UX into revision-bound control requirements.
+2. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22).
+3. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
+4. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits
 
