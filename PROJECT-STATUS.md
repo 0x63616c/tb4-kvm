@@ -66,7 +66,7 @@ provisional v1 control default. Issue #18 now has a reviewed PD-free executable
 controller model with 57 checks, a live interactive model lab, a portable C11
 controller core with 113 host checks, an isolated Pico 2 bench plan and a
 content-verified B1-B13 physical-evidence contract. A software-only binding now
-pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a proposed exact
+pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a reviewed exact
 acquisition/build pack prepares the low-value bench without ordering it. The
 local host lacks the Arm cross-compiler, so the target has not been cross-built locally;
 no Pico has been flashed and no physical bench has run yet. A GitHub Actions
@@ -111,12 +111,14 @@ Latest evidence:
 - Pico 2 cross-build workflow: [`.github/workflows/pico2-cross-build.yml`](.github/workflows/pico2-cross-build.yml) and successful exact-head [run `33549979596`](https://github.com/0x63616c/tb4-kvm/actions/runs/33549979596).
 - Exact-head Pico 2 compile evidence: [`docs/validation/2026-09-01-pico2-cross-build-evidence.md`](docs/validation/2026-09-01-pico2-cross-build-evidence.md).
 - Owner bench-inventory response: [`design/controller-bench/owner-inventory.response.json`](design/controller-bench/owner-inventory.response.json) (none owned; no purchase/cart authorization).
+- Complete bench owner-approval packet: [`docs/research/issue-18-controller-bench/acquisition/OWNER-APPROVAL-PACKET.md`](docs/research/issue-18-controller-bench/acquisition/OWNER-APPROVAL-PACKET.md) and [`design/controller-bench/acquisition.approval.json`](design/controller-bench/acquisition.approval.json) (prepared, not approved or ordered).
+- Independent bench-packet review: [`docs/reviews/2026-09-01-controller-bench-approval-packet-review.md`](docs/reviews/2026-09-01-controller-bench-approval-packet-review.md) (accepted as a decision aid; no cart/contact/purchase authority).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- #18 refresh reputable-source stock and all-in pricing for the complete bench, including a DMM and current-limited supply, then prepare a no-cart owner approval packet;
+- #18 no reversible acquisition work remains before the owner decides whether to authorize a no-purchase cart/address calculation;
 
 Owner participation or acceptance:
 
@@ -134,8 +136,8 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Refresh exact authorized-source stock and all-in pricing for every controller-bench line, including the required DMM and current-limited supply.
-2. Prepare and independently review an owner approval packet; do not create a cart, contact vendors or order anything without explicit authority.
+1. Ask the owner separately for no-purchase cart/address-calculation authority; vendor contact and a later exact-item/max-spend purchase authorization remain distinct.
+2. After owner direction, either calculate the landed cart without purchasing or continue without external action.
 3. Continue collecting owner feedback without pausing reversible downstream work.
 4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
 5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.

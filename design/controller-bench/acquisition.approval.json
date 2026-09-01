@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "issue": 18,
+  "status": "PROPOSED",
+  "acquisitionStatus": "PREPARED_NOT_ORDERED",
+  "captureDate": "2026-09-01",
+  "currency": "USD",
+  "authorisation": {
+    "ownerInventoryStatus": "CONFIRMED_NONE_OWNED",
+    "purchaseAuthorised": false,
+    "cartAuthorised": false,
+    "externalContactAuthorised": false,
+    "statement": "No cart, vendor contact, purchase, or substitution is authorised; this packet is for owner review only."
+  },
+  "route": {
+    "vendor": "DigiKey",
+    "sellerType": "DIGIKEY_STOREFRONT_INCLUDES_MARKETPLACE_PARTNERS",
+    "publishedSitewideShippingStartingUsd": 4.99,
+    "shippingStartingBasis": "Published DigiKey US USPS Ground Advantage starting rate observed on 2026-09-01; marketplace items may add shipping, and actual shipping, tariff and eligibility remain address/cart dependent.",
+    "marketplaceExtraShippingPossible": true,
+    "taxTariffExcluded": true,
+    "noFiniteLandedUpperBound": true
+  },
+  "items": [
+    {"id":"pico2-board","manufacturer":"Raspberry Pi","mpn":"SC1631","quantity":1,"unitPriceUsd":6.12,"stock":"21717 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/raspberry-pi/SC1631/24627136","exactItem":true,"notes":"Unheadered Pico 2; verify received order code."},
+    {"id":"breadboard","manufacturer":"BusBoard Prototype Systems","mpn":"BB830","quantity":1,"unitPriceUsd":8.95,"stock":"1261 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://www.busboard.com/BB830","distributorSourceUrl":"https://www.digikey.com/en/products/detail/busboard-prototype-systems/BB830/19200392","exactItem":true},
+    {"id":"local-button","manufacturer":"Omron / Aratas","mpn":"B3F-1000","quantity":1,"unitPriceUsd":0.35,"stock":"43642 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://components.omron.com/us-en/asset/ds_related_pdf/Y234-E1.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/aratas-america-llc/B3F-1000/33150","exactItem":true},
+    {"id":"remote-button","manufacturer":"Omron / Aratas","mpn":"B3F-1000","quantity":1,"unitPriceUsd":0.35,"stock":"43642 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://components.omron.com/us-en/asset/ds_related_pdf/Y234-E1.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/aratas-america-llc/B3F-1000/33150","exactItem":true,"notes":"Keep adjacent on breadboard; no exposed remote cable."},
+    {"id":"display","manufacturer":"Adafruit Industries","mpn":"938","quantity":1,"unitPriceUsd":19.95,"stock":"2527 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://www.adafruit.com/product/938","distributorSourceUrl":"https://www.digikey.com/en/products/detail/adafruit-industries-llc/938/5774238","exactItem":true},
+    {"id":"status-led","manufacturer":"Kingbright","mpn":"WP59EGW/CA","quantity":1,"unitPriceUsd":0.45,"stock":"45971 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://www.kingbrightusa.com/images/catalog/SPEC/WP59EGW-CA.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/kingbright/WP59EGW-CA/2033663","exactItem":true},
+    {"id":"resistor-1k","manufacturer":"YAGEO","mpn":"CFR-25JB-52-1K","quantity":4,"unitPriceUsd":0.10,"stock":"239126 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET","distributorSourceUrl":"https://www.digikey.com/en/products/detail/yageo/CFR-25JB-52-1K/96","exactItem":true},
+    {"id":"resistor-10k","manufacturer":"YAGEO","mpn":"CFR-25JB-52-10K","quantity":4,"unitPriceUsd":0.10,"stock":"179020 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET","distributorSourceUrl":"https://www.digikey.com/en/products/detail/yageo/CFR-25JB-52-10K/338","exactItem":true},
+    {"id":"resistor-100k-divider","manufacturer":"YAGEO","mpn":"CFR-25JB-52-100K","quantity":2,"unitPriceUsd":0.11,"stock":"97822 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://yageogroup.com/content/datasheet/asset/file/YAGEO-CFR_DATASHEET","distributorSourceUrl":"https://www.digikey.com/en/products/detail/yageo/CFR-25JB-52-100K/245","exactItem":true},
+    {"id":"adc-filter-capacitor","manufacturer":"KEMET","mpn":"C315C104K5R5TA","quantity":1,"unitPriceUsd":0.62,"stock":"7250 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://search.kemet.com/component-documentation/download/specsheet/C315C104K5R5TA","distributorSourceUrl":"https://www.digikey.com/en/products/detail/kemet/C315C104K5R5TA/12701330","exactItem":true},
+    {"id":"uart-cable","manufacturer":"FTDI","mpn":"TTL-232R-3V3","quantity":1,"unitPriceUsd":23.80,"stock":"1785 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://ftdichip.com/products/ttl-232r-3v3/","distributorSourceUrl":"https://www.digikey.com/en/products/detail/ftdi-future-technology-devices-international-ltd/TTL-232R-3V3/1836393","exactItem":true,"notes":"Connect GND/TX/RX only; leave VCC disconnected."},
+    {"id":"jumper-wires","manufacturer":"Adafruit Industries","mpn":"1957","quantity":1,"unitPriceUsd":1.95,"stock":"10180 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://www.adafruit.com/product/1957","distributorSourceUrl":"https://www.digikey.com/en/products/detail/adafruit-industries-llc/1957/6827090","exactItem":true},
+    {"id":"bench-supply","manufacturer":"SRA / KORAD","mpn":"KD3005D","quantity":1,"unitPriceUsd":94.38,"stock":"1439 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://www.sra-shops.com/pub/media/docs/srasolder/instructions/kd3005p-user-manual.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/sra-soldering-products/KD3005D/10709902","exactItem":true,"notes":"Official family manual proves 110/120/220/230V input, fuse table, front terminals and power cord; verify selector/fuse on receipt."},
+    {"id":"dmm","manufacturer":"Klein Tools","mpn":"MM325","quantity":1,"unitPriceUsd":39.74,"stock":"349 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://data.kleintools.com/sites/all/product_assets/documents/instructions/klein/MM325%20Instructions_web.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/klein-tools-inc/MM325/16649074","exactItem":true,"notes":"20.00V range is 0.01V resolution; perform known-voltage check before evidence."},
+    {"id":"supply-lead-black","manufacturer":"Pomona Electronics","mpn":"3782-24-0","quantity":1,"unitPriceUsd":12.14,"stock":"1080 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/766/3782.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/pomona-electronics/3782-24-0/603364","exactItem":true,"notes":"Black 24in banana-to-Minigrabber, 300VDC/5A."},
+    {"id":"supply-lead-red","manufacturer":"Pomona Electronics","mpn":"3782-24-2","quantity":1,"unitPriceUsd":12.14,"stock":"1128 shown","vendor":"DigiKey","sourceDate":"2026-09-01","manufacturerSourceUrl":"https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/766/3782.pdf","distributorSourceUrl":"https://www.digikey.com/en/products/detail/pomona-electronics/3782-24-2/603365","exactItem":true,"notes":"Red 24in banana-to-Minigrabber, 300VDC/5A."}
+  ],
+  "costSummary": {
+    "baseElectronicsSubtotalUsd": 63.56,
+    "supplyUsd": 94.38,
+    "dmmUsd": 39.74,
+    "leadsUsd": 24.28,
+    "merchandiseSubtotalUsd": 221.96,
+    "publishedSitewideShippingStartingUsd": 4.99,
+    "arithmeticStartingTotalBeforeTaxTariffUsd": 226.95,
+    "taxTariffExcluded": true,
+    "calculation": "$63.56 + $94.38 + $39.74 + (2 x $12.14) = $221.96; $221.96 + DigiKey's $4.99 sitewide shipping starting rate = $226.95 arithmetic starting total before marketplace shipping, tax or tariff."
+  },
+  "alternatives": [
+    {"role":"current-limited supply","manufacturer":"SRA / KORAD","mpn":"KA3005P","priceUsd":120.04,"stock":"144 shown","sourceUrl":"https://www.digikey.com/en/products/detail/sra-soldering-products/KA3005P/10709868","requiresReview":true,"notes":"Same 0-30V/0-5A class; confirm exact US selector, fuse, mains cord and output-lead inclusion on receipt."},
+    {"role":"higher-resolution DMM","manufacturer":"Fluke","mpn":"106","priceUsd":99.99,"stock":"In stock shown","sourceUrl":"https://www.fluke.com/en-us/product/electrical-testing/digital-multimeters/fluke-106","requiresReview":true,"notes":"6.000V range and 1mV resolution; manufacturer-direct price snapshot, but not the single-DigiKey route."},
+    {"role":"lower-cost DMM","manufacturer":"SparkFun / Artech","mpn":"A875 / TOL-18340","priceUsd":27.95,"stock":"In stock shown","sourceUrl":"https://www.sparkfun.com/artech-smart-digital-multimeter-a875.html","requiresReview":true,"notes":"6V DC range and continuity/resistance; no CAT rating stated on the manufacturer page, so low-voltage isolated bench only."}
+  ],
+  "trapdoors": {
+    "currentLimit": "KD3005D has 1mA setting/readback resolution, but 100mA is only a nominal procedural setpoint; regulation/accuracy terms include approximately 10mA. Verify CC at 100mA with a known load and DMM, start output off, and never raise the supply above the 250mA bench ceiling. OCP is not a substitute for that procedure.",
+    "mains": "Before energising the received KD3005D, inspect the rear selector and set 110/120V for US mains, confirm protective earth, and verify the T5A/250V 110/120V fuse. The official family manual proves a power cord but does not prove output leads; the packet supplies separate banana-to-Minigrabber leads. Do not infer selector position from the listing.",
+    "dmm": "MM325 is the exact identified instrument and includes test leads; Klein requires a known-voltage/current operation check before each use. Its 20.00V range resolves 0.01V, adequate for coarse 3.3V-present and below-5.5V acceptance, not for a millivolt or +/-5mV limit. Traceability here means exact MPN plus that pre-use check, not an ISO-17025 certificate.",
+    "leads": "The two exact Pomona leads are separate line items: 3782-24-0 black and 3782-24-2 red, each 24in, banana-to-Minigrabber, 300VDC/5A. Verify color/MPN on receipt before connecting the supply.",
+    "shipping": "The $4.99 amount is only DigiKey's published US USPS Ground Advantage starting rate observed on the capture date, not a guaranteed shipping quote for this route. Marketplace items may add shipping. Address eligibility, split shipments, tariff and tax can change the delivered total; there is no finite landed upper bound without a separately owner-authorised cart/address calculation."
+  },
+  "ownerChecklist": [
+    {"id":"O1","action":"Review the single-storefront DigiKey route, marketplace caveats and exact MPNs; do not authorize a cart yet.","done":false},
+    {"id":"O2","action":"Confirm the owner wants the KD3005D supply rather than reviewing the KA3005P alternative.","done":false},
+    {"id":"O3","action":"Confirm the MM325 0.01V resolution is sufficient for the bench acceptance limits, or select Fluke 106.","done":false},
+    {"id":"O4","action":"Re-open every dated manufacturer and DigiKey source and re-check US stock and exact variant.","done":false},
+    {"id":"O5","action":"Confirm shipping, tax, tariff and delivery terms only after separate owner authority for a no-purchase cart/address calculation.","done":false},
+    {"id":"O6","action":"After any approval and receipt, photograph each package and record received MPN, quantity and lot/date code where present.","done":false},
+    {"id":"O7","action":"Before energizing the supply, verify US mains selector, protective earth, fuse and output-off state.","done":false},
+    {"id":"O8","action":"Before direct VSYS evidence, known-voltage-check the DMM, verify 3.3V/100mA, disconnect both USB cables, and confirm USB VBUS is 0V.","done":false},
+    {"id":"O9","action":"Treat vendor contact and purchase as separate later approvals; purchase authority must name exact items and a maximum landed spend.","done":false}
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0x63616c/tb4-kvm/design/controller-bench/acquisition.approval.schema.json",
+  "title": "Issue 18 owner approval packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "issue",
+    "status",
+    "acquisitionStatus",
+    "captureDate",
+    "currency",
+    "authorisation",
+    "route",
+    "items",
+    "costSummary",
+    "alternatives",
+    "trapdoors",
+    "ownerChecklist"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "issue": { "const": 18 },
+    "status": { "const": "PROPOSED" },
+    "acquisitionStatus": { "const": "PREPARED_NOT_ORDERED" },
+    "captureDate": { "const": "2026-09-01" },
+    "currency": { "const": "USD" },
+    "authorisation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerInventoryStatus",
+        "purchaseAuthorised",
+        "cartAuthorised",
+        "externalContactAuthorised",
+        "statement"
+      ],
+      "properties": {
+        "ownerInventoryStatus": { "const": "CONFIRMED_NONE_OWNED" },
+        "purchaseAuthorised": { "const": false },
+        "cartAuthorised": { "const": false },
+        "externalContactAuthorised": { "const": false },
+        "statement": {
+          "const": "No cart, vendor contact, purchase, or substitution is authorised; this packet is for owner review only."
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vendor",
+        "sellerType",
+        "publishedSitewideShippingStartingUsd",
+        "shippingStartingBasis",
+        "marketplaceExtraShippingPossible",
+        "taxTariffExcluded",
+        "noFiniteLandedUpperBound"
+      ],
+      "properties": {
+        "vendor": { "const": "DigiKey" },
+        "sellerType": { "const": "DIGIKEY_STOREFRONT_INCLUDES_MARKETPLACE_PARTNERS" },
+        "publishedSitewideShippingStartingUsd": { "const": 4.99 },
+        "shippingStartingBasis": {
+          "const": "Published DigiKey US USPS Ground Advantage starting rate observed on 2026-09-01; marketplace items may add shipping, and actual shipping, tariff and eligibility remain address/cart dependent."
+        },
+        "marketplaceExtraShippingPossible": { "const": true },
+        "taxTariffExcluded": { "const": true },
+        "noFiniteLandedUpperBound": { "const": true }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "manufacturer",
+          "mpn",
+          "quantity",
+          "unitPriceUsd",
+          "stock",
+          "vendor",
+          "sourceDate",
+          "manufacturerSourceUrl",
+          "distributorSourceUrl",
+          "exactItem"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "manufacturer": { "type": "string", "minLength": 1 },
+          "mpn": { "type": "string", "minLength": 1 },
+          "quantity": { "type": "integer", "minimum": 1 },
+          "unitPriceUsd": { "type": "number", "minimum": 0 },
+          "stock": { "type": "string", "minLength": 1 },
+          "vendor": { "const": "DigiKey" },
+          "sourceDate": { "const": "2026-09-01" },
+          "manufacturerSourceUrl": { "type": "string", "pattern": "^https://" },
+          "distributorSourceUrl": { "type": "string", "pattern": "^https://www\\.digikey\\.com/" },
+          "exactItem": { "const": true },
+          "notes": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "costSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseElectronicsSubtotalUsd",
+        "supplyUsd",
+        "dmmUsd",
+        "leadsUsd",
+        "merchandiseSubtotalUsd",
+        "publishedSitewideShippingStartingUsd",
+        "arithmeticStartingTotalBeforeTaxTariffUsd",
+        "taxTariffExcluded",
+        "calculation"
+      ],
+      "properties": {
+        "baseElectronicsSubtotalUsd": { "const": 63.56 },
+        "supplyUsd": { "const": 94.38 },
+        "dmmUsd": { "const": 39.74 },
+        "leadsUsd": { "const": 24.28 },
+        "merchandiseSubtotalUsd": { "const": 221.96 },
+        "publishedSitewideShippingStartingUsd": { "const": 4.99 },
+        "arithmeticStartingTotalBeforeTaxTariffUsd": { "const": 226.95 },
+        "taxTariffExcluded": { "const": true },
+        "calculation": {
+          "const": "$63.56 + $94.38 + $39.74 + (2 x $12.14) = $221.96; $221.96 + DigiKey's $4.99 sitewide shipping starting rate = $226.95 arithmetic starting total before marketplace shipping, tax or tariff."
+        }
+      }
+    },
+    "alternatives": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "manufacturer", "mpn", "priceUsd", "stock", "sourceUrl", "requiresReview"],
+        "properties": {
+          "role": { "type": "string", "minLength": 1 },
+          "manufacturer": { "type": "string", "minLength": 1 },
+          "mpn": { "type": "string", "minLength": 1 },
+          "priceUsd": { "type": "number", "minimum": 0 },
+          "stock": { "type": "string", "minLength": 1 },
+          "sourceUrl": { "type": "string", "pattern": "^https://" },
+          "requiresReview": { "const": true },
+          "notes": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "trapdoors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currentLimit", "mains", "dmm", "leads", "shipping"],
+      "properties": {
+        "currentLimit": { "type": "string", "minLength": 80 },
+        "mains": { "type": "string", "minLength": 80 },
+        "dmm": { "type": "string", "minLength": 80 },
+        "leads": { "type": "string", "minLength": 40 },
+        "shipping": { "type": "string", "minLength": 60 }
+      }
+    },
+    "ownerChecklist": {
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "action", "done"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^O[1-9][0-9]*$" },
+          "action": { "type": "string", "minLength": 1 },
+          "done": { "const": false }
+        }
+      }
+    }
+  }
+}
