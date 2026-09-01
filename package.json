@@ -15,6 +15,7 @@
     "verify:controller-prototype": "node firmware/controller-prototype/test.mjs && firmware/controller-pico2/test-host.sh && node design/controller-bench/validate.mjs && node design/controller-bench/validate-evidence.mjs && node design/controller-bench/test-evidence.mjs && node design/controller-bench/acquisition.validate.mjs && node design/controller-bench/acquisition.test.mjs && node design/controller-bench/validate-owner-inventory-response.mjs && node design/controller-bench/owner-inventory.response.test.mjs && node design/controller-bench/validate-acquisition-approval-packet.mjs && node design/controller-bench/acquisition.approval-packet.test.mjs",
     "verify:pico-binding": "cmake --list-presets -S firmware/controller-pico2",
     "verify:pcb1a": "node scripts/verify-pcb1a-plan.mjs && node design/pcb1a/validate-topology.mjs && node design/pcb1a/topology.test.mjs",
+    "verify:site-topology": "node scripts/verify-site-topology.mjs",
     "verify:channel-budget": "node design/channel-budget/validate.mjs",
     "verify:collateral": "node design/collateral-policy/validate.mjs && node design/collateral-policy/test.mjs",
     "verify:product-decisions": "node design/product-decisions/validate.mjs && node design/product-decisions/validate.mjs design/product-decisions/catalog.json design/product-decisions/response.accepted.json && node design/product-decisions/test.mjs",
@@ -28,7 +29,7 @@
     "format": "oxfmt app components lib scripts package.json tsconfig.json vite.config.ts next.config.ts",
     "format:check": "oxfmt --check app components lib scripts package.json tsconfig.json vite.config.ts next.config.ts",
     "audit": "npm audit --audit-level=high",
-    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:control && npm run verify:controller-prototype && npm run verify:pico-binding && npm run verify:pcb1a && npm run verify:channel-budget && npm run verify:collateral && npm run verify:product-decisions && npm run verify:measurement-route && npm run verify:validation-tools && npm run verify:evidence && npm run verify:links && npm run audit && npm run verify:sbom && npm run build"
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run verify:control && npm run verify:controller-prototype && npm run verify:pico-binding && npm run verify:pcb1a && npm run verify:site-topology && npm run verify:channel-budget && npm run verify:collateral && npm run verify:product-decisions && npm run verify:measurement-route && npm run verify:validation-tools && npm run verify:evidence && npm run verify:links && npm run audit && npm run verify:sbom && npm run build"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

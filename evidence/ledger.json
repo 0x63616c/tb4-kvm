@@ -89,7 +89,7 @@
       "id": "EVD-BASE-001", "kind": "evidence", "title": "Existing OWC dock baseline is reported as USB4 40 Gb/s; raw capture not yet retained", "status": "PROPOSED", "owner": "validation", "evidence": ["PROJECT-STATUS.md"], "blockers": []
     },
     {
-      "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx", "docs/ARTIFACT-HUB-CONTRACT.md", "docs/SOFTWARE-SUPPLY-CHAIN.md"], "blockers": []
+      "id": "ART-WEB-001", "kind": "artifact", "title": "Interactive beginner field guide and evidence dashboard", "status": "MODELED", "owner": "website", "evidence": ["app/field-guide.tsx", "components/site-topology-explorer.tsx", "lib/site-topology-model.mjs", "scripts/verify-site-topology.mjs", "docs/validation/2026-09-01-site-topology-visual-qa.md", "docs/reviews/2026-09-01-site-topology-explorer-review.md", "docs/ARTIFACT-HUB-CONTRACT.md", "docs/SOFTWARE-SUPPLY-CHAIN.md"], "blockers": []
     },
     {
       "id": "ART-OWNER-DECISIONS-001", "kind": "artifact", "title": "Beginner-friendly v1 owner decision packet and browser-local workbench", "status": "REVIEWED", "owner": "product", "evidence": ["docs/product/v1-owner-decisions.md", "components/owner-decision-workbench.tsx", "design/product-decisions/catalog.json", "design/product-decisions/response.schema.json", "design/product-decisions/response.example.json", "design/product-decisions/validate.mjs", "design/product-decisions/test.mjs", "docs/reviews/2026-09-01-owner-decisions-measurement-route-review.md", "docs/reviews/2026-09-01-product-decision-contract-review.md"], "blockers": []

@@ -88,6 +88,15 @@ four fixture classes with unresolved physical-instance counts, and an exact
 four-port campaign rule that partitions every path/state into 4 measured, 8
 inactive-bundle, and 12 other matched conductors. It explicitly authorizes no
 footprint, layout, part freeze, product connection, compliance claim, or order.
+The field guide now has a contract-driven interactive PCB-1A explorer that can
+select each lane and host branch, render its exact four endpoint ports, and
+explain the 4 + 8 + 12 measurement campaign and claim boundary. Desktop and
+390 x 844 mobile browser QA caught and closed a horizontal-overflow defect.
+Independent review then caught and closed overstated campaign wording and
+insufficient path/responsive drift protection. Corrected exact staged tree
+`113a2f3e750e064fdaccaf3e28526b3d83ae704b` is accepted with no remaining
+P0-P3 findings and the full repository gate passes. This site tranche remains
+local until the resulting commit passes hosted CI and Pages deployment.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
@@ -125,12 +134,15 @@ Latest evidence:
 - Independent frontend review: [`docs/reviews/2026-09-01-pico2-low-speed-frontend-review.md`](docs/reviews/2026-09-01-pico2-low-speed-frontend-review.md) (accepted source; 39 host and fail-closed UBSan checks; hosted exact-head cross-build remains required).
 - Independent topology review: [`docs/reviews/2026-09-01-pcb1a-topology-contract-review.md`](docs/reviews/2026-09-01-pcb1a-topology-contract-review.md) (accepted as a `PROPOSED` pre-schematic contract; 29 adversarial mutations and 16 exact 4+8+12 campaigns).
 - Combined release review: [`docs/reviews/2026-09-01-frontend-topology-release-review.md`](docs/reviews/2026-09-01-frontend-topology-release-review.md) (R-001 through R-008 closed; exact corrected source tree accepted).
+- PCB-1A site explorer and visual QA: [`components/site-topology-explorer.tsx`](components/site-topology-explorer.tsx), [`scripts/verify-site-topology.mjs`](scripts/verify-site-topology.mjs), and [`docs/validation/2026-09-01-site-topology-visual-qa.md`](docs/validation/2026-09-01-site-topology-visual-qa.md) (contract-driven, responsive, not an electrical or order-readiness claim).
+- Independent site-explorer review: [`docs/reviews/2026-09-01-site-topology-explorer-review.md`](docs/reviews/2026-09-01-site-topology-explorer-review.md) (two P2 findings closed; corrected exact staged tree accepted).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- release the accepted frontend and proposed PCB-1A abstract topology contract, then verify exact-head CI, Pages and Pico cross-build;
+- release and verify the independently accepted interactive PCB-1A topology explorer;
+- then advance the first order-package design gate that does not require vendor contact or purchase authority;
 
 Owner participation or acceptance:
 
@@ -148,12 +160,11 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Ask the owner separately for no-purchase cart/address-calculation authority; vendor contact and a later exact-item/max-spend purchase authorization remain distinct.
-2. After owner direction, either calculate the landed cart without purchasing or continue without external action.
-3. Continue collecting owner feedback without pausing reversible downstream work.
-4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
-5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
-6. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
+1. Push the accepted explorer tranche directly to `main`; verify exact-head repository checks, Pages and Pico cross-build, then inspect the live `/#pcb1a` route.
+2. Synchronize issues #8/#2 and send a concise milestone notification only after hosted proof passes.
+3. Advance the next reversible order-package artifact while keeping vendor/developer/fabricator requests unsent.
+4. Ask separately for no-purchase cart/address-calculation authority only when it would unblock physical controller-bench work; purchase authorization remains an exact-item/max-landed-spend decision.
+5. Never freeze the integrated schematic/layout until its reference, model, safety and review gates actually close.
 
 ## Execution limits
 

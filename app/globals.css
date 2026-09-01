@@ -2173,6 +2173,79 @@ footer > p {
   text-align: right;
 }
 
+/* Contract-driven PCB-1A topology explorer */
+.site-topology-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+.site-topology-explorer {
+  max-width: none;
+  min-width: 0;
+  overflow: hidden;
+}
+.site-topology-explorer > *,
+.site-topology-diagram > *,
+.site-topology-inspector > *,
+.site-topology-lower-grid > *,
+.site-topology-claim-boundary > *,
+.site-topology-frontend > * {
+  min-width: 0;
+}
+.site-topology-diagram {
+  display: grid;
+  grid-template-columns: 1fr auto 1.2fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.site-topology-diagram small,
+.site-topology-frontend code {
+  overflow-wrap: anywhere;
+}
+.site-topology-inspector {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 20px;
+  border-left: 3px solid var(--teal);
+  background: rgba(71, 230, 193, 0.06);
+}
+.site-topology-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+.site-topology-metrics div {
+  padding: 10px;
+  border: 1px solid rgba(71, 230, 193, 0.17);
+}
+.site-topology-metrics dt {
+  color: #78938a;
+  font: 9px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.site-topology-metrics dd {
+  margin: 6px 0 0;
+  color: #d4e6df;
+  font: 650 12px var(--font-mono);
+}
+.site-topology-lower-grid,
+.site-topology-claim-boundary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.site-topology-frontend {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 24px;
+  padding: 20px;
+  border: 1px solid rgba(255, 200, 97, 0.35);
+  border-radius: 12px;
+}
+
 /* Issue #17 control-experience prototype */
 .controller-prototype-lab {
   max-width: 1180px;
@@ -2892,5 +2965,19 @@ footer > p {
   .evidence-summary,
   .evidence-gates {
     grid-template-columns: 1fr;
+  }
+  .site-topology-section {
+    padding-inline: 17px;
+  }
+  .site-topology-diagram,
+  .site-topology-inspector,
+  .site-topology-lower-grid,
+  .site-topology-claim-boundary,
+  .site-topology-frontend,
+  .site-topology-metrics {
+    grid-template-columns: 1fr;
+  }
+  .site-topology-arrow {
+    transform: rotate(90deg);
   }
 }

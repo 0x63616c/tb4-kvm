@@ -30,6 +30,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { OwnerDecisionWorkbench } from '@/components/owner-decision-workbench';
 import { ControlExperiencePrototype } from '@/components/control-experience-prototype';
 import { ControllerPrototypeLab } from '@/components/controller-prototype-lab';
+import { SiteTopologyExplorer } from '@/components/site-topology-explorer';
 import controllerModel from '@/design/control-state-machine.json';
 import evidenceLedger from '@/evidence/ledger.json';
 
@@ -427,6 +428,7 @@ export default function FieldGuide() {
         <nav aria-label="Primary navigation">
           <a href="#learn">Learn</a>
           <a href="#architecture">Architecture</a>
+          <a href="#pcb1a">PCB-1A</a>
           <a href="#parts">Parts</a>
           <a href="#test">Test</a>
           <a href="#control-experience">Controls</a>
@@ -983,6 +985,14 @@ export default function FieldGuide() {
         </div>
       </section>
 
+      <div className="section-rule">
+        <span>04</span>
+        <p>PCB-1A topology</p>
+      </div>
+      <div id="pcb1a" className="site-topology-section">
+        <SiteTopologyExplorer />
+      </div>
+
       <section className="module-surface schematic-section">
         <div className="module-heading">
           <p className="eyebrow">
@@ -1046,7 +1056,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>04</span>
+        <span>05</span>
         <p>Controller and display</p>
       </div>
       <section className="module display-module">
@@ -1220,7 +1230,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>05</span>
+        <span>06</span>
         <p>Candidate parts</p>
       </div>
       <section className="module" id="parts">
@@ -1302,7 +1312,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>06</span>
+        <span>07</span>
         <p>How we prove it works</p>
       </div>
       <section className="module-surface test-section" id="test">
@@ -1430,7 +1440,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>07</span>
+        <span>08</span>
         <p>Control experience</p>
       </div>
       <div id="control-experience">
@@ -1438,7 +1448,7 @@ export default function FieldGuide() {
       </div>
 
       <div className="section-rule">
-        <span>08</span>
+        <span>09</span>
         <p>Controller model lab</p>
       </div>
       <div id="controller-prototype">
@@ -1446,7 +1456,7 @@ export default function FieldGuide() {
       </div>
 
       <div className="section-rule">
-        <span>09</span>
+        <span>10</span>
         <p>Owner choices</p>
       </div>
       <div id="decide">
@@ -1454,7 +1464,7 @@ export default function FieldGuide() {
       </div>
 
       <div className="section-rule">
-        <span>10</span>
+        <span>11</span>
         <p>Before copper and plastic</p>
       </div>
       <section className="module-surface gate-section" id="gate">
@@ -1561,7 +1571,7 @@ export default function FieldGuide() {
       </section>
 
       <div className="section-rule">
-        <span>11</span>
+        <span>12</span>
         <p>Terminology and evidence</p>
       </div>
       <section className="module glossary-section" id="glossary">
