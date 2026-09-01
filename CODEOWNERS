@@ -1,0 +1,7 @@
+# Initial ownership map. Add named human/domain reviewers before protected releases.
+* @0x63616c
+/app/ @0x63616c
+/design/ @0x63616c
+/hardware/ @0x63616c
+/cad/ @0x63616c
+/evidence/ @0x63616c

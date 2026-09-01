@@ -1,0 +1,189 @@
+{
+  "version": 2,
+  "status": "architectural review model — rejected as production firmware input",
+  "integratedDesignAuthorized": false,
+  "note": "Unknown thresholds, timers, commands and downstream-port policy must come from accepted Intel/Infineon reference collateral. This model checks architectural ordering only.",
+  "unknownVendorParameters": [
+    "VBUS_SAFE_THRESHOLD_MV",
+    "DETACH_TIMEOUT_MS",
+    "DISCHARGE_TIMEOUT_MS",
+    "VBUS_RISE_TIMEOUT_MS",
+    "PD_NEGOTIATION_TIMEOUT_MS",
+    "MODE_ENTRY_TIMEOUT_MS",
+    "LINK_TRAIN_TIMEOUT_MS"
+  ],
+  "downstreamPort": {
+    "status": "UNRESOLVED_BLOCKER",
+    "requiredOwner": "reference-design-supported downstream Type-C/PD policy engine and protected power path",
+    "requiredProperties": [
+      "CC1/CC2 and Rp/Rd ownership",
+      "VBUS source/sink and reverse-current policy",
+      "VCONN and e-marker discovery",
+      "dock-originated power isolation from both hosts",
+      "safe behavior with host, charger, unpowered dock and second hub"
+    ]
+  },
+  "resetState": "RESET_SAFE",
+  "faultTarget": "FAULT_LATCHED",
+  "states": [
+    {
+      "id": "RESET_SAFE", "label": "Reset: all paths safe", "phase": "RESET", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "RESET · PATHS OFF", "observable": "Independent selector and power-path readback plus VBUS monitors",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": "UNKNOWN", "vbusBSafe0": "UNKNOWN", "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "READY_A", "label": "Host A ready", "phase": "READY", "route": "A", "vbusSource": "A", "pdContract": "A", "link": "READY", "display": "READY · HOST A", "observable": "Aligned independent readback, PD contract and supported router/host status",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "ATTACHED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "A" }
+    },
+    {
+      "id": "DETACH_REQUEST_A", "label": "Request Host A detach", "phase": "DETACH_REQUESTED", "route": "A", "vbusSource": "A", "pdContract": "A", "link": "DOWN", "display": "SWITCHING · DETACH A", "observable": "PD detach requested; completion is not yet claimed",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DETACH_REQUESTED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "A" }
+    },
+    {
+      "id": "DETACH_CONFIRMED_A", "label": "Host A detach confirmed", "phase": "DETACH_CONFIRMED", "route": "OFF", "vbusSource": "A", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · A DETACHED", "observable": "PD controller confirms detach and no contract",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "DISCHARGE_A", "label": "Discharge Host A VBUS", "phase": "VBUS_DISCHARGING", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · DISCHARGE A", "observable": "Source-FET off readback and measured VBUS; safe threshold not yet met",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": true, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "VBUS_SAFE_A", "label": "Host A VBUS measured safe", "phase": "VBUS_SAFE", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · A SAFE", "observable": "Measured A VBUS below vendor-derived safe threshold before deadline",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "AUTHORIZE_B_CC", "label": "Advertise on Host B CC", "phase": "CC_ADVERTISEMENT", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · DISCOVER B", "observable": "B policy engine advertises Rp; no VBUS or data route yet",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "ADVERTISE_RP" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "ATTACHED_B", "label": "Host B attached and oriented", "phase": "ATTACHED", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · B ATTACHED", "observable": "B policy engine reports valid Rd attachment and CC orientation",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "ATTACHED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "B_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "DEFAULT_5V_B", "label": "Apply default VBUS to Host B", "phase": "DEFAULT_VBUS", "route": "OFF", "vbusSource": "B", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · B DEFAULT 5V", "observable": "Valid attach plus source-path readback and measured default VBUS range",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "ATTACHED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "ROUTE_B", "label": "Enable orientation-correct Host B route", "phase": "DATA_ROUTE", "route": "B", "vbusSource": "B", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · ROUTE B", "observable": "Known B orientation and independent mux enable/select readback",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "ATTACHED" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "NEGOTIATE_B", "label": "Negotiate Host B PD", "phase": "PD_NEGOTIATING", "route": "B", "vbusSource": "B", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · PD B", "observable": "PD exchange in progress while VBUS remains at legal default",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "NEGOTIATING" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "CONTRACT_B", "label": "Host B contract reached", "phase": "PD_CONTRACTED", "route": "B", "vbusSource": "B", "pdContract": "B", "link": "DOWN", "display": "SWITCHING · B CONTRACT", "observable": "PD contract accepted and negotiated VBUS reached within vendor-derived limits",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "CONTRACTED" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "B" }
+    },
+    {
+      "id": "TRAIN_B", "label": "Enter mode and train Host B", "phase": "LINK_TRAINING", "route": "B", "vbusSource": "B", "pdContract": "B", "link": "TRAINING", "display": "SWITCHING · TRAIN B", "observable": "Supported PD/router mode and link status; otherwise explicitly host-observed",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "CONTRACTED" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "B" }
+    },
+    {
+      "id": "READY_B", "label": "Host B ready", "phase": "READY", "route": "B", "vbusSource": "B", "pdContract": "B", "link": "READY", "display": "READY · HOST B", "observable": "Aligned independent readback, PD contract and supported router/host status",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "ATTACHED" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "B" }
+    },
+    {
+      "id": "DETACH_REQUEST_B", "label": "Request Host B detach", "phase": "DETACH_REQUESTED", "route": "B", "vbusSource": "B", "pdContract": "B", "link": "DOWN", "display": "SWITCHING · DETACH B", "observable": "PD detach requested; completion is not yet claimed",
+      "commands": { "routeAEnable": false, "routeBEnable": true, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DETACH_REQUESTED" },
+      "observed": { "routeAActive": false, "routeBActive": true, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "B_KNOWN", "contractHost": "B" }
+    },
+    {
+      "id": "DETACH_CONFIRMED_B", "label": "Host B detach confirmed", "phase": "DETACH_CONFIRMED", "route": "OFF", "vbusSource": "B", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · B DETACHED", "observable": "PD controller confirms detach and no contract",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": true, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": true, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "DISCHARGE_B", "label": "Discharge Host B VBUS", "phase": "VBUS_DISCHARGING", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · DISCHARGE B", "observable": "Source-FET off readback and measured VBUS; safe threshold not yet met",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": true, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": false, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "VBUS_SAFE_B", "label": "Host B VBUS measured safe", "phase": "VBUS_SAFE", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · B SAFE", "observable": "Measured B VBUS below vendor-derived safe threshold before deadline",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "AUTHORIZE_A_CC", "label": "Advertise on Host A CC", "phase": "CC_ADVERTISEMENT", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · DISCOVER A", "observable": "A policy engine advertises Rp; no VBUS or data route yet",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "ADVERTISE_RP", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "NONE", "contractHost": "NONE" }
+    },
+    {
+      "id": "ATTACHED_A", "label": "Host A attached and oriented", "phase": "ATTACHED", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · A ATTACHED", "observable": "A policy engine reports valid Rd attachment and CC orientation",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "ATTACHED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": true, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "DEFAULT_5V_A", "label": "Apply default VBUS to Host A", "phase": "DEFAULT_VBUS", "route": "OFF", "vbusSource": "A", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · A DEFAULT 5V", "observable": "Valid attach plus source-path readback and measured default VBUS range",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "ATTACHED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "ROUTE_A", "label": "Enable orientation-correct Host A route", "phase": "DATA_ROUTE", "route": "A", "vbusSource": "A", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · ROUTE A", "observable": "Known A orientation and independent mux enable/select readback",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "ATTACHED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "NEGOTIATE_A", "label": "Negotiate Host A PD", "phase": "PD_NEGOTIATING", "route": "A", "vbusSource": "A", "pdContract": "NONE", "link": "DOWN", "display": "SWITCHING · PD A", "observable": "PD exchange in progress while VBUS remains at legal default",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "NEGOTIATING", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "NONE" }
+    },
+    {
+      "id": "CONTRACT_A", "label": "Host A contract reached", "phase": "PD_CONTRACTED", "route": "A", "vbusSource": "A", "pdContract": "A", "link": "DOWN", "display": "SWITCHING · A CONTRACT", "observable": "PD contract accepted and negotiated VBUS reached within vendor-derived limits",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "CONTRACTED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "A" }
+    },
+    {
+      "id": "TRAIN_A", "label": "Enter mode and train Host A", "phase": "LINK_TRAINING", "route": "A", "vbusSource": "A", "pdContract": "A", "link": "TRAINING", "display": "SWITCHING · TRAIN A", "observable": "Supported PD/router mode and link status; otherwise explicitly host-observed",
+      "commands": { "routeAEnable": true, "routeBEnable": false, "sourceAEnable": true, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "CONTRACTED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": true, "routeBActive": false, "sourceAConducting": true, "sourceBConducting": false, "vbusASafe0": false, "vbusBSafe0": true, "orientation": "A_KNOWN", "contractHost": "A" }
+    },
+    {
+      "id": "FAULT_LATCHED", "label": "Fault latched safely", "phase": "FAULT", "route": "OFF", "vbusSource": "OFF", "pdContract": "NONE", "link": "DOWN", "display": "FAULT · PATHS OFF", "observable": "Hardware protection input, independent command/readback and VBUS measurements",
+      "commands": { "routeAEnable": false, "routeBEnable": false, "sourceAEnable": false, "sourceBEnable": false, "dischargeAEnable": false, "dischargeBEnable": false, "ccPolicyA": "DISABLED", "ccPolicyB": "DISABLED" },
+      "observed": { "routeAActive": false, "routeBActive": false, "sourceAConducting": false, "sourceBConducting": false, "vbusASafe0": "UNKNOWN", "vbusBSafe0": "UNKNOWN", "orientation": "NONE", "contractHost": "NONE" }
+    }
+  ],
+  "sequences": {
+    "A_TO_B": ["READY_A", "DETACH_REQUEST_A", "DETACH_CONFIRMED_A", "DISCHARGE_A", "VBUS_SAFE_A", "AUTHORIZE_B_CC", "ATTACHED_B", "DEFAULT_5V_B", "ROUTE_B", "NEGOTIATE_B", "CONTRACT_B", "TRAIN_B", "READY_B"],
+    "B_TO_A": ["READY_B", "DETACH_REQUEST_B", "DETACH_CONFIRMED_B", "DISCHARGE_B", "VBUS_SAFE_B", "AUTHORIZE_A_CC", "ATTACHED_A", "DEFAULT_5V_A", "ROUTE_A", "NEGOTIATE_A", "CONTRACT_A", "TRAIN_A", "READY_A"]
+  },
+  "transitionRequirements": {
+    "DETACH_REQUESTED->DETACH_CONFIRMED": ["PD_DETACH_CONFIRMED", "PD_CONTRACT_NONE"],
+    "VBUS_DISCHARGING->VBUS_SAFE": ["SOURCE_FET_OFF_READBACK", "VBUS_BELOW_SAFE_THRESHOLD", "NO_REVERSE_CURRENT", "BEFORE_DISCHARGE_TIMEOUT"],
+    "CC_ADVERTISEMENT->ATTACHED": ["VALID_RD_ATTACHMENT", "ORIENTATION_KNOWN"],
+    "ATTACHED->DEFAULT_VBUS": ["VALID_ATTACHMENT_STILL_PRESENT", "OTHER_HOST_SOURCE_OFF_READBACK"],
+    "DEFAULT_VBUS->DATA_ROUTE": ["DEFAULT_VBUS_IN_RANGE", "ORIENTATION_KNOWN", "ROUTE_READBACK_ALL_OFF_BEFORE_ENABLE"],
+    "PD_NEGOTIATING->PD_CONTRACTED": ["PD_CONTRACT_ACCEPTED", "NEGOTIATED_VBUS_IN_RANGE", "NO_POWER_FAULT"],
+    "LINK_TRAINING->READY": ["ROUTE_READBACK_MATCHES_COMMAND", "SOURCE_READBACK_MATCHES_COMMAND", "PD_CONTRACT_ACTIVE", "SUPPORTED_LINK_OR_HOST_ENUMERATION_EVIDENCE"]
+  },
+  "transitionPolicy": {
+    "normalEdges": "EXACTLY_SEQUENCE_ADJACENCIES",
+    "asynchronousFaultEdgeFromEveryNonFaultState": true,
+    "faultRecovery": "POWER_CYCLE_OR_EXPLICIT_RECOVERY_AFTER_FAULT_CLEAR_AND_BOTH_PATHS_OBSERVED_ISOLATED",
+    "timeoutDisposition": "FAULT_LATCHED"
+  },
+  "invariants": [
+    { "id": "INV-ROUTE-EXCLUSIVE", "description": "Independent A and B route commands and readbacks are mutually exclusive" },
+    { "id": "INV-SOURCE-EXCLUSIVE", "description": "Independent A and B source commands and conduction readbacks are mutually exclusive" },
+    { "id": "INV-MEASURED-DISCHARGE", "description": "A host change cannot authorize the other CC port until old VBUS is measured safe" },
+    { "id": "INV-ORIENTATION-BEFORE-ROUTE", "description": "A data route cannot be enabled until that host orientation is known" },
+    { "id": "INV-CONTRACT-BEFORE-READY", "description": "Ready requires a matching active PD contract and link evidence" },
+    { "id": "INV-RESET-ALL-OFF", "description": "Reset commands every route, host source and CC policy off" },
+    { "id": "INV-FAULT-EDGE", "description": "Every non-fault state has an asynchronous transition to the safe latched fault" },
+    { "id": "INV-DOWNSTREAM-GATE", "description": "Unresolved downstream PD/power ownership blocks integrated design authorization" }
+  ]
+}
