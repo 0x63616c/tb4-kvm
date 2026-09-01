@@ -74,7 +74,7 @@ this inert source; it remains no substitute for physical evidence.
 
 The [`Pico 2 cross-build workflow`](../../.github/workflows/pico2-cross-build.yml)
 is the reproducible CI route for the target. It runs on Ubuntu 24.04, installs
-the distro `gcc-arm-none-eabi`/Newlib packages, checks out this exact SDK commit
+the distro Arm GCC, C Newlib and C++ Newlib packages, checks out this exact SDK commit
 and all submodules, verifies the board identity, and builds the preset. It
 requires no board or USB connection, performs no flash operation, uploads no
 firmware artifact, and fails if an unexpected UF2 appears. The hosted distro
@@ -87,6 +87,12 @@ portable core and `main.c`, not to Pico SDK sources. The first hosted run expose
 why that boundary matters: applying the flags target-wide rejected intentional
 function/object-pointer conversions in SDK 2.3.0's IRQ implementation before
 our inert program could link.
+
+The next hosted run reached the SDK's `pico_cxx_options/new_delete.cpp` and
+proved that Ubuntu's separate `libstdc++-arm-none-eabi-newlib` package is also a
+required build input, even though this repository's application sources are C.
+The workflow therefore installs that package explicitly rather than relying on
+the compiler package's recommendations.
 
 ## Next integration boundary
 

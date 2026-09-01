@@ -76,7 +76,10 @@ that no UF2 is emitted; it uploads no firmware artifact. The workflow has not
 yet passed: exact-head run `33549186026` proved toolchain/SDK/board setup but
 failed because target-wide strict application warnings were also applied to
 deliberate pointer conversions inside the pinned SDK IRQ source. The correction
-now scopes those warnings to our `main.c`; a new exact-head run is required.
+now scopes those warnings to our `main.c`. Exact-head run `33549559925` then
+compiled through 88% and proved Ubuntu's separate C++ Newlib package is required
+by the SDK's `new_delete.cpp`; that package is now explicit, and a new exact-head
+run is required.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
