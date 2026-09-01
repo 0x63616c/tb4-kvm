@@ -32,7 +32,7 @@
       "id": "GATE-AVAIL-001", "kind": "gate", "title": "Detached-host discovery and startup/failover policy is reference-supported and modeled", "status": "BLOCKED", "owner": "product/electrical", "evidence": ["docs/PRODUCT-REQUIREMENTS.md", "docs/CONTROL-STATE-MACHINE.md"], "blockers": ["GATE-PD-001"]
     },
     {
-      "id": "GATE-GOV-001", "kind": "gate", "title": "Protected release branch and independent qualified human approval", "status": "BLOCKED", "owner": "release governance", "evidence": ["docs/GOVERNANCE.md"], "blockers": []
+      "id": "GATE-GOV-001", "kind": "gate", "title": "Protected release branch and independent qualified human approval", "status": "BLOCKED", "owner": "release governance", "evidence": ["docs/GOVERNANCE.md", "docs/reviews/2026-09-01-governance-protection-e82069a.md"], "blockers": []
     },
     {
       "id": "TEST-CTRL-001", "kind": "test", "title": "Architectural control model executable invariants", "status": "MODELED", "owner": "firmware", "evidence": ["design/control-state-machine.json", "scripts/verify-control-model.mjs"], "blockers": ["GATE-DS-001", "GATE-PD-001"]
