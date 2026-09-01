@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/0x63616c/tb4-kvm/design/controller-bench/owner-inventory.response.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "issue",
+    "recordedDate",
+    "inventoryReference",
+    "ownerInventoryStatus",
+    "purchaseAuthorization",
+    "cartAuthorization",
+    "externalContactAuthorization",
+    "ownerMeaning",
+    "nextAuthorizedPreparation",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "issue": { "const": 18 },
+    "recordedDate": { "const": "2026-09-01" },
+    "inventoryReference": {
+      "const": "design/controller-bench/acquisition.inventory.json"
+    },
+    "ownerInventoryStatus": { "const": "CONFIRMED_NONE_OWNED" },
+    "purchaseAuthorization": { "const": false },
+    "cartAuthorization": { "const": false },
+    "externalContactAuthorization": { "const": false },
+    "ownerMeaning": {
+      "const": "All listed base electronics and required instruments need to be acquired."
+    },
+    "nextAuthorizedPreparation": {
+      "const": "Refresh reputable-source stock and all-in pricing, then prepare an owner approval packet without creating a cart or order."
+    },
+    "notes": {
+      "const": [
+        "The earlier 63.54-63.94 USD range excludes the required DMM and current-limited supply and is not the all-in purchase total.",
+        "No scope, optional remote-cable ESD, USB-C, PD, Thunderbolt, dock, host computer or product-power hardware is authorized by this response."
+      ]
+    }
+  }
+}

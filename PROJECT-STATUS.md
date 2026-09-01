@@ -68,18 +68,19 @@ controller core with 113 host checks, an isolated Pico 2 bench plan and a
 content-verified B1-B13 physical-evidence contract. A software-only binding now
 pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a proposed exact
 acquisition/build pack prepares the low-value bench without ordering it. The
-local host lacks the Arm cross-compiler, so the target has not been cross-built;
+local host lacks the Arm cross-compiler, so the target has not been cross-built locally;
 no Pico has been flashed and no physical bench has run yet. A GitHub Actions
 workflow now provisions the Ubuntu 24.04 distro Arm toolchain, checks out the
 exact SDK commit with its pinned submodules, builds the inert target and asserts
-that no UF2 is emitted; it uploads no firmware artifact. The workflow has not
-yet passed: exact-head run `33549186026` proved toolchain/SDK/board setup but
+that no UF2 is emitted; it uploads no firmware artifact. The first exact-head
+run, `33549186026`, proved toolchain/SDK/board setup but
 failed because target-wide strict application warnings were also applied to
 deliberate pointer conversions inside the pinned SDK IRQ source. The correction
 now scopes those warnings to our `main.c`. Exact-head run `33549559925` then
 compiled through 88% and proved Ubuntu's separate C++ Newlib package is required
-by the SDK's `new_delete.cpp`; that package is now explicit, and a new exact-head
-run is required.
+by the SDK's `new_delete.cpp`; that package is now explicit. Exact-head run
+`33549979596` subsequently built the inert ELF to 100%, found no UF2, uploaded
+no artifact and passed. This is compile evidence only.
 Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
@@ -107,17 +108,19 @@ Latest evidence:
 - Owner-acceptance transcription review: [`docs/reviews/2026-09-01-owner-acceptance-review.md`](docs/reviews/2026-09-01-owner-acceptance-review.md).
 - Interactive control-experience prototype and review: [`components/control-experience-prototype.tsx`](components/control-experience-prototype.tsx), [`docs/prototypes/control-experience.md`](docs/prototypes/control-experience.md) and [`docs/reviews/2026-09-01-control-experience-review.md`](docs/reviews/2026-09-01-control-experience-review.md).
 - PD-free controller model, bench plan and review: [`firmware/controller-prototype/model.mjs`](firmware/controller-prototype/model.mjs), [`docs/research/issue-18-controller-bench/README.md`](docs/research/issue-18-controller-bench/README.md) and [`docs/reviews/2026-09-01-controller-prototype-review.md`](docs/reviews/2026-09-01-controller-prototype-review.md).
-- Pico 2 cross-build workflow: [`.github/workflows/pico2-cross-build.yml`](.github/workflows/pico2-cross-build.yml) (not yet run on this uncommitted checkout).
+- Pico 2 cross-build workflow: [`.github/workflows/pico2-cross-build.yml`](.github/workflows/pico2-cross-build.yml) and successful exact-head [run `33549979596`](https://github.com/0x63616c/tb4-kvm/actions/runs/33549979596).
+- Exact-head Pico 2 compile evidence: [`docs/validation/2026-09-01-pico2-cross-build-evidence.md`](docs/validation/2026-09-01-pico2-cross-build-evidence.md).
+- Owner bench-inventory response: [`design/controller-bench/owner-inventory.response.json`](design/controller-bench/owner-inventory.response.json) (none owned; no purchase/cart authorization).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- #18 independently review and cross-build the pinned inert Pico 2 target; the proposed low-value bench acquisition/build pack is prepared. The CI implementation is present, and its exact-head run still needs to be observed;
+- #18 refresh reputable-source stock and all-in pricing for the complete bench, including a DMM and current-limited supply, then prepare a no-cart owner approval packet;
 
 Owner participation or acceptance:
 
-- #18 confirm which proposed controller-bench items are already owned and approve only the missing low-value items after release review;
+- #18 owner has confirmed none of the proposed controller-bench items are owned; explicit purchase approval remains required after the complete all-in packet is reviewed;
 - #6 written capability/terms/quote confirmation only if the optional measurement branch is later triggered;
 - #5 vendor model/source requests after owner review;
 - #7 PCBWay pre-layout construction/capability inquiry;
@@ -131,10 +134,8 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Independently review the pinned inert Pico 2 binding and proposed acquisition/build pack.
-2. Run the pinned Pico 2 cross-build workflow on the exact `main` commit and
-   record its result (including the no-UF2 assertion); after review, ask the
-   owner to confirm existing bench inventory and approve only missing items.
+1. Refresh exact authorized-source stock and all-in pricing for every controller-bench line, including the required DMM and current-limited supply.
+2. Prepare and independently review an owner approval packet; do not create a cart, contact vendors or order anything without explicit authority.
 3. Continue collecting owner feedback without pausing reversible downstream work.
 4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
 5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
