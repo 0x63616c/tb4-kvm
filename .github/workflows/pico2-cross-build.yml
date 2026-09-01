@@ -1,0 +1,62 @@
+name: Pico 2 cross-build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pico2-cross-build:
+    # Pin the hosted image family so the distro toolchain source is explicit.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Install distro Arm toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes \
+            gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi
+          arm-none-eabi-gcc --version
+          test "$(arm-none-eabi-gcc -dumpmachine)" = arm-none-eabi
+
+      - name: Fetch exact Pico SDK commit
+        env:
+          PICO_SDK_COMMIT: 98a542c1a62fb549ffb5d66a3e5892b06276b670
+        run: |
+          sdk_path="$RUNNER_TEMP/pico-sdk"
+          git init "$sdk_path"
+          git -C "$sdk_path" remote add origin https://github.com/raspberrypi/pico-sdk.git
+          git -C "$sdk_path" fetch --no-tags --depth=1 origin "$PICO_SDK_COMMIT"
+          git -C "$sdk_path" checkout --detach "$PICO_SDK_COMMIT"
+          git -C "$sdk_path" submodule update --init --recursive
+          test "$(git -C "$sdk_path" rev-parse HEAD)" = "$PICO_SDK_COMMIT"
+          git -C "$sdk_path" submodule status --recursive
+          echo "PICO_SDK_PATH=$sdk_path" >> "$GITHUB_ENV"
+
+      - name: Verify SDK pin and board identity
+        run: |
+          cmake -DPICO_SDK_PATH="$PICO_SDK_PATH" \
+            -P firmware/controller-pico2/cmake/verify-pico-sdk-pin.cmake
+
+      - name: Configure and build inert Pico 2 target
+        run: |
+          cmake -S firmware/controller-pico2 \
+            --preset pico2-rp2350-arm-s \
+            -DPICO_SDK_PATH="$PICO_SDK_PATH"
+          cmake --build firmware/controller-pico2/build/pico2-rp2350-arm-s \
+            --parallel 2
+
+          build_dir=firmware/controller-pico2/build/pico2-rp2350-arm-s
+          test -s "$build_dir/tb4kvm_pico2_inert.elf"
+          if find "$build_dir" -type f -name '*.uf2' -print -quit | grep -q .; then
+            echo 'Unexpected UF2 output: PICO_NO_PICOTOOL must remain enabled.' >&2
+            exit 1
+          fi
+          echo 'Inert ELF built; no UF2 output was produced. No firmware artifact is uploaded.'

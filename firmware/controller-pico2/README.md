@@ -70,6 +70,18 @@ pin state, USB isolation, power behavior, or any B1–B13 bench test. An actual
 cross-build additionally proves only that the named SDK/toolchain can compile
 this inert source; it remains no substitute for physical evidence.
 
+## GitHub Actions cross-build
+
+The [`Pico 2 cross-build workflow`](../../.github/workflows/pico2-cross-build.yml)
+is the reproducible CI route for the target. It runs on Ubuntu 24.04, installs
+the distro `gcc-arm-none-eabi`/Newlib packages, checks out this exact SDK commit
+and all submodules, verifies the board identity, and builds the preset. It
+requires no board or USB connection, performs no flash operation, uploads no
+firmware artifact, and fails if an unexpected UF2 appears. The hosted distro
+toolchain is an input of the CI environment; the workflow logs its compiler
+version so a later toolchain change remains visible rather than silently being
+treated as equivalent evidence.
+
 ## Next integration boundary
 
 Before adding any low-speed I/O adapter, obtain and independently review an

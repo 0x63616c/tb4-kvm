@@ -69,7 +69,11 @@ content-verified B1-B13 physical-evidence contract. A software-only binding now
 pins Pico SDK 2.3.0 and the Pico 2/RP2350A target, and a proposed exact
 acquisition/build pack prepares the low-value bench without ordering it. The
 local host lacks the Arm cross-compiler, so the target has not been cross-built;
-no Pico has been flashed and no physical bench has run yet. Later owner feedback may refine the UX without stopping
+no Pico has been flashed and no physical bench has run yet. A GitHub Actions
+workflow now provisions the Ubuntu 24.04 distro Arm toolchain, checks out the
+exact SDK commit with its pinned submodules, builds the inert target and asserts
+that no UF2 is emitted; it uploads no firmware artifact. The workflow has not
+run on this uncommitted checkout, so it is not yet cross-build evidence. Later owner feedback may refine the UX without stopping
 reversible work. Optional measurement-route
 research for issue #6 found plausible staffed and rental leads but no publicly
 proven complete contract.
@@ -96,12 +100,13 @@ Latest evidence:
 - Owner-acceptance transcription review: [`docs/reviews/2026-09-01-owner-acceptance-review.md`](docs/reviews/2026-09-01-owner-acceptance-review.md).
 - Interactive control-experience prototype and review: [`components/control-experience-prototype.tsx`](components/control-experience-prototype.tsx), [`docs/prototypes/control-experience.md`](docs/prototypes/control-experience.md) and [`docs/reviews/2026-09-01-control-experience-review.md`](docs/reviews/2026-09-01-control-experience-review.md).
 - PD-free controller model, bench plan and review: [`firmware/controller-prototype/model.mjs`](firmware/controller-prototype/model.mjs), [`docs/research/issue-18-controller-bench/README.md`](docs/research/issue-18-controller-bench/README.md) and [`docs/reviews/2026-09-01-controller-prototype-review.md`](docs/reviews/2026-09-01-controller-prototype-review.md).
+- Pico 2 cross-build workflow: [`.github/workflows/pico2-cross-build.yml`](.github/workflows/pico2-cross-build.yml) (not yet run on this uncommitted checkout).
 
 ## Current frontier
 
 Agent-ready implementation:
 
-- #18 independently review and cross-build the pinned inert Pico 2 target; the proposed low-value bench acquisition/build pack is prepared;
+- #18 independently review and cross-build the pinned inert Pico 2 target; the proposed low-value bench acquisition/build pack is prepared. The CI implementation is present, and its exact-head run still needs to be observed;
 
 Owner participation or acceptance:
 
@@ -120,7 +125,9 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 ## Exact next pickup
 
 1. Independently review the pinned inert Pico 2 binding and proposed acquisition/build pack.
-2. Cross-build with a verified Arm toolchain without flashing; after review, ask the owner to confirm existing bench inventory and approve only missing items.
+2. Run the pinned Pico 2 cross-build workflow on the exact `main` commit and
+   record its result (including the no-UF2 assertion); after review, ask the
+   owner to confirm existing bench inventory and approve only missing items.
 3. Continue collecting owner feedback without pausing reversible downstream work.
 4. Ask the owner to adopt or amend the independently reviewed early collateral policy (#22) when it reaches the critical path.
 5. Keep the prepared vendor/developer/fabricator requests unsent until the owner authorizes the relevant external contact or performs the submission.
