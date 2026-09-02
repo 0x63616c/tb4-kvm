@@ -18,5 +18,5 @@ It compares an LED-minimal surface with a small display, retains the main-unit
 button when the optional pod is absent, and treats the pod as a request-only
 low-speed accessory. It intentionally makes no claim about Type-C/PD timing,
 VBUS safety, controller status, link training, bandwidth, compliance or
-readiness. Any accepted product behaviour still requires the owner decision,
-reference-backed electrical design and validation evidence.
+readiness. The owner decision is accepted; implementing that behavior still
+requires reference-backed electrical design and validation evidence.

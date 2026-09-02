@@ -184,8 +184,9 @@ The design target is deliberately narrow: the owner's two target hosts, existing
 - Every plug orientation on every port.
 - Cold boot, warm boot, sleep, wake, logout and power loss.
 - Existing OWC dock, target display, Ethernet, USB2, USB3 and PCIe storage.
-- Concurrent display, network, USB and sustained storage traffic.
-- Switching during traffic with explicit data-integrity outcomes.
+- Concurrent display, network, USB and sustained storage traffic without switching.
+- Normal switching only after the user has stopped or ejected external storage.
+- Separately controlled destructive-fault switching during sustained storage writes only on disposable media/data, with recovery and integrity outcomes recorded.
 - Multiple certified cable models/lengths.
 - Fault injection, brownout, watchdog, failed discharge and wrong-port attachments.
 - Thermal steady state, charging load and blocked-vent fault cases.

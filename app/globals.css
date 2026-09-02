@@ -3000,3 +3000,210 @@ footer > p {
     transform: rotate(90deg);
   }
 }
+
+/* 2026-09 project-site redesign */
+:root {
+  --content-wide: 1480px;
+  --content-surface: 1432px;
+}
+
+.site-header {
+  height: auto;
+  min-height: 78px;
+  padding: 0 24px;
+  border-bottom-color: rgba(185, 255, 102, 0.16);
+  background: rgba(5, 12, 11, 0.94);
+}
+.header-shell {
+  width: min(100%, var(--content-wide));
+  min-height: 78px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+.brand {
+  min-width: max-content;
+}
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  box-shadow:
+    0 0 0 1px rgba(185, 255, 102, 0.3),
+    0 0 24px rgba(185, 255, 102, 0.12);
+}
+.brand-copy {
+  display: grid;
+  gap: 2px;
+}
+.brand-copy b {
+  font: 720 14px/1.1 var(--font-sans);
+  letter-spacing: 0.02em;
+}
+.brand-copy small {
+  color: #71867f;
+  font: 550 9px/1.2 var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.site-header nav {
+  margin: 0;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 30px);
+}
+.site-header nav a {
+  position: relative;
+  padding: 29px 0 26px;
+  color: #9aada7;
+  font-weight: 600;
+}
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 17px;
+  left: 0;
+  height: 2px;
+  background: var(--lime);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+}
+.site-header nav a:hover::after,
+.site-header nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.phase-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  color: var(--amber);
+  border-color: rgba(255, 200, 97, 0.28);
+  background: rgba(255, 200, 97, 0.05);
+}
+.phase-chip i {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--amber);
+  box-shadow: 0 0 10px rgba(255, 200, 97, 0.65);
+}
+.project-link {
+  min-height: 38px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid #355149;
+  border-radius: 8px;
+  color: #dcebe6;
+  font-size: 12px;
+  font-weight: 650;
+  background: rgba(18, 33, 30, 0.72);
+}
+.project-link:hover {
+  color: var(--lime);
+  border-color: rgba(185, 255, 102, 0.45);
+}
+
+.intro,
+.learning-grid,
+.section-rule,
+.module,
+.site-topology-section,
+.evidence-placeholder {
+  max-width: var(--content-wide);
+}
+.module-surface,
+.evidence-dashboard,
+.decision-strip {
+  max-width: var(--content-surface);
+}
+.intro {
+  grid-template-columns: minmax(0, 1.15fr) minmax(420px, 0.85fr);
+}
+
+#top,
+#verdict,
+#learn,
+#architecture,
+#pcb1a,
+#parts,
+#test,
+#control-experience,
+#controller-prototype,
+#decide,
+#gate,
+#glossary {
+  scroll-margin-top: 94px;
+}
+
+@media (max-width: 1120px) {
+  .header-shell {
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+  }
+  .site-header nav {
+    display: flex;
+    grid-row: 2;
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    border-top: 1px solid rgba(36, 60, 54, 0.55);
+  }
+  .site-header nav a {
+    padding: 12px 0 14px;
+    white-space: nowrap;
+  }
+  .site-header nav a::after {
+    bottom: 6px;
+  }
+  .header-actions {
+    justify-content: flex-end;
+  }
+  .intro {
+    grid-template-columns: 1fr;
+  }
+  #top,
+  #verdict,
+  #learn,
+  #architecture,
+  #pcb1a,
+  #parts,
+  #test,
+  #control-experience,
+  #controller-prototype,
+  #decide,
+  #gate,
+  #glossary {
+    scroll-margin-top: 132px;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-header {
+    padding: 0 14px;
+  }
+  .header-shell {
+    padding-top: 12px;
+  }
+  .brand-copy small,
+  .phase-chip,
+  .project-link span {
+    display: none;
+  }
+  .project-link {
+    padding: 0 10px;
+    font-size: 0;
+  }
+}

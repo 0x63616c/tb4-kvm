@@ -33,7 +33,7 @@ The exact delays and commands must come from the selected controller reference d
 
 ```text
 request switch
-  → quiesce or warn user about active storage writes
+  → present the stop/eject requirement and wait for explicit user acknowledgement
   → detach old host through its PD policy engine
   → turn old-host source path off and verify VBUS discharge/isolation
   → disable high-speed, USB2 and SBU selectors
@@ -45,6 +45,8 @@ request switch
   → allow router discovery, link training and tunnel enumeration
   → report ready only after supported status or observable enumeration
 ```
+
+The normal state machine must not claim that the MCU can detect application-level storage quiescence. Switching during an active storage write is a separate destructive fault-injection test, permitted only with disposable media/data and an explicit recovery and integrity check.
 
 The design must fail safe if the MCU resets halfway through. Hardware enable defaults and pull resistors must select “all paths off,” not either host.
 

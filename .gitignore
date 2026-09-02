@@ -40,3 +40,6 @@ next-env.d.ts
 
 # Pico SDK local cross-build artifacts
 /firmware/controller-pico2/build/
+
+# KiCad per-user window/session state
+*.kicad_prl

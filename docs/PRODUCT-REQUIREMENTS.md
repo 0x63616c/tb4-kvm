@@ -1,6 +1,6 @@
 # Product requirements
 
-Status: proposed for owner approval. These requirements describe intended behavior, not current implementation evidence.
+Status: v1 product behavior accepted by the owner on 2026-09-01. These requirements describe intended behavior, not current implementation evidence. The machine-readable authority is [`design/product-decisions/response.accepted.json`](../design/product-decisions/response.accepted.json).
 
 ## Product statement
 
@@ -33,11 +33,11 @@ Not included in v1:
 |---|---|
 | Only A is discoverable at power-up | Select A automatically after legal Type-C/PD discovery |
 | Only B is discoverable at power-up | Select B automatically after legal Type-C/PD discovery |
-| Both are discoverable at power-up | Restore last safe selection; otherwise use the documented default |
+| Both are discoverable at power-up | Select A after legal Type-C/PD discovery |
 | Neither is discoverable | Remain in safe idle with host data/source-power paths off |
 | Second host appears while one is active | Do not steal the dock or interrupt the active host |
 | User requests an absent/unavailable host | Keep the active host connected; indicate unavailable; do not create a pointless detach |
-| Active host detaches and the other is available | After a documented debounce/guard sequence, select the remaining host if automatic failover is enabled |
+| Active host detaches and the other is available | Indicate the loss and wait for a physical button request; do not automatically fail over |
 | Remote pod is absent or fails | Onboard control remains usable; unsafe commands are impossible |
 | Supervisor resets or browns out | Hardware defaults route and host source-power commands off |
 
@@ -52,6 +52,10 @@ Not included in v1:
 - “Ready” is displayed only with the required supported control/link evidence.
 - Exact detach, discharge, attach, mode-entry and training behavior follows the accepted controller reference design.
 - The project records total switch time and each observable sub-stage.
+- Normal operation requires the user to stop or eject external-storage activity
+  before requesting a switch; v1 does not promise safe switching during writes.
+- In-write switching is permitted only as an explicitly destructive validation
+  fault on disposable media/data with recovery and integrity results recorded.
 
 Optional future control sources may use the same safe request interface:
 
@@ -94,16 +98,20 @@ Must not imply without evidence:
 - Exact display model/resolution/refresh and both host models must be recorded before the integrated validation matrix freezes.
 - USB2, USB3, PCIe storage, Ethernet and DisplayPort tunnels must operate concurrently through the existing dock within host/dock bandwidth limits.
 
-## Power policy requiring owner decision
-
-Recommended v1:
+## Accepted v1 power and downstream policy
 
 - selected host: data plus up to 60 W charging;
 - unselected host: no dock data and no promised charging;
 - control/router electronics: always powered from the external supply;
 - downstream dock VBUS: independently managed according to the supported reference design and never transparently passed to a host by assumption.
+- downstream compatibility promise: validate the named OWC Thunderbolt Dock 96W first; broader devices require separate validation.
+- KVM external-power loss: isolate both hosts and make no dock-powered pass-through promise.
 
-The integrated design remains blocked until the downstream port policy explicitly answers whether dock-originated power is rejected, consumed or otherwise managed; minimum downstream accessory power; behavior without KVM external power; and whether v1 supports only the named OWC dock or arbitrary TB4 devices.
+The integrated design remains blocked until the accepted named-OWC/no-pass-through
+policy has a reference-backed implementation that explicitly defines how
+dock-originated power is rejected, consumed or otherwise managed; minimum
+downstream accessory power; isolation/discharge behavior without KVM external
+power; and the measurable limits of the named-dock compatibility promise.
 
 ## Wrong-port and fault behavior
 

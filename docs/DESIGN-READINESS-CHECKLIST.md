@@ -8,9 +8,9 @@ The machine-checked [integrated schematic-entry contract](../design/integrated-s
 
 | Gate | Current state | Evidence required to close it |
 |---|---|---|
-| Product behavior | **Review required** | User accepts selected-host detach/re-enumerate behavior and target switch time |
-| Selected-host charging | **Review required** | User accepts the v1 wattage target and external power-supply size |
-| Existing dock baseline | **Recapture required** | Retain sanitized raw topology output plus exact host, cable, dock, display, Ethernet, USB and storage context |
+| Product behavior | **Owner choice accepted; implementation proof open** | Reference-backed detach/re-enumerate implementation and measured switch-stage timing |
+| Selected-host charging | **Owner choice accepted; electrical proof open** | Reference-backed 60 W selected-host design, supply budget and measured protected-power behavior |
+| Existing dock baseline | **Topology captured; behavior baseline incomplete** | Add exact host model, cable, dock, display, Ethernet, USB, storage, charging, sleep/wake and power-cycle context to the retained sanitized literal topology capture |
 | Intel controller access | **Open — hard blocker for integrated layout** | Current reference schematic, layout rules, firmware/NVM path, legal prototype terms and sourcing |
 | Infineon PD implementation | **Open — hard blocker for integrated layout** | Supported dual-upstream application firmware/configuration and programming/debug route |
 | Channel model | **Open** | Connector, ESD, mux, package and trace S-parameters in the chosen stack-up pass simulation |
@@ -19,18 +19,16 @@ The machine-checked [integrated schematic-entry contract](../design/integrated-s
 | Certification route | **Open** | Written pre-compliance and Intel/USB-IF lab plan, budget and permitted branding claims |
 | Open-source release boundary | **Open** | List what can be redistributed versus vendor-confidential firmware/reference material |
 
-## User review gate
+## Accepted owner choices and remaining measurements
 
-Before schematic capture, explicitly decide:
+The owner accepted the eight v1 choices in
+[`design/product-decisions/response.accepted.json`](../design/product-decisions/response.accepted.json): prefer Host A at startup, up to 60 W for the selected host, no automatic failover, named OWC dock first, isolate both hosts on KVM-power loss, measure switching stages before promising latency, truthful minimal status, and defer the exact envelope until PCB/thermal measurement.
 
-- Is it acceptable that the unselected laptop disconnects from the dock and normally does not charge?
-- Is 60 W the right v1 charging target, or must it be higher?
-- Is reconnect time of several seconds acceptable after pressing the button?
-- Is the existing OWC dock always the downstream device, or must the KVM expose additional native downstream ports?
-- Which exact display resolution and refresh rate must survive switching?
-- Is the local display required for v1 or a detachable option?
-- Is one button sufficient, and should long-press perform a safe power-cycle/recovery action?
-- Must the device fit a particular desk/mount envelope, and what measured clearances constrain it?
+These product choices do not close the electrical gate. Before schematic/layout
+release, record the exact display resolution/refresh, host models and cable identities,
+dock firmware, required peripheral behavior, supported controller timing, power
+budget/protection and physical clearances. A local display remains optional; the
+main enclosure still requires onboard button control and minimal truthful status.
 
 ## Technical evidence gate
 
@@ -54,4 +52,4 @@ A low-speed PD/control/UI proof may proceed in parallel only on supported evalua
 
 ## Definition of ready for Rev B layout
 
-Rev B is ready only when every hard gate above is closed, the user-review decisions are recorded, the schematic has independent electrical and signal-integrity review, and the layout constraints are generated from the accepted channel model. If any item is unknown, the correct artifact is an experiment or a question—not production copper.
+Rev B is ready only when every hard gate above is closed, the accepted owner choices are implemented as testable requirements, the schematic has independent electrical and signal-integrity review, and the layout constraints are generated from the accepted channel model. If any item is unknown, the correct artifact is an experiment or a question—not production copper.

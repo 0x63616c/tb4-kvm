@@ -37,6 +37,8 @@ Problems:
 
 It may still be useful as a deliberately limited signal-integrity coupon, but not as the promised product.
 
+See [Transparent USB-C mux prototype: what can work and what cannot](decisions/2026-09-01-transparent-mux-prototype-boundary.md) for the pin-group, orientation, power and realistic-capacity breakdown.
+
 ## Alternative: dual Thunderbolt controllers
 
 One controller per host can keep both hosts enumerated while switching resources behind them. It increases heat, cost, layout complexity, firmware dependency and potential patent exposure. It is reserved for a future version only if continuous host attachment becomes a requirement.

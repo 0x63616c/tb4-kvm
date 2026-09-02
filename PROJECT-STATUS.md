@@ -38,7 +38,8 @@ Pre-PCB design review. The full project goal remains active. Work is not blocked
 ## Open gates
 
 - Intel reference design, controller firmware/NVM and certification path.
-- Exact power-supply budget and whether 60 W selected-host charging is sufficient.
+- Reference-backed implementation, supply budget and target-host compatibility
+  proof for the accepted up-to-60 W selected-host charging target.
 - Exact downstream behavior with the existing OWC dock and target display.
 - S-parameter channel simulation and fabricator stack-up.
 - Final connector, ESD, mux and PD-controller companion parts.
@@ -46,11 +47,30 @@ Pre-PCB design review. The full project goal remains active. Work is not blocked
 
 The authoritative close criteria for these gates are tracked in [Design-readiness checklist](docs/DESIGN-READINESS-CHECKLIST.md). Signal responsibilities are fixed at the pre-schematic level in [Signal and power ownership](docs/SIGNAL-POWER-OWNERSHIP.md). Mechanical work is limited to the interface rules in [Mechanical interface guidance](docs/MECHANICAL-INTERFACE.md) until a measured integrated board exists.
 
-## Reported baseline requiring recapture
+## Partial pre-KVM desk baseline
 
-On 2026-09-01, `system_profiler SPThunderboltDataType` was reported to show the connected OWC Thunderbolt Dock 96W in USB4 mode at 40 Gb/s. The raw sanitized command capture, exact host/cable context and immutable evidence record were not retained in this repository, so the ledger deliberately downgrades this to `PROPOSED`. Re-run the documented baseline capture before using it as measured evidence. Even after recapture it will be a functional baseline, not electrical compliance.
+On 2026-09-01, a sanitized literal `system_profiler SPThunderboltDataType`
+capture recorded the connected OWC Thunderbolt Dock 96W in USB4 mode at
+40 Gb/s. The immutable safe output and validation record are retained in the
+repository. This closes the earlier raw-topology evidence gap, but the baseline
+remains `BLOCKED`: exact host model and cable details plus display, storage,
+Ethernet, USB, charging, sleep/wake and power-cycle behavior still require owner
+observation.
+This is a functional topology baseline, not electrical compliance evidence.
 
 ## Current execution checkpoint
+
+Owner scope correction on 2026-09-01: the first product PCB must be the complete
+three-port integrated TB4 KVM, not a separate low-speed controller carrier.
+CTRL-1A work is retained only as uncommitted side research and is removed from
+the release critical path and product-facing website. The integrated schematic
+contract remains fail-closed because Intel router pinout/reference/NVM/recovery
+collateral and the matched Infineon PD/reference route have not been obtained.
+Issue #19 is now the active wayfinder ticket. The current official Thunderbolt
+developer application requires truthful legal organization/contact/address,
+website, CNDA status and project information plus owner acceptance of applicable
+terms; no agent may invent or submit those fields. The copy-ready request packet
+remains at `docs/research/issue-19-controller-route/OWNER-ACCESS-REQUEST-PACKET.md`.
 
 The prototype-first execution map is active. The project owner accepted all eight
 v1 product choices and the Prototype A conditions on 2026-09-01; the exact
@@ -172,9 +192,10 @@ Latest evidence:
 
 Agent-ready implementation:
 
-- release the independently reviewed integrated schematic-entry contract;
-- continue the experimental low-speed CTRL-1A carrier in parallel without weakening the integrated design gates;
-- continue the next integrated order-package gate that does not require vendor contact or purchase authority;
+- keep the full integrated-board contract, status and website synchronized;
+- prepare every non-confidential input needed immediately after approved Intel/Infineon collateral arrives;
+- continue only integrated-board work that does not guess controlled router, PD,
+  power, firmware, footprint or channel facts.
 
 Owner participation or acceptance:
 
@@ -192,11 +213,17 @@ Use fast/lower-cost agents for bounded frontier research and issue hygiene. Use 
 
 ## Exact next pickup
 
-1. Release the reviewed integrated schematic-entry contract; verify exact-head checks, Pages and Pico cross-build.
-2. Keep integrated KiCad capture blocked until the contract's controlled facts are accepted from permitted Intel/Infineon, power, SI, fabricator and collateral evidence.
-3. Finish the separate CTRL-1A low-speed experimental carrier with a real schematic/netlist, zero-error ERC/DRC, independent electrical/layout review and explicit non-product boundary.
-4. Advance the next reversible integrated order-package artifact while keeping vendor/developer/fabricator requests unsent.
-5. Ask separately for no-purchase cart/address-calculation authority only when it would unblock physical controller-bench work; purchase authorization remains an exact-item/max-landed-spend decision.
+1. Owner completes or explicitly authorizes the official Thunderbolt developer
+   application using truthful legal/contact details and reviews all applicable
+   terms; use the prepared issue #19 request text.
+2. Obtain Intel's written controller/topology/reference/NVM/recovery and
+   redistribution answer, then request the exact matched Infineon PD route.
+3. Register permitted metadata, independently review the accepted conclusions,
+   and close the controlled fact groups in the integrated schematic contract.
+4. Capture and review the complete integrated KiCad schematic; do not substitute
+   a low-speed carrier, passive coupler, donor dock or guessed black-box pinout.
+5. Continue through SI/stack-up, layout, DFM and the owner-approved Rev A order
+   package under the existing map.
 
 ## Execution limits
 

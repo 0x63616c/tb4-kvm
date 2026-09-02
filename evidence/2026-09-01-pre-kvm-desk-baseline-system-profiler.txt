@@ -1,0 +1,79 @@
+Command: system_profiler SPThunderboltDataType
+Capture date: 2026-09-01
+Sanitization: UID and Domain UUID values replaced with [REDACTED]; no serials, MACs, host names or user identifiers retained.
+
+Thunderbolt/USB4:
+
+    Thunderbolt/USB4 Bus 2:
+
+      Vendor Name: Apple Inc.
+      Device Name: MacBook Pro
+      UID: [REDACTED]
+      Route String: 0
+      Domain UUID: [REDACTED]
+      Port:
+          Status: Device connected
+          Link Status: 0x2
+          Speed: 40 Gb/s
+          Receptacle: 3
+          Micro Firmware Version: 0.0.0
+
+        Thunderbolt Dock 96W:
+
+          Vendor Name: Other World Computing
+          Device Name: Thunderbolt Dock 96W
+          Mode: USB4
+          Device ID: 0xDE49
+          Vendor ID: 0x1E91
+          Device Revision: 0x2
+          UID: [REDACTED]
+          Route String: 1
+          Firmware Version: 43.4
+          Port (Upstream):
+              Status: Device connected
+              Link Status: 0x2
+              Speed: 40 Gb/s
+              Micro Firmware Version: 0.88.0
+          Port:
+              Status: No device connected
+              Link Status: 0x7
+              Speed: Up to 40 Gb/s
+              Micro Firmware Version: 0.88.0
+          Port:
+              Status: No device connected
+              Link Status: 0x7
+              Speed: Up to 40 Gb/s
+              Micro Firmware Version: 0.88.0
+          Port:
+              Status: No device connected
+              Link Status: 0x7
+              Speed: Up to 40 Gb/s
+              Micro Firmware Version: 0.88.0
+
+    Thunderbolt/USB4 Bus 1:
+
+      Vendor Name: Apple Inc.
+      Device Name: MacBook Pro
+      UID: [REDACTED]
+      Route String: 0
+      Domain UUID: [REDACTED]
+      Port:
+          Status: No device connected
+          Link Status: 0x100
+          Speed: Up to 40 Gb/s
+          Receptacle: 2
+          Micro Firmware Version: 0.0.0
+
+    Thunderbolt/USB4 Bus 0:
+
+      Vendor Name: Apple Inc.
+      Device Name: MacBook Pro
+      UID: [REDACTED]
+      Route String: 0
+      Domain UUID: [REDACTED]
+      Port:
+          Status: No device connected
+          Link Status: 0x100
+          Speed: Up to 40 Gb/s
+          Receptacle: 1
+          Micro Firmware Version: 0.0.0

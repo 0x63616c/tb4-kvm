@@ -86,7 +86,7 @@
       "id": "TEST-CTRL-001", "kind": "test", "title": "Architectural control model executable invariants", "status": "MODELED", "owner": "firmware", "evidence": ["design/control-state-machine.json", "scripts/verify-control-model.mjs"], "blockers": ["GATE-DS-001", "GATE-PD-001"]
     },
     {
-      "id": "EVD-BASE-001", "kind": "evidence", "title": "Existing OWC dock baseline is reported as USB4 40 Gb/s; raw capture not yet retained", "status": "PROPOSED", "owner": "validation", "evidence": ["PROJECT-STATUS.md"], "blockers": []
+      "id": "EVD-BASE-001", "kind": "evidence", "title": "OWC Thunderbolt Dock 96W topology is captured at USB4 40 Gb/s; full desk behavior baseline remains incomplete", "status": "BLOCKED", "owner": "validation", "evidence": ["evidence/2026-09-01-pre-kvm-desk-baseline-system-profiler.txt", "docs/validation/2026-09-01-pre-kvm-desk-baseline.md"], "blockers": []
     },
     {
       "id": "ART-HARDWARE-SCAFFOLD-001", "kind": "artifact", "title": "Blocked non-electrical KiCad and immutable-release policy scaffold", "status": "REVIEWED", "owner": "hardware/release", "evidence": ["hardware/README.md", "hardware/kicad/README.md", "hardware/kicad/scaffold.json", "hardware/releases/README.md", "scripts/verify-hardware-scaffold.mjs", "scripts/verify-hardware-scaffold.test.mjs", "docs/reviews/2026-09-01-hardware-scaffold-no-pcb-review.md"], "blockers": ["GATE-INT-001", "GATE-DS-001", "GATE-PD-001", "GATE-SI-001", "GATE-FAB-001", "GATE-PCB1-PARTS-001", "GATE-COLLATERAL-ADOPTION-001"]

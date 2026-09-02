@@ -177,15 +177,17 @@ export function OwnerDecisionWorkbench() {
       aria-labelledby="decide-heading"
     >
       <div className="module-heading">
-        <p className="eyebrow">Owner decision packet · local only</p>
+        <p className="eyebrow">Accepted owner contract · option explorer</p>
         <h2 id="decide-heading">
-          Choose the desk behaviour before engineering turns it into a testable
-          requirement.
+          The eight v1 choices are accepted; explore what each option would have
+          changed.
         </h2>
         <p>
-          These are product choices, not proof that a controller, power path or
-          dock can safely deliver them. Your draft stays in this browser; copy
-          or download it when ready.
+          The authoritative response prefers Host A, promises up to 60 W only to
+          the selected host, waits for a button after active-host removal, and
+          validates the named OWC dock first. This browser-only form creates a
+          draft for comparison; it cannot replace the accepted repository
+          contract or prove that hardware can deliver it.
         </p>
       </div>
 

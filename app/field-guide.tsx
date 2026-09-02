@@ -415,30 +415,37 @@ export default function FieldGuide() {
   return (
     <main className="min-h-screen">
       <header className="site-header">
-        <a
-          className="brand"
-          href="#top"
-          aria-label="Thunderbolt KVM field guide home"
-        >
-          <span className="brand-mark">
-            <GitBranch size={18} />
-          </span>
-          <span>TB4 KVM Field Guide</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#learn">Learn</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#pcb1a">PCB-1A</a>
-          <a href="#parts">Parts</a>
-          <a href="#test">Test</a>
-          <a href="#control-experience">Controls</a>
-          <a href="#controller-prototype">Controller lab</a>
-          <a href="#decide">Decide v1</a>
-          <a href="#gate">Build gate</a>
-          <a href="#glossary">Glossary</a>
-          <a href={projectHubHref}>Project files</a>
-        </nav>
-        <span className="phase-chip">Design review</span>
+        <div className="header-shell">
+          <a
+            className="brand"
+            href="#top"
+            aria-label="Thunderbolt KVM field guide home"
+          >
+            <span className="brand-mark">
+              <GitBranch size={18} />
+            </span>
+            <span className="brand-copy">
+              <b>TB4 / KVM</b>
+              <small>Open hardware field guide</small>
+            </span>
+          </a>
+          <nav aria-label="Primary navigation">
+            <a href="#learn">Learn</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#pcb1a">Hardware</a>
+            <a href="#test">Validation</a>
+            <a href="#control-experience">Controls</a>
+            <a href="#glossary">Glossary</a>
+          </nav>
+          <div className="header-actions">
+            <span className="phase-chip">
+              <i /> Design gate closed
+            </span>
+            <a className="project-link" href={projectHubHref}>
+              Project files <ArrowRight size={15} />
+            </a>
+          </div>
+        </div>
       </header>
 
       <section className="intro" id="top">
@@ -902,10 +909,10 @@ export default function FieldGuide() {
                 </>
               }
               bullets={[
-                'Smallest and preserves the dock’s direct PD charging path.',
-                'But joins two cable assemblies into an undefined Type-C/PD topology.',
-                'Consumes extra channel-loss budget with another receptacle and cable.',
-                'Still useful only as a Rev 0 electrical experiment.',
+                'The fast mux can pass four 20 Gb/s differential paths; that part is physically plausible.',
+                'But 24 contacts are not 24 ordinary wires: CC/VCONN orientation, USB2, SBU and protected VBUS remain separate jobs.',
+                'Two independently flippable and e-marked cables do not become one defined cable identity through a female-to-female box.',
+                'Only a PD-free RF coupon is safe as the first experiment; do not attach laptops, the dock or VBUS.',
               ]}
             />
           </TabsContent>
@@ -926,7 +933,7 @@ export default function FieldGuide() {
               bullets={[
                 'Matches the architecture of a certified commercial KVM dock.',
                 'Terminates the upstream connection and creates a valid downstream TB4 port.',
-                'Can expose three downstream TB4 ports and use the existing dock for peripherals.',
+                'Exposes one downstream TB4 port to the existing dock; the product has three receptacles total.',
                 'Requires Intel/Infineon design access and its own laptop-charging power supply.',
               ]}
             />
@@ -1363,18 +1370,18 @@ export default function FieldGuide() {
           <div>
             <Gauge />
             <span>
-              <b>Baseline reported · raw recapture required</b>
+              <b>Topology captured · behavior baseline incomplete</b>
               <small>
-                OWC Thunderbolt Dock 96W · Mode USB4 · reported Speed 40 Gb/s
+                OWC Thunderbolt Dock 96W · Mode USB4 · observed Speed 40 Gb/s
               </small>
             </span>
           </div>
           <code>system_profiler SPThunderboltDataType</code>
           <p>
-            This command was previously reported to return a connected OWC dock
-            at 40 Gb/s, but its raw sanitized output and exact host/cable
-            context were not retained. The repository therefore does not count
-            it as measured evidence yet. A future recapture remains functional
+            A sanitized literal command capture now records this topology. The
+            full baseline remains blocked because the exact host model and cable
+            details plus display, storage, Ethernet, USB, charging, sleep/wake
+            and power-cycle behavior were not captured. This is topology
             evidence, not electrical compliance.
           </p>
         </div>
@@ -1389,7 +1396,7 @@ export default function FieldGuide() {
               'Dock cable · plug up',
               'Dock cable · plug down',
               'Idle switch',
-              'Switch during NVMe write',
+              'Destructive write-fault test · disposable media only',
               'Sleep / wake',
               'Cold power cycle',
               'Three cable vendors',
@@ -1457,7 +1464,7 @@ export default function FieldGuide() {
 
       <div className="section-rule">
         <span>10</span>
-        <p>Owner choices</p>
+        <p>Accepted owner choices</p>
       </div>
       <div id="decide">
         <OwnerDecisionWorkbench />

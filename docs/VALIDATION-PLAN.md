@@ -9,9 +9,10 @@ Passing a storage benchmark is not the same as proving electrical compliance. Ev
 - Record the current Thunderbolt topology with `system_profiler SPThunderboltDataType`.
 - Record the current dock, display, storage, Ethernet and USB behavior without the KVM.
 - Capture sleep/wake and power-cycle behavior.
+- Record the exact host model used for the baseline.
 - Keep exact cable models and lengths in the test record.
 
-Baseline reported on 2026-09-01, but not yet accepted as measured evidence because the raw sanitized capture and full test context were not retained:
+On 2026-09-01 a sanitized literal `system_profiler` capture retained the current dock topology, but the baseline is not accepted as complete measured evidence because the exact host model, cable details and the functional test context below were not retained:
 
 ```text
 Thunderbolt Dock 96W
@@ -62,14 +63,20 @@ For each host:
 - both host-cable orientations;
 - both downstream-cable orientations;
 - cold boot, warm boot, sleep and wake;
-- idle switch and switch during sustained NVMe writes;
+- idle switch for normal operation;
 - display reconnect at required resolution/refresh;
 - simultaneous display, USB, Ethernet and PCIe storage load;
 - dock and KVM power cycles;
 - at least three certified cable vendors/lengths;
 - 1,000 automated switching cycles;
-- data-integrity verification after intentionally interrupted writes;
+- separately controlled destructive-fault switching during sustained NVMe writes
+  on disposable media/data, followed by recovery and data-integrity verification;
 - no cross-host VBUS or CC leakage.
+
+The sustained-write case is fault injection, not the supported user workflow.
+Ordinary operation follows the accepted condition: stop or eject external
+storage before switching. Never use irreplaceable data or the owner's primary
+storage device for an interrupted-write test.
 
 ## 5. Affordable tools
 
